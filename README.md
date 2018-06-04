@@ -8,7 +8,7 @@ Follow along with the workshop to make your own! This canonical version can serv
 
 ## Setup
 
-To use this boilerplate, you'll need to take the following steps://CHANGE
+To use this boilerplate, you'll need to take the following steps:
 
 * Don't fork or clone this repo! Instead, create a new, empty directory on your machine and `git init` (or create an empty repo on Github and clone it to your local machine)
 * Run the following commands:
