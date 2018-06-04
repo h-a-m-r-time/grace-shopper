@@ -3,7 +3,8 @@ const db = require('../db')
 const User = require('./user')
 const Feeling = require('./feeling')
 const Thing = require('./thing')
-const Transaction = require('./transactions')
+const Transaction = require('./transaction')
+const Cart = require('./cart')
 
 
 Feeling.belongsToMany(Thing, {through: 'opinion'})
@@ -15,6 +16,11 @@ Opinion.belongsTo(Transaction)
 Transaction.hasOne(Opinion)
 User.belongsTo(Transaction)
 Transaction.hasOne(User)
+
+Opinion.belongsTo(Cart)
+Cart.hasOne(Opinion)
+User.belongsTo(Cart)
+Cart.hasOne(User)
 
 
 /**
@@ -31,5 +37,5 @@ Transaction.hasOne(User)
  * instead of: const User = require('../db/models/user')
  */
 module.exports = {
-  User
+  User, Feeling, Thing, Transaction, Cart, Opinion
 }
