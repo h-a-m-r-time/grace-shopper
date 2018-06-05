@@ -40,7 +40,7 @@ router.put('/:id', async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
   try {
-      Thing.destroy({where: {id: +req.params.id}})
+      await Thing.destroy({where: {id: +req.params.id}})
       res.json(req.params.id)
   } catch (err){
       next(err)
