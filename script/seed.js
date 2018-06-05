@@ -173,12 +173,12 @@ if (module === require.main) {
       console.error(err)
       process.exitCode = 1
     })
-    // .finally(() => {
-    //   // `finally` is like then + catch. It runs no matter what.
-    //   console.log('closing db connection')
-    //   db.close()
-    //   console.log('db connection closed')
-    // })
+    .finally(() => {
+      // `finally` is like then + catch. It runs no matter what.
+      console.log('closing db connection')
+      db.close()
+      console.log('db connection closed')
+    })
   /*
    * note: everything outside of the async function is totally synchronous
    * The console.log below will occur before any of the logs that occur inside

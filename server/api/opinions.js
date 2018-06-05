@@ -1,11 +1,11 @@
 const router = require('express').Router()
-const {Feeling} = require('../db/models')
+const {Opinion} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
     try {
-        const feelings = await Feeling.findAll()
-        res.json(feelings)
+        const opinions = await Opinion.findAll()
+        res.json(opinions)
     } catch (error) {
         next(error)
     }
@@ -13,8 +13,8 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
     try {
-        const feeling = await Feeling.findById(req.params.id)
-        res.json(feeling)
+        const opinion = await Opinion.findById(req.params.id)
+        res.json(opinion)
     } catch (error){
         next(error)
     }
@@ -22,8 +22,8 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
     try{
-        const feeling = await Feeling.create(req.body)
-        res.json(feeling)
+        const opinion = await Opinion.create(req.body)
+        res.json(opinion)
     } catch (err) {
         next(err)
     }
@@ -31,8 +31,8 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
-      const feeling = await Feeling.update(req.body, { where: {id: req.body.id} })
-      res.json(feeling)
+      const opinion = await Opinion.update(req.body, { where: {id: req.body.id} })
+      res.json(opinion)
   } catch (err){
       next(err)
   }
@@ -40,7 +40,7 @@ router.put('/:id', async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
   try {
-      await Feeling.destroy({where: {id: +req.params.id}})
+      await Opinion.destroy({where: {id: +req.params.id}})
       res.json(req.params.id)
   } catch (err){
       next(err)
