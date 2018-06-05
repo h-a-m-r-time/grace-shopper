@@ -41,7 +41,7 @@ router.put('/:id', async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
   try {
-      Transaction.destroy({where: {id: +req.params.id}})
+      await Transaction.destroy({where: {id: +req.params.id}})
       res.json(req.params.id)
   } catch (err){
       next(err)
