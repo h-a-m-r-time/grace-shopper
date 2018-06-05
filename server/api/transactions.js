@@ -26,7 +26,7 @@ router.get('/:id', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
     try{
         const request = {...req.body, purchased: true}
-        const transaction = await Transaction.create(req.body)
+        const transaction = await Transaction.create(request)
         res.json(transaction)
     } catch (err) {
         next(err)
@@ -36,7 +36,7 @@ router.post('/', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
   try {
       const request = { ...req.body, purchased: true}
-      const transaction = await Transaction.update(req.body, { where: {id: req.body.id} })
+      const transaction = await Transaction.update(request, { where: {id: req.body.id} })
       res.json(transaction)
   } catch (err){
       next(err)
