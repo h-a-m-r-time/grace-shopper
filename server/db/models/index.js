@@ -10,8 +10,8 @@ const Opinion = require('./opinion')
 Feeling.belongsToMany(Thing, {through: Opinion})
 Thing.belongsToMany(Feeling, {through: Opinion})
 
-Opinion.belongsTo(Transaction)
-Transaction.hasOne(Opinion)
+Opinion.hasMany(Transaction)
+Transaction.belongsTo(Opinion)
 User.belongsTo(Transaction)
 Transaction.hasOne(User)
 
