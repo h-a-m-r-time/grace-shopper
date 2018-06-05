@@ -5,6 +5,10 @@ const Transaction = db.define('transaction', {
   amount: {
     type: Sequelize.DECIMAL,
     allowNull: false
+  },
+  purshased: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
 })
 
