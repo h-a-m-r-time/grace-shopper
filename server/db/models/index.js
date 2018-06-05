@@ -1,16 +1,14 @@
-const db = require('../db')
+// const db = require('../db')
 
 const User = require('./user')
 const Feeling = require('./feeling')
 const Thing = require('./thing')
 const Transaction = require('./transaction')
 const Cart = require('./cart')
+const Opinion = require('./opinion')
 
-
-Feeling.belongsToMany(Thing, {through: 'opinion'})
-Thing.belongsToMany(Feeling, {through: 'opinion'})
-
-const Opinion = db.model('opinion')
+Feeling.belongsToMany(Thing, {through: Opinion})
+Thing.belongsToMany(Feeling, {through: Opinion})
 
 Opinion.belongsTo(Transaction)
 Transaction.hasOne(Opinion)
@@ -21,7 +19,6 @@ Opinion.belongsTo(Cart)
 Cart.hasOne(Opinion)
 User.belongsTo(Cart)
 Cart.hasOne(User)
-
 
 /**
  * If we had any associations to make, this would be a great place to put them!
