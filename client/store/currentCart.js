@@ -5,9 +5,9 @@ import history from '../history'
 
 const GET_CART = 'GET_CART'
 
-const defaultCart = {}
+const defaultCart = []
 
-const getCart = items => ({type: GET_CART, cart})
+const getCart = cart => ({type: GET_CART, cart})
 
 export const fetchCart = (userId) => {
   return async dispatch => {
