@@ -6,7 +6,7 @@ const Transaction = db.define('transaction', {
     type: Sequelize.DECIMAL,
     allowNull: false
   },
-  purshased: {
+  purchased: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
   }
