@@ -7,6 +7,7 @@ import transaction from './transaction'
 import currentCart from './currentCart'
 import feelingReducer from './feeling'
 import thingReducer from './thing'
+import opinionReducer from './opinion'
 
 const reducer = combineReducers({
   user,
@@ -14,6 +15,7 @@ const reducer = combineReducers({
   currentCart,
   feelingReducer,
   thingReducer,
+  opinionReducer
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
