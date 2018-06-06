@@ -13,9 +13,14 @@ label {
 nav a {
   display: inline-block;
   margin: 1em;
+  color: white;
 }
 
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+.contentWrap{
+    margin-top: 160px;
 }
