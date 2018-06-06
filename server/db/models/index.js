@@ -7,11 +7,11 @@ const Transaction = require('./transaction')
 const Cart = require('./cart')
 const Opinion = require('./opinion')
 
-Feeling.belongsToMany(Thing, {through: Opinion})
-Thing.belongsToMany(Feeling, {through: Opinion})
+Feeling.belongsToMany(Thing)
+Thing.belongsToMany(Feeling)
 
-Opinion.belongsTo(Transaction)
-Transaction.hasOne(Opinion)
+Opinion.hasMany(Transaction)
+Transaction.belongsTo(Opinion)
 User.belongsTo(Transaction)
 Transaction.hasOne(User)
 
