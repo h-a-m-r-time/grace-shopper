@@ -1,6 +1,8 @@
 import React from 'react'
+import ReactDom from 'react-dom'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
+import Button from '@material-ui/core/Button'
 import {auth} from '../store'
 
 /**
@@ -21,7 +23,7 @@ const AuthForm = (props) => {
           <input name="password" type="password" />
         </div>
         <div>
-          <button type="submit">{displayName}</button>
+          <Button variant="contained" color="primary" type="submit">{displayName}</Button>
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>

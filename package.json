@@ -5,6 +5,10 @@
   "engines": {
     "node": ">= 7.0.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/h-a-m-r-time/grace-shopper.git"
+  },
   "main": "index.js",
   "scripts": {
     "build-client": "webpack",
@@ -21,6 +25,8 @@
   "author": "Fullstack Academy of Code",
   "license": "MIT",
   "dependencies": {
+    "@material-ui/core": "^1.2.0",
+    "@material-ui/icons": "^1.1.0",
     "axios": "^0.15.3",
     "body-parser": "^1.16.1",
     "compression": "^1.7.1",
