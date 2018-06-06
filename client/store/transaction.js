@@ -1,15 +1,14 @@
-import axios from 'axios';
-import history from '../history';
+import axios from 'axios'
 
 /**
  * ACTION TYPES
  */
-const GET_TRANSACTIONS = 'GET_TRANSACTIONS';
+const GET_TRANSACTIONS = 'GET_TRANSACTIONS'
 
 /**
  * INITIAL STATE
  */
-const transactions = [];
+const initState = []
 
 /**
  * ACTION CREATORS
@@ -17,7 +16,7 @@ const transactions = [];
 const gotTransactions = transactions => ({
   type: GET_TRANSACTIONS,
   transactions,
-});
+})
 
 /**
  * THUNK CREATORS
@@ -26,16 +25,16 @@ export const getTransactions = () => dispatch =>
   axios
     .get('/api/transactions')
     .then(res => dispatch(gotTransactions(res.data)))
-    .catch(err => console.log(err));
+    .catch(err => console.log(err))
 
 /**
  * REDUCER
  */
-export default function(state = transactions, action) {
+export default function(state = initState, action) {
   switch (action.type) {
     case GET_TRANSACTIONS:
-      return [...state, ...action.transactions];
+      return [...state, ...action.transactions]
     default:
-      return state;
+      return state
   }
 }
