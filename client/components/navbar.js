@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { logout } from '../store'
+import AppBar from '@material-ui/core/AppBar'
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
-  <div>
+  <AppBar>
     <h1>Certified Opinions</h1>
     <nav>
       {isLoggedIn ? (
@@ -25,7 +26,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
       )}
     </nav>
     <hr />
-  </div>
+  </AppBar>
 )
 
 /**
