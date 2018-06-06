@@ -1,26 +1,10 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React from 'react'
 
-export class Opinion extends Component (props) {
+export default function Opinion (props) {
 
-
-
-
-
-  render() {
-    const transactions = this.props.transactions
-    return (
-      <div>
-        <h2> I {name} {
-          transactions.opinion
-        }</h2>
-      </div>
-    )
-  }
+  return (
+    <div>
+      <h2>{props.opinion.name}</h2>
+    </div>
+  )
 }
-
-const mapStateToProps = state => ({
-  transactions: state.transactions
-})
-
-export default connect(mapStateToProps, null)(Opinion)

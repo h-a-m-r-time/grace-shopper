@@ -21,7 +21,7 @@ router.get('/:id', async (req, res, next) => {
 })
 
 router.post('/', async (req, res, next) => {
-    try{
+    try {
         const opinion = await Opinion.create(req.body)
         res.json(opinion)
     } catch (err) {
