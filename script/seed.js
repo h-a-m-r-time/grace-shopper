@@ -2,7 +2,6 @@
 
 const db = require('../server/db')
 const {
-  Cart,
   Feeling,
   Opinion,
   Thing,
@@ -22,44 +21,36 @@ const {
  * Now that you've got the main idea, check it out in practice below!
  */
 
-const carts = [
-  {
-    amount: 0.0,
-  },
-  {
-    amount: 0.0,
-  },
-  {
-    amount: 0.0,
-  },
-]
-
 const feelings = [
   {
-    name: 'positive',
-    category: 'positive',
+    name: 'love',
+    category: 'verb'
   },
   {
-    name: 'negative',
-    category: 'negative',
+    name: 'suspicious',
+    category: 'description'
   },
   {
-    name: 'neutral',
-    category: 'neutral',
+    name: 'really sucks',
+    category: 'description'
   },
+  {
+    name: 'don\'t mind',
+    category: 'verb',
+  }
 ]
 
 const opinions = [
   {
-    name: '',
+    statement: '',
     feelingId: 1,
     thingId: 1,
   }, {
-    name: '',
+    statement: '',
     feelingId: 2,
     thingId: 2,
   }, {
-    name: '',
+    statement: '',
     feelingId: 3,
     thingId: 3,
   }
@@ -113,9 +104,6 @@ async function seed() {
   // Whoa! Because we `await` the promise that db.sync returns, the next line will not be
   // executed until that promise resolves!
 
-  // const createdOpinions = await Opinion.bulkCreate(opinions, { returning: true })
-
-  const createdCarts = await Cart.bulkCreate(carts, { returning: true })
   const createdFeelings = await Feeling.bulkCreate(feelings, {
     returning: true,
   })
@@ -127,35 +115,23 @@ async function seed() {
   const createdOpinions = await Opinion.bulkCreate(opinions, { returning: true })
 
   await Promise.all([
-    createdCarts[0].setUser(createdUsers[0]),
-    createdCarts[1].setUser(createdUsers[1]),
-    createdCarts[2].setUser(createdUsers[2]),
-  ])
-
-  await Promise.all([
     createdTransactions[0].setUser(createdUsers[0]),
     createdTransactions[1].setUser(createdUsers[1]),
     createdTransactions[2].setUser(createdUsers[2]),
   ])
 
   await Promise.all([
-    createdTransactions[0].setOpinion(createdOpinions[0]),
-    createdTransactions[1].setOpinion(createdOpinions[1]),
-    createdTransactions[2].setOpinion(createdOpinions[2]),
+    createdOpinions[0].setTransaction(createdTransactions[0]),
+    createdOpinions[1].setTransaction(createdTransactions[1]),
+    createdOpinions[2].setTransaction(createdTransactions[2]),
   ])
 
   await Promise.all([
-    createdCarts,
     createdFeelings,
     createdOpinions,
     createdThings,
     createdTransactions,
     createdUsers,
-    // setCartUsers,
-    // setOpinions,
-    // // setThingOpinions,
-    // setTransactionOpinions,
-    // setTransactionUsers,
   ])
 
   // Wowzers! We can even `await` on the right-hand side of the assignment operator
@@ -173,12 +149,12 @@ if (module === require.main) {
       console.error(err)
       process.exitCode = 1
     })
-    // .finally(() => {
-    //   // `finally` is like then + catch. It runs no matter what.
-    //   console.log('closing db connection')
-    //   db.close()
-    //   console.log('db connection closed')
-    // })
+    .finally(() => {
+      // `finally` is like then + catch. It runs no matter what.
+      console.log('closing db connection')
+      db.close()
+      console.log('db connection closed')
+    })
   /*
    * note: everything outside of the async function is totally synchronous
    * The console.log below will occur before any of the logs that occur inside
