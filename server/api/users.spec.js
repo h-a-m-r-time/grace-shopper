@@ -44,11 +44,17 @@ describe('Feeling routes', () => {
     let love
 
     beforeEach(() => {
-      return Feeling.bulkCreate([{
-        name: firstFeeling
+
+      const feelings = [{
+        name: firstFeeling,
+        category: 'verb'
       }, {
-        name: secondFeeling
-      }])
+        name: secondFeeling,
+        category: 'verb'
+      }]
+
+
+      return Feeling.bulkCreate(feelings, {returning: true})
         .then(createdFeelings => {
           love = createdFeelings[1].id
         })
@@ -61,16 +67,17 @@ describe('Feeling routes', () => {
         .then(res => {
           expect(res.body).to.be.an('array')
           expect(res.body[0].name).to.be.equal(firstFeeling)
+          expect(res.body[1].category).to.be.equal('verb')
         })
     })
 
     it('serves up a specific feeling on GET /feelings/{id}', () => {
       return request(app)
-        .get(`/feelings/${love}`)
+        .get(`/api/feelings/${love}`)
         .expect(200)
         .then(res => {
           expect(res.body).to.be.an('object')
-          expect(res.body).to.be.equal({ name: secondFeeling })
+          expect(res.body.name).to.be.equal( secondFeeling )
         })
     })
   })
