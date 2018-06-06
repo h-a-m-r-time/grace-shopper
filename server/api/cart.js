@@ -11,6 +11,15 @@ router.get('/', async (req, res, next) => {
     }
 })
 
+router.get('/users/:id', async (req, res, next) => {
+    try {
+        const transactions = await Transaction.findAll({where: {userId: req.params.id, purchased: false}})
+        res.json(transactions)
+    } catch (error){
+        next(error)
+    }
+})
+
 router.get('/:id', async (req, res, next) => {
     try {
         const transaction = await Transaction.findById(req.params.id, {where: {purchased: false}})
