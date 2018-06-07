@@ -42,15 +42,15 @@ const feelings = [
 
 const opinions = [
   {
-    statement: '',
+    statement: 'I love cake.',
     feelingId: 1,
     thingId: 1,
   }, {
-    statement: '',
+    statement: 'I am suspicious of bears.',
     feelingId: 2,
     thingId: 2,
   }, {
-    statement: '',
+    statement: 'Pugs really suck.',
     feelingId: 3,
     thingId: 3,
   }
