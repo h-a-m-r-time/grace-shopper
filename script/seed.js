@@ -81,6 +81,18 @@ const transactions = [
   {
     amount: 0.0,
   },
+  {
+    amount: 8.77,
+    purchased: true
+  },
+  {
+    amount: 2.66,
+    purchased: true
+  },
+  {
+    amount: 0.0,
+    purchased: true
+  },
 ]
 
 const users = [
@@ -137,6 +149,7 @@ async function seed() {
   // Wowzers! We can even `await` on the right-hand side of the assignment operator
   // and store the result that the promise resolves to in a variable! This is nice!
   console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${transactions.length} users`)
   console.log(`seeded successfully`)
 }
 
