@@ -27,6 +27,7 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
             <Route path="/opinions" component={OpinionList} />
             <Route path="/home" component={UserHome} />
+            <Route path="/confirmation" component={}
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
