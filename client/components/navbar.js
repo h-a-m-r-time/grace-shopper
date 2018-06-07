@@ -37,7 +37,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           </Button>
         </div>
       )}
-      </nav>
+    </nav>
     <hr />
     </Toolbar>
   </AppBar>
