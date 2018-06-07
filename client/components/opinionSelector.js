@@ -4,6 +4,7 @@ import { getFeelings } from '../store/feeling'
 import { getThings } from '../store/thing'
 import Button from '@material-ui/core/Button'
 import IntegrationReactSelect from './OpinionSelectorIntegration'
+import CategoryRadioButtons from './opinionSelectorCategory'
 
 class OpinionSelector extends Component {
   constructor(props) {
@@ -28,15 +29,10 @@ class OpinionSelector extends Component {
     ///need to push data to store and maybe redirect to cart? tbd
     //can se
   }
-  // value,
-  // onChangeFunc,
-  // placeholder,
-  // optionName,
-  // suggestions,
+
   render() {
     return (
       <div className="contentWrap">
-        <div>I</div>
         <form onSubmit={this.onSubmit}>
           <IntegrationReactSelect
             value={this.state.feeling}
@@ -52,6 +48,10 @@ class OpinionSelector extends Component {
             optionName="thing"
             suggestions={this.props.thingSuggestion}
           />>
+          <CategoryRadioButtons
+            onChangeFunc={this.onChange}
+            value={this.state.category}
+          />
           <div>
             <Button variant="contained" color="primary" type="submit">
               Add Opinion to Cart
