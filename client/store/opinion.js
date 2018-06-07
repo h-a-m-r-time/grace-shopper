@@ -33,10 +33,15 @@ export const getOpinion = (id) => dispatch =>
 export default function(state = initState, action) {
   switch (action.type) {
     case GET_OPINIONS:
-      return {...state, ...action.opinions}
+      return {
+        ...state, opinions: action.opinions
+      }
     case GET_OPINION:
-      return {...state, opinion: action.opinion}
-    default:
+      return {
+        ...state, opinion: action.opinion
+      }
+    default: {
       return state
+    }
   }
 }

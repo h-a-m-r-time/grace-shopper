@@ -5,17 +5,17 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import user from './user'
 import transaction from './transaction'
 import currentCart from './currentCart'
-import feelingReducer from './feeling'
-import thingReducer from './thing'
+import feelings from './feeling'
+import things from './thing'
 import opinionReducer from './opinion'
 
 const reducer = combineReducers({
   user,
   transaction,
   currentCart,
-  feelingReducer,
-  thingReducer,
-  opinionReducer
+  feelings,
+  things,
+  opinionReducer,
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
