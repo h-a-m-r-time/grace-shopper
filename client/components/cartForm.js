@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {fetchCart, getMe} from '../store/currentCart'
+import {fetchCart, deleteOpinion} from '../store/currentCart'
+import {me} from '../store/user'
 import Button from '@material-ui/core/Button'
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import TableFooter from '@material-ui/core/TableFooter';
-import Paper from '@material-ui/core/Paper';
-import Input from '@material-ui/core/Input';
-import { withStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import TableFooter from '@material-ui/core/TableFooter'
+import Paper from '@material-ui/core/Paper'
+import Input from '@material-ui/core/Input'
+import { withStyles } from '@material-ui/core/styles'
 
 const CustomTableCell = withStyles(theme => ({
   head: {
@@ -28,13 +29,13 @@ class CartForm extends Component {
 
   constructor(props) {
     super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   componentDidMount () {
-    this.props.getUserCart();
-
+    this.props.getUser()
+    this.props.getUserCart(this.props.user.id)
   }
 
   handleChange(event) {
@@ -45,16 +46,19 @@ class CartForm extends Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault();
+    event.preventDefault()
     const cart = {
       opinion: event.target.opinion.value,
       price: event.target.price.value,
     }
   }
 
+  handleDelete = (itemId) => {
+    this.props.deleteItem(itemId)
+  }
 
   render() {
-
+    console.log(this.props)
     return (
       <Paper >
       <Table >
@@ -67,21 +71,17 @@ class CartForm extends Component {
           </TableRow>
         </TableHead>
         <TableBody>
-          <TableRow>
-            <TableCell>Opinion From Database</TableCell>
-            <TableCell><Input placeholder="What's It Worth?" /></TableCell>
-            <TableCell><Button variant="contained" color="secondary" type="submit"><small>Delete</small></Button></TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>I love rice!</TableCell>
-            <TableCell><Input placeholder="What's It Worth?" /></TableCell>
-            <TableCell><Button variant="contained" color="secondary" type="submit"><small>Delete</small></Button></TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>I hate pugs</TableCell>
-            <TableCell><Input placeholder="What's It Worth?" /></TableCell>
-            <TableCell><Button variant="contained" color="secondary" type="submit"><small>Delete</small></Button></TableCell>
-          </TableRow>
+
+            {
+              this.state.currentCart.map(item => {
+                <TableRow>
+                      <TableCell>{item.name}</TableCell>
+                      <TableCell><Input placeholder="What's It Worth?" /></TableCell>
+                      <TableCell><Button variant="contained" color="secondary" type="submit" onClick={this.handleDelete(item.id)}><small>Delete</small></Button></TableCell>
+                </TableRow>
+              })
+            }
+
         </TableBody>
         <TableFooter>
           <TableRow>
@@ -95,21 +95,42 @@ class CartForm extends Component {
       </Paper>
     )
   }
-
 }
 
 const mapStateToProps = (state) => ({
-  currentCart: state.currentCart
+  currentCart: state.currentCart,
+  user: state.user
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getUserCart: (user) => dispatch(fetchCart(user)),
-    getUser: () => dispatch(getMe())
+    getUser: () => dispatch(me()),
+    deleteItem: (opinionId) => dispatch(deleteOpinion(opinionId))
   }
 }
 
+
+
 export default connect(mapStateToProps, mapDispatchToProps)(CartForm)
+
+
+
+{/* <TableRow>
+<TableCell>Opinion From Database</TableCell>
+<TableCell><Input placeholder="What's It Worth?" /></TableCell>
+<TableCell><Button variant="contained" color="secondary" type="submit"><small>Delete</small></Button></TableCell>
+</TableRow>
+<TableRow>
+<TableCell>I love rice!</TableCell>
+<TableCell><Input placeholder="What's It Worth?" /></TableCell>
+<TableCell><Button variant="contained" color="secondary" type="submit"><small>Delete</small></Button></TableCell>
+</TableRow>
+<TableRow>
+<TableCell>I hate pugs</TableCell>
+<TableCell><Input placeholder="What's It Worth?" /></TableCell>
+<TableCell><Button variant="contained" color="secondary" type="submit"><small>Delete</small></Button></TableCell>
+</TableRow> */}
 
 // {
 //   this.props.defaultCart.map(opinion => (
