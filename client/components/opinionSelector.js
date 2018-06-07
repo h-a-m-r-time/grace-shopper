@@ -35,7 +35,7 @@ class OpinionSelector extends Component {
   // suggestions,
   render() {
     return (
-      <div>
+      <div className="contentWrap">
         <div>I</div>
         <form onSubmit={this.onSubmit}>
           <IntegrationReactSelect
