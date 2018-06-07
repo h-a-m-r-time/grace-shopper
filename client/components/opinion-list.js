@@ -6,8 +6,7 @@ import Opinion from './opinion'
 
 class OpinionList extends Component {
   renderOpinions() {
-    console.log('renderOpinions', this.props)
-    if (this.props.opinions && this.props.opinions.length) {
+    if (this.props.opinions.length) {
       return this.props.opinions.map(opinion => {
         return <Opinion opinion={opinion} key={opinion.id} />
       })
@@ -17,21 +16,8 @@ class OpinionList extends Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount()', this.props)
     this.props.getOpinions()
   }
-
-  // componentWillReceiveProps(props) {
-  //   console.log('PROPS is',props)
-  // }
-
-  // UNSAFE_componentWillReceiveProps(props){
-  //   console.log('PROPS is', props)
-  // }
-
-  // static getDerivedStateFromProps() {
-  //   console.log('HERE', this.props)
-  // }
 
   render() {
     return (
@@ -41,12 +27,11 @@ class OpinionList extends Component {
 }
 
 const mapStateToProps = state => ({
-  opinions: state.opinions
+  opinions: state.opinionReducer.opinions
 })
 
 const mapDispatchToProps = dispatch => ({
   getOpinions: () => {
-    console.log('DISPATCHING OPINIONS')
     return dispatch(getOpinions())
   },
 })
