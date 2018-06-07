@@ -13,7 +13,7 @@ const AuthForm = props => {
   const { name, displayName, handleSubmit, error } = props
 
   return (
-    <div className="contentWrap">
+    <div>
       <form onSubmit={handleSubmit} name={name}>
         <div>
           <TextField id="email" name="email" label="Email" />

@@ -32,7 +32,7 @@ class OpinionSelector extends Component {
 
   render() {
     return (
-      <div className="contentWrap">
+      <div>
         <form onSubmit={this.onSubmit}>
           <IntegrationReactSelect
             value={this.state.feeling}
