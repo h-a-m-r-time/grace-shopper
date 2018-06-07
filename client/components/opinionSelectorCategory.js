@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
-import FormHelperText from '@material-ui/core/FormHelperText'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormControl from '@material-ui/core/FormControl'
 import FormLabel from '@material-ui/core/FormLabel'
@@ -20,13 +19,9 @@ const styles = theme => ({
   },
 })
 
-class RadioButtonsGroup extends React.Component {
-  state = {
-    value: 'female',
-  }
-
+class CategoryRadioButtons extends React.Component {
   handleChange = event => {
-    this.setState({ value: event.target.value })
+    this.props.onChangeFunc('category', event.target.value)
   }
 
   render() {
@@ -39,74 +34,33 @@ class RadioButtonsGroup extends React.Component {
           required
           className={classes.formControl}
         >
-          <FormLabel component="legend">Gender</FormLabel>
+          <FormLabel component="legend">Category</FormLabel>
           <RadioGroup
-            aria-label="gender"
-            name="gender1"
+            aria-label="category"
+            name="category"
             className={classes.group}
-            value={this.state.value}
+            value={this.props.value}
             onChange={this.handleChange}
           >
             <FormControlLabel
-              value="female"
-              control={<Radio />}
-              label="Female"
+              value="verb"
+              control={<Radio color="primary" />}
+              label="Verb"
             />
-            <FormControlLabel value="male" control={<Radio />} label="Male" />
-            <FormControlLabel value="other" control={<Radio />} label="Other" />
             <FormControlLabel
-              value="disabled"
-              disabled
-              control={<Radio />}
-              label="(Disabled option)"
+              value="description"
+              control={<Radio color="primary" />}
+              label="Description"
             />
           </RadioGroup>
-        </FormControl>
-        <FormControl
-          component="fieldset"
-          required
-          error
-          className={classes.formControl}
-        >
-          <FormLabel component="legend">Gender</FormLabel>
-          <RadioGroup
-            aria-label="gender"
-            name="gender2"
-            className={classes.group}
-            value={this.state.value}
-            onChange={this.handleChange}
-          >
-            <FormControlLabel
-              value="female"
-              control={<Radio color="primary" />}
-              label="Female"
-            />
-            <FormControlLabel
-              value="male"
-              control={<Radio color="primary" />}
-              label="Male"
-            />
-            <FormControlLabel
-              value="other"
-              control={<Radio color="primary" />}
-              label="Other"
-            />
-            <FormControlLabel
-              value="disabled"
-              disabled
-              control={<Radio />}
-              label="(Disabled option)"
-            />
-          </RadioGroup>
-          <FormHelperText>You can display an error</FormHelperText>
         </FormControl>
       </div>
     )
   }
 }
 
-RadioButtonsGroup.propTypes = {
+CategoryRadioButtons.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(RadioButtonsGroup)
+export default withStyles(styles)(CategoryRadioButtons)
