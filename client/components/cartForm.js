@@ -46,11 +46,14 @@ class CartForm extends Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault()
-    const cart = {
-      opinion: event.target.opinion.value,
-      price: event.target.price.value,
-    }
+    //information to be submitted to checkout
+
+    // event.preventDefault()
+    // const cart = {
+    //   opinion: event.target.opinion.value,
+    //   price: event.target.price.value,
+    // }
+
   }
 
   handleDelete = (itemId) => {
@@ -60,6 +63,7 @@ class CartForm extends Component {
   render() {
     console.log(this.props)
     return (
+      <form onSubmit={this.handleSubmit}>
       <Paper >
       <Table >
         <TableHead>
@@ -71,17 +75,15 @@ class CartForm extends Component {
           </TableRow>
         </TableHead>
         <TableBody>
-
             {
-              this.state.currentCart.map(item => {
+              this.state.currentCart.map(item => (
                 <TableRow>
                       <TableCell>{item.name}</TableCell>
                       <TableCell><Input placeholder="What's It Worth?" /></TableCell>
                       <TableCell><Button variant="contained" color="secondary" type="submit" onClick={this.handleDelete(item.id)}><small>Delete</small></Button></TableCell>
                 </TableRow>
-              })
+              ))
             }
-
         </TableBody>
         <TableFooter>
           <TableRow>
@@ -89,10 +91,12 @@ class CartForm extends Component {
           <TableCell />
           <TableCell />
           <TableCell>Total</TableCell>
+          <TableCell><Button variant="contained" color="primary" type="submit"  ><small>Checkout</small></Button></TableCell>
           </TableRow>
         </TableFooter>
       </Table>
       </Paper>
+      </form>
     )
   }
 }
