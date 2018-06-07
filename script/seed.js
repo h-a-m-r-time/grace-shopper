@@ -136,9 +136,12 @@ async function seed() {
   ])
 
   await Promise.all([
-    createdOpinions[0].setTransaction(createdTransactions[0]),
-    createdOpinions[1].setTransaction(createdTransactions[1]),
-    createdOpinions[2].setTransaction(createdTransactions[2]),
+    createdTransactions[0].setOpinion(createdOpinions[0]),
+    createdTransactions[1].setOpinion(createdOpinions[1]),
+    createdTransactions[2].setOpinion(createdOpinions[2]),
+    createdTransactions[3].setOpinion(createdOpinions[2]),
+    createdTransactions[4].setOpinion(createdOpinions[2]),
+    createdTransactions[5].setOpinion(createdOpinions[2]),
   ])
 
   await Promise.all([

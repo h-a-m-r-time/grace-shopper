@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { getTransactions } from '../store/transaction'
+import { getTransactions } from '../store'
 
-class OpinionList extends Component {
-  renderOpinions() {
-    if (this.props.transactions.length) {
+class Confirmation extends Component {
+  renderTransactions() {
+    if (this.props.transactions && this.props.transactions.length) {
       return this.props.transactions.map(transaction => {
         return <div>Transaction {transaction.id}</div>
       })
@@ -15,7 +15,7 @@ class OpinionList extends Component {
   }
 
   componentDidMount() {
-    this.props.getOpinions()
+    this.props.getTransactions()
   }
 
   render() {
@@ -26,16 +26,16 @@ class OpinionList extends Component {
 }
 
 const mapStateToProps = state => ({
-  transactinos: state.transactionReducer.transactions
+  transactions: state.transaction
 })
 
 const mapDispatchToProps = dispatch => ({
-  getOpinions: () => {
-    return dispatch(getOpinions())
+  getTransactions: () => {
+    return dispatch(getTransactions())
   },
 })
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(OpinionList)
+)(Confirmation)

@@ -12,8 +12,8 @@ Feeling.hasMany(Opinion)
 Opinion.belongsTo(Thing)
 Thing.hasMany(Opinion)
 
-Opinion.belongsTo(Transaction)
-Transaction.hasMany(Opinion)
+Transaction.belongsTo(Opinion)
+Opinion.hasMany(Transaction)
 
 Transaction.belongsTo(User)
 User.hasMany(Transaction)
