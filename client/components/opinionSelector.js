@@ -48,21 +48,14 @@ class OpinionSelector extends Component {
         let thingObj = this.props.things.filter(thing => {
           return thing.name === this.state.thing
         })[0]
-      console.log(feelObj)
       if(!feelObj){
-          console.log("feelOBjyo", feelObj)
           //if the feeling wasn't already created we need to create one
-          //these are succesuflly hitting api to create stuff but not waiting, can't figure why
-          const tempObj = await this.props.createFeeling({name: this.state.feeling, category: this.state.category})
-          feelObj = tempObj
-          console.log("feelOBjyI<Po", feelObj)
+          feelObj = await this.props.createFeeling({name: this.state.feeling, category: this.state.category})
       }
       if(!thingObj){
           //if the thing wasn't already created we need to create one
-          //these are succesuflly hitting api to create stuff but not waiting, can't figure why
           thingObj = await this.props.createThing({name: this.state.thing})
       }
-      console.log("feelOBjyo", feelObj, thingObj)
 
       //iterate through the opinions and check if the state's thing and feeling id's match any of the opinions before the following line executies
       //if it does match, set the opinion object to the one it matches
