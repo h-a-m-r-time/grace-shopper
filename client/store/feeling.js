@@ -39,7 +39,7 @@ export function createFeeling(feelingObj) {
         const response = await axios.post('/api/feelings', feelingObj)
         const feeling = response.data
         dispatch(addFeeling(feeling))
-        return feeling;
+        return feeling
     }
 }
 

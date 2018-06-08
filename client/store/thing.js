@@ -33,12 +33,13 @@ export const getThings = () => dispatch =>
     .then(res => dispatch(gotThings(res.data)))
     .catch(err => console.log(err))
 
-export const createThing = (obj) => async dispatch => {
-     const thing = await axios
-        .post('/api/things', obj)
-        .then(res => dispatch(addThing(res.data)))
-        .catch(err => console.log(err))
-     return thing
+export const createThing = (thingObj) => {
+     return async dispatch => {
+         const response = await axios.post('/api/things', thingObj)
+         const thing = response.data
+         dispatch(addThing(thing))
+         return thing;
+     }
 }
 /**
  * REDUCER
