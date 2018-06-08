@@ -105,6 +105,7 @@ class OpinionSelector extends Component {
           })
         }
         if (!thingObj) {
+            console.log('should be hitting')
           //if the thing wasn't already created we need to create one
           thingObj = await this.props.createThing({ name: this.state.thing })
         }
@@ -212,6 +213,7 @@ const mapDispatchToProps = dispatch => {
       return dispatch(createFeeling(obj))
     },
     createThing: obj => {
+        console.log('about to createThing')
       return dispatch(createThing(obj))
     },
     addNewOpinion: obj => {
