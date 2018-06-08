@@ -49,7 +49,6 @@ class OpinionSelector extends Component {
   }
 
   render() {
-    console.log('PROPS', this.props)
     return (
       <div>
         <form onSubmit={this.onSubmit}>
@@ -93,9 +92,7 @@ const mapStateToProps = (state) => {
   let thingSuggestion = []
   if (state.feelings.length) {
     feelingSuggestion = state.feelings
-    .filter(feeling => feeling.category !== state.category)
     .map(feeling => {
-      console.log('category is', state.category)
       return {
         value: feeling.name,
         label: feeling.name,
