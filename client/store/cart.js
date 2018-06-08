@@ -18,7 +18,7 @@ export const fetchCart = (userId) => {
   }
 }
 
-const currentCart = ( state = defaultCart, action) => {
+const cart = ( state = defaultCart, action) => {
   switch (action.type) {
     case GET_CART: {
       return action.cart
@@ -29,4 +29,4 @@ const currentCart = ( state = defaultCart, action) => {
   }
 }
 
-export default currentCart;
+export default cart;
