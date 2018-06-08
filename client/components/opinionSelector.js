@@ -5,19 +5,23 @@ import { getThings } from '../store/thing'
 import Button from '@material-ui/core/Button'
 import IntegrationReactSelect from './OpinionSelectorIntegration'
 import CategoryRadioButtons from './opinionSelectorCategory'
+import StatementMaker from './statement-maker'
 
 class OpinionSelector extends Component {
   constructor(props) {
     super(props)
+
     this.state = {
       feeling: '',
       thing: '',
       category: 'verb',
     }
   }
+
   componentDidMount() {
     this.props.getFeelings()
     this.props.getThings()
+    console.log('PROPS', this.props)
   }
 
   onChange = (name, value) => {
@@ -26,8 +30,6 @@ class OpinionSelector extends Component {
 
   onSubmit = evt => {
     evt.preventDefault()
-    ///need to push data to store and maybe redirect to cart? tbd
-    //can se
   }
 
   render() {
@@ -40,14 +42,14 @@ class OpinionSelector extends Component {
             placeHolder="how you feeling?"
             optionName="feeling"
             suggestions={this.props.feelingSuggestion}
-          />>
+          />
           <IntegrationReactSelect
             value={this.state.thing}
             onChangeFunc={this.onChange}
             placeHolder="Thing you feel this towards?"
             optionName="thing"
             suggestions={this.props.thingSuggestion}
-          />>
+          />
           <CategoryRadioButtons
             onChangeFunc={this.onChange}
             value={this.state.category}
@@ -57,13 +59,20 @@ class OpinionSelector extends Component {
               Add Opinion to Cart
             </Button>
           </div>
+          <div>
+            <StatementMaker
+            thing={this.state.thing}
+            feeling={this.state.feeling}
+            category={this.state.category}
+            />
+          </div>
         </form>
       </div>
     )
   }
 }
 
-const mapStateToProps = (state, ownprops) => {
+const mapStateToProps = (state) => {
   let feelingSuggestion = []
   let thingSuggestion = []
   if (state.feelings.length) {
