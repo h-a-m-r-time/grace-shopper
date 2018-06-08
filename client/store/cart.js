@@ -1,25 +1,16 @@
 import axios from 'axios'
 import history from '../history'
-import { reporters } from 'mocha';
 
 //ACTION TYPES
 
 const GET_CART = 'GET_CART'
 const POST_CART = 'POST_CART'
-const DELETE_ITEM = 'DELETE_ITEM'
 
 const defaultCart = []
 
 const getCart = cart => ({type: GET_CART, cart})
 
 const postedCart = cart => ({type: POST_CART, cart})
-
-export const deleteItem = (opinionId) => {
-  return {
-    type: DELETE_ITEM,
-    opinionId
-  }
-}
 
 export const fetchCart = (userId) => {
   return async dispatch => {
@@ -39,15 +30,6 @@ export const postCart = (opinionObj) => {
     }
 }
 
-export const removeItem = (opinionId) => {
-  return async dispatch => {
-    const response = await axios.delete(`/api/cart/:${opinionId}`)
-    const opinionData = response.data
-    const action = deleteItem(opinionData)
-    dispatch(action)
-  }
-}
-
 const cart = ( state = defaultCart, action) => {
   switch (action.type) {
     case GET_CART: {
@@ -55,11 +37,6 @@ const cart = ( state = defaultCart, action) => {
     }
     case POST_CART: {
         return [...state, action.cartItem]
-    }
-    case DELETE_ITEM: {
-      return [...state, state.cart.filter(opinion => {
-        return opinion.id !== action.opinionId
-      })]
     }
     default: {
       return state
