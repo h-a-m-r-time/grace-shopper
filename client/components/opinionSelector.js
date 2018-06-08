@@ -4,16 +4,19 @@ import { getFeelings, getThings, createFeeling, createThing, addNewOpinion, post
 import Button from '@material-ui/core/Button'
 import IntegrationAutosuggest from './OpinionSelectorAutoSuggest'
 import CategoryRadioButtons from './opinionSelectorCategory'
+import StatementMaker from './statement-maker'
 
 class OpinionSelector extends Component {
   constructor(props) {
     super(props)
+
     this.state = {
       feeling: '',
       thing: '',
       category: 'verb',
     }
   }
+
   componentDidMount() {
     this.props.getFeelings()
     this.props.getThings()
@@ -75,14 +78,14 @@ class OpinionSelector extends Component {
           <IntegrationAutosuggest
             value={this.state.feeling}
             onChangeFunc={this.onChange}
-            placeHolder="how you feeling?"
+            placeHolder="singular verb"
             optionName="feeling"
             suggestionsProps={this.props.feelingSuggestion}
           />
           <IntegrationAutosuggest
             value={this.state.thing}
             onChangeFunc={this.onChange}
-            placeHolder="Thing you feel this towards?"
+            placeHolder="opinion subject"
             optionName="thing"
             suggestionsProps={this.props.thingSuggestion}
           />
@@ -95,13 +98,19 @@ class OpinionSelector extends Component {
               Add Opinion to Cart
             </Button>
           </div>
+          <div>
+            <StatementMaker
+            thing={this.state.thing}
+            feeling={this.state.feeling}
+            category={this.state.category} />
+          </div>
         </form>
       </div>
     )
   }
 }
 
-const mapStateToProps = (state, ownprops) => {
+const mapStateToProps = (state) => {
   let feelingSuggestion = []
   let thingSuggestion = []
   if (state.feelings.length) {
@@ -125,6 +134,7 @@ const mapStateToProps = (state, ownprops) => {
   return {
     feelings: state.feelings,
     things: state.things,
+    category: state.category,
     feelingSuggestion: feelingSuggestion,
     thingSuggestion: thingSuggestion,
     userId: state.user.id
