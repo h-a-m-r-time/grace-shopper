@@ -4,6 +4,7 @@ import axios from 'axios'
  * ACTION TYPES
  */
 const GET_THINGS = 'GET_THINGS'
+const ADD_THING = 'ADD_THING'
 
 /**
  * INITIAL STATE
@@ -18,6 +19,11 @@ const gotThings = things => ({
   things,
 })
 
+const addThing = thing => ({
+  type: ADD_THING,
+  thing
+})
+
 /**
  * THUNK CREATORS
  */
@@ -27,6 +33,13 @@ export const getThings = () => dispatch =>
     .then(res => dispatch(gotThings(res.data)))
     .catch(err => console.log(err))
 
+export const createThing = (obj) => async dispatch => {
+     const thing = await axios
+        .post('/api/things', obj)
+        .then(res => dispatch(addThing(res.data)))
+        .catch(err => console.log(err))
+     return thing
+}
 /**
  * REDUCER
  */
@@ -34,6 +47,8 @@ export default function(state = initState, action) {
   switch (action.type) {
     case GET_THINGS:
       return [...state, ...action.things]
+    case ADD_THING:
+      return [...state, action.thing]
     default:
       return state
   }
