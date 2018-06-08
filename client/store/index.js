@@ -26,3 +26,4 @@ export default store
 export * from './user'
 export * from './transaction'
 export * from './cart'
+export * from './opinion'
