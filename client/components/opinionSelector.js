@@ -18,10 +18,13 @@ class OpinionSelector extends Component {
     }
   }
 
+  componentDidUpdate() {
+
+  }
+
   componentDidMount() {
     this.props.getFeelings()
     this.props.getThings()
-    console.log('PROPS', this.props)
   }
 
   onChange = (name, value) => {
@@ -33,20 +36,21 @@ class OpinionSelector extends Component {
   }
 
   render() {
+    console.log('PROPS',this.props)
     return (
       <div>
         <form onSubmit={this.onSubmit}>
           <IntegrationReactSelect
             value={this.state.feeling}
             onChangeFunc={this.onChange}
-            placeHolder="how you feeling?"
+            placeHolder="singular verb"
             optionName="feeling"
             suggestions={this.props.feelingSuggestion}
           />
           <IntegrationReactSelect
             value={this.state.thing}
             onChangeFunc={this.onChange}
-            placeHolder="Thing you feel this towards?"
+            placeHolder="opinion subject"
             optionName="thing"
             suggestions={this.props.thingSuggestion}
           />
@@ -63,8 +67,7 @@ class OpinionSelector extends Component {
             <StatementMaker
             thing={this.state.thing}
             feeling={this.state.feeling}
-            category={this.state.category}
-            />
+            category={this.state.category} />
           </div>
         </form>
       </div>
@@ -76,7 +79,10 @@ const mapStateToProps = (state) => {
   let feelingSuggestion = []
   let thingSuggestion = []
   if (state.feelings.length) {
-    feelingSuggestion = state.feelings.map(feeling => {
+    feelingSuggestion = state.feelings
+    .filter(feeling => feeling.category !== state.category)
+    .map(feeling => {
+      console.log('category is', state.category)
       return {
         value: feeling.name,
         label: feeling.name,
@@ -85,7 +91,8 @@ const mapStateToProps = (state) => {
   }
 
   if (state.things.length) {
-    thingSuggestion = state.things.map(thing => {
+    thingSuggestion = state.things
+    .map(thing => {
       return {
         value: thing.name,
         label: thing.name,
@@ -96,6 +103,7 @@ const mapStateToProps = (state) => {
   return {
     feelings: state.feelings,
     things: state.things,
+    category: state.category,
     feelingSuggestion: feelingSuggestion,
     thingSuggestion: thingSuggestion,
   }

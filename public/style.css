@@ -24,3 +24,8 @@ form div {
 .content{
     margin-top: 100px;
 }
+
+.card{
+  position: fixed;
+  left: 200px;
+}

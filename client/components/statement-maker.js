@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
+import Card from './card'
 
 export default class StatementMaker extends Component {
   constructor(props) {
@@ -7,40 +10,48 @@ export default class StatementMaker extends Component {
     this.state = {
       statement: '',
     }
+
+    this.descriptionStatement = this.descriptionStatement.bind(this)
+    this.verbStatement = this.verbStatement.bind(this)
+    this.createStatement = this.createStatement.bind(this)
+
+  }
+
+  presTenseVerb(){
+    if (this.props.thing){
+      if (this.props.thing[this.props.thing.length - 1] === 's'){
+        return 'are'
+      } else {
+        return 'is'
+      }
+    }
   }
 
   descriptionStatement() {
-    console.log('description statement', this)
-    if (this.props.thing !== '' && this.props.feeling !== '') {
-      this.setState({ statement: 'I think/feel something about something' })
-    } else if (this.props.thing !== '') {
-      this.setState({
-        statement: `I think/feel something about ${this.props.thing}`,
-      })
-    } else if (this.props.feeling !== '') {
-      this.setState({ statement: `I ${this.props.feeling} something` })
+    if (!this.props.thing && !this.props.feeling) {
+      return  'Something is described'
+    } else if (this.props.thing && !this.props.feeling) {
+      return `${this.props.thing} ${this.presTenseVerb()} described`
+    } else if (!this.props.thing && this.props.feeling) {
+      return `Something ${this.props.feeling}`
     } else {
-      this.setState({
-        statement: `I ${this.props.feeling} ${this.props.thing}`,
-      })
+      return `${this.props.thing} ${this.presTenseVerb()} ${this.props.feeling} `
     }
   }
 
   verbStatement() {
-    console.log('verbStatement', this)
-    if (this.props.thing !== '' && this.props.feeling !== '') {
-      this.setState({ statement:  'Something is described' })
-    } else if (this.props.thing !== '') {
-      this.setState({ statement:  `I think/feel something about ${this.props.thing}` })
-    } else if (this.props.feeling !== '') {
-      this.setState({ statement:  `I ${this.props.feeling} something` })
+    if (!this.props.feeling && !this.props.thing) {
+      return 'believe/feel/think something about something'
+    } else if (!this.props.feeling && this.props.thing) {
+      return `believe/feel/think something about ${this.props.thing}`
+    } else if (this.props.feeling && !this.props.thing) {
+      return `${this.props.feeling} something`
     } else {
-      this.setState({ statement:  `I ${this.props.feeling} ${this.props.thing}` })
+      return `${this.props.feeling} ${this.props.thing}`
     }
   }
 
   createStatement() {
-    console.log('createStatement', this)
     if (this.props.category === 'verb') {
       return this.verbStatement()
     } else {
@@ -49,30 +60,15 @@ export default class StatementMaker extends Component {
   }
 
   componentDidMount() {
-    console.log('CDM', this)
     this.createStatement()
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    console.log('GDSFP', this)
-    if (
-      nextProps.thing !== prevState.thing &&
-      nextProps.feeling !== prevState.feeling
-    ) {
-      return {
-        thing: nextProps.thing,
-        feeling: nextProps.feeling
-      }
-    }
-    return null
-  }
-
-  // componentDidUpdate(){
-  //   console.log('CDU')
-  //   // this.createStatement()
-  // }
-
   render() {
-    return <div> {this.state.statement} </div>
+
+    return (
+    <div>
+      <Card statement={this.createStatement()} />
+    </div>
+    )
   }
 }
