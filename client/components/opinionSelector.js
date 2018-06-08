@@ -39,6 +39,7 @@ class OpinionSelector extends Component {
     evt.preventDefault()
     ///need to push data to store and maybe redirect to cart? tbd
     //need both feeling and thing to be filled out before
+    try{
     if (this.state.feeling && this.state.thing) {
         //i think we could use find here to not have the array lookup
         let feelObj = this.props.feelings.filter(feeling => {
@@ -52,7 +53,8 @@ class OpinionSelector extends Component {
           console.log("feelOBjyo", feelObj)
           //if the feeling wasn't already created we need to create one
           //these are succesuflly hitting api to create stuff but not waiting, can't figure why
-          feelObj = await this.props.createFeeling({name: this.state.feeling, category: this.state.category})
+          const tempObj = await this.props.createFeeling({name: this.state.feeling, category: this.state.category})
+          feelObj = tempObj
           console.log("feelOBjyI<Po", feelObj)
       }
       if(!thingObj){
@@ -69,6 +71,9 @@ class OpinionSelector extends Component {
       const cartObj = await this.props.postCart({opinionId: opinion.id, userId: this.props.userId, amount: 0.0})
 
     }
+} catch(error){
+    console.log(error)
+}
   }
 
   render() {
@@ -150,14 +155,16 @@ const mapDispatchToProps = dispatch => {
       dispatch(getThings())
     },
     createFeeling: (obj) => {
-        console.log('about to dispatch', obj)
-        dispatch(createFeeling(obj))
+        return dispatch(createFeeling(obj))
     },
     createThing: (obj) => {
-        dispatch(createThing(obj))
+        return dispatch(createThing(obj))
     },
     addNewOpinion: (obj) => {
-        dispatch(addNewOpinion(obj))
+        return dispatch(addNewOpinion(obj))
+    },
+    postCart: (obj) => {
+        dispatch(postCart(obj))
     }
   }
 }
