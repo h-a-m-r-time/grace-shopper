@@ -91,8 +91,7 @@ const mapStateToProps = (state) => {
   let feelingSuggestion = []
   let thingSuggestion = []
   if (state.feelings.length) {
-    feelingSuggestion = state.feelings
-    .map(feeling => {
+    feelingSuggestion = state.feelings.map(feeling => {
       return {
         value: feeling.name,
         label: feeling.name,
@@ -101,8 +100,7 @@ const mapStateToProps = (state) => {
   }
 
   if (state.things.length) {
-    thingSuggestion = state.things
-    .map(thing => {
+    thingSuggestion = state.things.map(thing => {
       return {
         value: thing.name,
         label: thing.name,
