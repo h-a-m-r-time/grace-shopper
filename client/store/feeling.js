@@ -20,7 +20,6 @@ const gotFeelings = feelings => ({
 })
 
 const addFeeling = feeling => {
-    console.log('in here though')
   return {type: ADD_FEELING,
   feeling}
 }
@@ -40,7 +39,6 @@ export function createFeeling(feelingObj) {
         const response = await axios.post('/api/feelings', feelingObj)
         const feeling = response.data
         dispatch(addFeeling(feeling))
-        console.log("FEELING", feeling)
         return feeling;
     }
 }
@@ -54,7 +52,6 @@ export default function(state = initState, action) {
     case GET_FEELINGS:
       return [...state, ...action.feelings]
     case ADD_FEELING: {
-      console.log('adding feeling reducer')
       return [...state, action.feeling]
     }
     default:
