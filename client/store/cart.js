@@ -1,7 +1,5 @@
 import axios from 'axios'
 import history from '../history'
-import { reporters } from 'mocha';
-
 //ACTION TYPES
 
 const GET_CART = 'GET_CART'
