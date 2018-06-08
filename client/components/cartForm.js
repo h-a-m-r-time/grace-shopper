@@ -34,7 +34,9 @@ class CartForm extends Component {
   }
 
   componentDidMount () {
+      console.log("MOINT")
     this.props.getUser()
+    console.log(this.props.user.id)
     this.props.getUserCart(this.props.user.id)
   }
 
@@ -76,11 +78,11 @@ class CartForm extends Component {
         </TableHead>
         <TableBody>
             {
-              this.state.cart.map(item => (
-                <TableRow>
-                      <TableCell>{item.name}</TableCell>
+              this.props.cart.map(item => (
+                <TableRow key={item.id}>
+                      <TableCell>{item.opinion.statement}</TableCell>
                       <TableCell><Input placeholder="What's It Worth?" /></TableCell>
-                      <TableCell><Button variant="contained" color="secondary" type="submit" onClick={this.handleDelete(item.id)}><small>Delete</small></Button></TableCell>
+                      <TableCell><Button variant="contained" color="secondary" type="submit" onClick={this.handleDelete}><small>Delete</small></Button></TableCell>
                 </TableRow>
               ))
             }
