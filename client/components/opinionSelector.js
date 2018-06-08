@@ -11,7 +11,8 @@ import {
 import Button from '@material-ui/core/Button'
 import IntegrationAutosuggest from './OpinionSelectorAutoSuggest'
 import CategoryRadioButtons from './opinionSelectorCategory'
-import StatementMaker from './statement-maker'
+import Card from './card'
+import StatementMaker from '../utilities/statement-maker'
 
 class OpinionSelector extends Component {
   constructor(props) {
@@ -21,48 +22,6 @@ class OpinionSelector extends Component {
       feeling: '',
       thing: '',
       category: 'verb',
-    }
-  }
-
-  presTenseVerb(thing){
-    if (thing){
-      if (thing[thing.length - 1] === 's'){
-        return 'are'
-      } else {
-        return 'is'
-      }
-    }
-  }
-
-  descriptionStatement(thing, feeling) {
-    if (!thing && !feeling){
-      return  'Something is described'
-    } else if (thing && !feeling) {
-      return `${thing} ${this.presTenseVerb(thing)} described`
-    } else if (!thing && feeling) {
-      return `Something ${feeling}`
-    } else {
-      return `${thing} ${this.presTenseVerb()} ${feeling} `
-    }
-  }
-
-  verbStatement(feeling, thing) {
-      if (!feeling && !thing){
-      return 'believe/feel/think something about something'
-    } else if (!feeling && thing) {
-      return `believe/feel/think something about ${thing}`
-    } else if (feeling && !thing) {
-      return `${feeling} something`
-    } else {
-      return `${feeling} ${thing}`
-    }
-  }
-
-  createStatement(feeling, thing) {
-    if (this.state.category === 'verb') {
-      return this.verbStatement(feeling, thing)
-    } else {
-      return this.descriptionStatement(feeling, thing)
     }
   }
 
@@ -113,7 +72,7 @@ class OpinionSelector extends Component {
         //if it does match, set the opinion object to the one it matches
         //not working because the awaits aren't holding up the logic
         const opinion = await this.props.addNewOpinion({
-          statement: this.createStatement(this.state.feeling, this.state.thing),
+          statement: StatementMaker.createStatement(this.state.feeling, this.state.thing),
           feelingId: feelObj.id,
           thingId: thingObj.id,
         })
@@ -156,11 +115,11 @@ class OpinionSelector extends Component {
             </Button>
           </div>
           <div>
-            <StatementMaker
-              thing={this.state.thing}
-              feeling={this.state.feeling}
-              category={this.state.category}
-              statement={this.createStatement(this.state.feeling, this.state.thing)}
+            <Card
+              statement={StatementMaker.createStatement(
+                this.state.feeling,
+                this.state.thing
+              )}
             />
           </div>
         </form>
