@@ -78,7 +78,7 @@ class CartForm extends Component {
         </TableHead>
         <TableBody>
             {
-              this.props.cart.map(item => (
+              this.props && this.props.cart && this.props.cart[0] && this.props.cart[0].id && this.props.cart.map(item => (
                 <TableRow key={item.id}>
                       <TableCell>{item.opinion.statement}</TableCell>
                       <TableCell><Input placeholder="What's It Worth?" /></TableCell>
