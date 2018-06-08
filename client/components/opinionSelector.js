@@ -39,6 +39,7 @@ class OpinionSelector extends Component {
     evt.preventDefault()
     ///need to push data to store and maybe redirect to cart? tbd
     //need both feeling and thing to be filled out before
+    try{
     if (this.state.feeling && this.state.thing) {
         //i think we could use find here to not have the array lookup
         let feelObj = this.props.feelings.filter(feeling => {
@@ -47,20 +48,14 @@ class OpinionSelector extends Component {
         let thingObj = this.props.things.filter(thing => {
           return thing.name === this.state.thing
         })[0]
-      console.log(feelObj)
       if(!feelObj){
-          console.log("feelOBjyo", feelObj)
           //if the feeling wasn't already created we need to create one
-          //these are succesuflly hitting api to create stuff but not waiting, can't figure why
           feelObj = await this.props.createFeeling({name: this.state.feeling, category: this.state.category})
-          console.log("feelOBjyI<Po", feelObj)
       }
       if(!thingObj){
           //if the thing wasn't already created we need to create one
-          //these are succesuflly hitting api to create stuff but not waiting, can't figure why
           thingObj = await this.props.createThing({name: this.state.thing})
       }
-      console.log("feelOBjyo", feelObj, thingObj)
 
       //iterate through the opinions and check if the state's thing and feeling id's match any of the opinions before the following line executies
       //if it does match, set the opinion object to the one it matches
@@ -69,6 +64,9 @@ class OpinionSelector extends Component {
       const cartObj = await this.props.postCart({opinionId: opinion.id, userId: this.props.userId, amount: 0.0})
 
     }
+} catch(error){
+    console.log(error)
+}
   }
 
   render() {
@@ -150,14 +148,16 @@ const mapDispatchToProps = dispatch => {
       dispatch(getThings())
     },
     createFeeling: (obj) => {
-        console.log('about to dispatch', obj)
-        dispatch(createFeeling(obj))
+        return dispatch(createFeeling(obj))
     },
     createThing: (obj) => {
-        dispatch(createThing(obj))
+        return dispatch(createThing(obj))
     },
     addNewOpinion: (obj) => {
-        dispatch(addNewOpinion(obj))
+        return dispatch(addNewOpinion(obj))
+    },
+    postCart: (obj) => {
+        dispatch(postCart(obj))
     }
   }
 }
