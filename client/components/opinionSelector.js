@@ -57,14 +57,14 @@ class OpinionSelector extends Component {
             onChangeFunc={this.onChange}
             placeHolder="singular verb"
             optionName="feeling"
-            suggestions={this.props.feelingSuggestion}
+            suggestionsProps={this.props.feelingSuggestion}
           />
           <IntegrationAutosuggest
             value={this.state.thing}
             onChangeFunc={this.onChange}
             placeHolder="opinion subject"
             optionName="thing"
-            suggestions={this.props.thingSuggestion}
+            suggestionsProps={this.props.thingSuggestion}
           />
           <CategoryRadioButtons
             onChangeFunc={this.onChange}
