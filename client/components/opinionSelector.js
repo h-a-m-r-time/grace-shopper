@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { getFeelings } from '../store/feeling'
 import { getThings } from '../store/thing'
 import Button from '@material-ui/core/Button'
-import IntegrationReactSelect from './OpinionSelectorIntegration'
+import IntegrationAutosuggest from './OpinionSelectorAutoSuggest'
 import CategoryRadioButtons from './opinionSelectorCategory'
 
 class OpinionSelector extends Component {
@@ -22,32 +22,47 @@ class OpinionSelector extends Component {
 
   onChange = (name, value) => {
     this.setState({ [name]: value })
+    //toogles the  category state if feeling exists
+    if (name === 'feeling') {
+      const feelObj = this.props.feelings.filter(feeling => {
+        return feeling.name === value
+      })[0]
+      if (feelObj) {
+        this.setState({ category: feelObj.category })
+      }
+    }
   }
 
   onSubmit = evt => {
     evt.preventDefault()
     ///need to push data to store and maybe redirect to cart? tbd
-    //can se
+    //need both feeling and thing to be filled out before
+    if (this.state.feeling && this.state.thing) {
+      const feelObj = this.props.feelings.filter(feeling => {
+        return feeling.name === this.state.feeling
+      })[0]
+      console.log(feelObj)
+    }
   }
 
   render() {
     return (
       <div>
         <form onSubmit={this.onSubmit}>
-          <IntegrationReactSelect
+          <IntegrationAutosuggest
             value={this.state.feeling}
             onChangeFunc={this.onChange}
             placeHolder="how you feeling?"
             optionName="feeling"
-            suggestions={this.props.feelingSuggestion}
-          />>
-          <IntegrationReactSelect
+            suggestionsProps={this.props.feelingSuggestion}
+          />
+          <IntegrationAutosuggest
             value={this.state.thing}
             onChangeFunc={this.onChange}
             placeHolder="Thing you feel this towards?"
             optionName="thing"
-            suggestions={this.props.thingSuggestion}
-          />>
+            suggestionsProps={this.props.thingSuggestion}
+          />
           <CategoryRadioButtons
             onChangeFunc={this.onChange}
             value={this.state.category}
