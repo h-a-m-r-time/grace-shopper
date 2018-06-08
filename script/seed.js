@@ -81,6 +81,18 @@ const transactions = [
   {
     amount: 0.0,
   },
+  {
+    amount: 8.77,
+    purchased: true
+  },
+  {
+    amount: 2.66,
+    purchased: true
+  },
+  {
+    amount: 0.0,
+    purchased: true
+  },
 ]
 
 const users = [
@@ -118,12 +130,18 @@ async function seed() {
     createdTransactions[0].setUser(createdUsers[0]),
     createdTransactions[1].setUser(createdUsers[1]),
     createdTransactions[2].setUser(createdUsers[2]),
+    createdTransactions[3].setUser(createdUsers[0]),
+    createdTransactions[4].setUser(createdUsers[0]),
+    createdTransactions[5].setUser(createdUsers[0]),
   ])
 
   await Promise.all([
-    createdOpinions[0].setTransaction(createdTransactions[0]),
-    createdOpinions[1].setTransaction(createdTransactions[1]),
-    createdOpinions[2].setTransaction(createdTransactions[2]),
+    createdTransactions[0].setOpinion(createdOpinions[0]),
+    createdTransactions[1].setOpinion(createdOpinions[1]),
+    createdTransactions[2].setOpinion(createdOpinions[2]),
+    createdTransactions[3].setOpinion(createdOpinions[2]),
+    createdTransactions[4].setOpinion(createdOpinions[2]),
+    createdTransactions[5].setOpinion(createdOpinions[2]),
   ])
 
   await Promise.all([
@@ -137,6 +155,7 @@ async function seed() {
   // Wowzers! We can even `await` on the right-hand side of the assignment operator
   // and store the result that the promise resolves to in a variable! This is nice!
   console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${transactions.length} transactions`)
   console.log(`seeded successfully`)
 }
 

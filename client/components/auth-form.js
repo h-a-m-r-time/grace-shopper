@@ -2,8 +2,7 @@ import React from 'react'
 import ReactDom from 'react-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField'
+import {Button, TextField} from '@material-ui/core'
 import { auth } from '../store'
 
 /**
