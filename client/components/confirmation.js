@@ -25,7 +25,7 @@ class Confirmation extends Component {
           }
       })
     } else {
-      return 'We can not find your transactions, the pyramid is collapsing'
+      return <TableRow><TableCell>'We can not find your transactions, the pyramid is collapsing'</TableCell></TableRow>
     }
   }
 
