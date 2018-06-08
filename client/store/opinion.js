@@ -37,11 +37,13 @@ export const getOpinion = (id) => dispatch =>
     .then(res => dispatch(gotOpinion(res.data)))
     .catch(err => console.log(err))
 
-export const addNewOpinion = (opinion) => dispatch =>
-  axios
+export const addNewOpinion = (opinion) => async dispatch => {
+  const opinion = await axios
     .post('/api/opinions', opinion)
     .then(res => dispatch(addOpinion(res.data)))
     .catch(err => console.log(err))
+  return opinion
+}
 
 export default function(state = initState, action) {
   switch (action.type) {
