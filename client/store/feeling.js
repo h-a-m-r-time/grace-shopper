@@ -4,6 +4,7 @@ import axios from 'axios'
  * ACTION TYPES
  */
 const GET_FEELINGS = 'GET_FEELINGS'
+const ADD_FEELING = 'ADD_FEELING'
 
 /**
  * INITIAL STATE
@@ -18,6 +19,11 @@ const gotFeelings = feelings => ({
   feelings,
 })
 
+const addFeeling = feeling => ({
+  type: ADD_FEELING,
+  feeling
+})
+
 /**
  * THUNK CREATORS
  */
@@ -27,6 +33,12 @@ export const getFeelings = () => dispatch =>
     .then(res => dispatch(gotFeelings(res.data)))
     .catch(err => console.log(err))
 
+export const createFeeling = () => dispatch =>
+  axios
+    .post('/api/feelings'
+    .then(res => dispatch(addFeeling(res.data)))
+    .catch(err => console.log(err)))
+
 /**
  * REDUCER
  */
@@ -34,6 +46,8 @@ export default function(state = initState, action) {
   switch (action.type) {
     case GET_FEELINGS:
       return [...state, ...action.feelings]
+    case ADD_FEELING:
+      return [...state, action.feeling]
     default:
       return state
   }
