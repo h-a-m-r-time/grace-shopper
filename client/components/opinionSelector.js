@@ -18,10 +18,6 @@ class OpinionSelector extends Component {
     }
   }
 
-  componentDidUpdate() {
-
-  }
-
   componentDidMount() {
     this.props.getFeelings()
     this.props.getThings()
@@ -53,7 +49,7 @@ class OpinionSelector extends Component {
   }
 
   render() {
-    console.log('PROPS',this.props)
+    console.log('PROPS', this.props)
     return (
       <div>
         <form onSubmit={this.onSubmit}>
@@ -64,7 +60,7 @@ class OpinionSelector extends Component {
             optionName="feeling"
             suggestions={this.props.feelingSuggestion}
           />
-          <IntegrationReactSelect
+          <IntegrationAutosuggest
             value={this.state.thing}
             onChangeFunc={this.onChange}
             placeHolder="opinion subject"
