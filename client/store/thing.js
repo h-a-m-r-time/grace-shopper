@@ -35,7 +35,6 @@ export const getThings = () => dispatch =>
 
 export const createThing = (thingObj) => {
      return async dispatch => {
-         console.log('about to send off to things')
          const response = await axios.post('/api/things', thingObj)
          const thing = response.data
          dispatch(addThing(thing))
