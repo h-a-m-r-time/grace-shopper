@@ -11,7 +11,7 @@ import {
 import Button from '@material-ui/core/Button'
 import IntegrationAutosuggest from './OpinionSelectorAutoSuggest'
 import CategoryRadioButtons from './opinionSelectorCategory'
-import StatementMaker from './statement-maker'
+import Card from './card'
 
 class OpinionSelector extends Component {
   constructor(props) {
@@ -24,9 +24,9 @@ class OpinionSelector extends Component {
     }
   }
 
-  presTenseVerb(thing){
-    if (thing){
-      if (thing[thing.length - 1] === 's'){
+  presTenseVerb(thing) {
+    if (thing) {
+      if (thing[thing.length - 1] === 's') {
         return 'are'
       } else {
         return 'is'
@@ -35,19 +35,19 @@ class OpinionSelector extends Component {
   }
 
   descriptionStatement(thing, feeling) {
-    if (!thing && !feeling){
-      return  'Something is described'
+    if (!thing && !feeling) {
+      return 'Something is described'
     } else if (thing && !feeling) {
       return `${thing} ${this.presTenseVerb(thing)} described`
     } else if (!thing && feeling) {
       return `Something ${feeling}`
     } else {
-      return `${thing} ${this.presTenseVerb()} ${feeling} `
+      return `${thing} ${this.presTenseVerb(thing)} ${feeling} `
     }
   }
 
   verbStatement(feeling, thing) {
-      if (!feeling && !thing){
+    if (!feeling && !thing) {
       return 'believe/feel/think something about something'
     } else if (!feeling && thing) {
       return `believe/feel/think something about ${thing}`
@@ -156,11 +156,11 @@ class OpinionSelector extends Component {
             </Button>
           </div>
           <div>
-            <StatementMaker
-              thing={this.state.thing}
-              feeling={this.state.feeling}
-              category={this.state.category}
-              statement={this.createStatement(this.state.feeling, this.state.thing)}
+            <Card
+              statement={this.createStatement(
+                this.state.feeling,
+                this.state.thing
+              )}
             />
           </div>
         </form>
