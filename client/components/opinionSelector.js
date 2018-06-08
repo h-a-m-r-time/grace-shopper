@@ -1,6 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getFeelings, getThings, createFeeling, createThing, addNewOpinion, postCart } from '../store'
+import {
+  getFeelings,
+  getThings,
+  createFeeling,
+  createThing,
+  addNewOpinion,
+  postCart,
+} from '../store'
 import Button from '@material-ui/core/Button'
 import IntegrationAutosuggest from './OpinionSelectorAutoSuggest'
 import CategoryRadioButtons from './opinionSelectorCategory'
@@ -14,6 +21,48 @@ class OpinionSelector extends Component {
       feeling: '',
       thing: '',
       category: 'verb',
+    }
+  }
+
+  presTenseVerb(thing){
+    if (thing){
+      if (thing[thing.length - 1] === 's'){
+        return 'are'
+      } else {
+        return 'is'
+      }
+    }
+  }
+
+  descriptionStatement(thing, feeling) {
+    if (!thing && !feeling){
+      return  'Something is described'
+    } else if (thing && !feeling) {
+      return `${thing} ${this.presTenseVerb(thing)} described`
+    } else if (!thing && feeling) {
+      return `Something ${feeling}`
+    } else {
+      return `${thing} ${this.presTenseVerb()} ${feeling} `
+    }
+  }
+
+  verbStatement(feeling, thing) {
+      if (!feeling && !thing){
+      return 'believe/feel/think something about something'
+    } else if (!feeling && thing) {
+      return `believe/feel/think something about ${thing}`
+    } else if (feeling && !thing) {
+      return `${feeling} something`
+    } else {
+      return `${feeling} ${thing}`
+    }
+  }
+
+  createStatement(feeling, thing) {
+    if (this.state.category === 'verb') {
+      return this.verbStatement(feeling, thing)
+    } else {
+      return this.descriptionStatement(feeling, thing)
     }
   }
 
@@ -39,8 +88,8 @@ class OpinionSelector extends Component {
     evt.preventDefault()
     ///need to push data to store and maybe redirect to cart? tbd
     //need both feeling and thing to be filled out before
-    try{
-    if (this.state.feeling && this.state.thing) {
+    try {
+      if (this.state.feeling && this.state.thing) {
         //i think we could use find here to not have the array lookup
         let feelObj = this.props.feelings.filter(feeling => {
           return feeling.name === this.state.feeling
@@ -48,25 +97,35 @@ class OpinionSelector extends Component {
         let thingObj = this.props.things.filter(thing => {
           return thing.name === this.state.thing
         })[0]
-      if(!feelObj){
+        if (!feelObj) {
           //if the feeling wasn't already created we need to create one
-          feelObj = await this.props.createFeeling({name: this.state.feeling, category: this.state.category})
-      }
-      if(!thingObj){
+          feelObj = await this.props.createFeeling({
+            name: this.state.feeling,
+            category: this.state.category,
+          })
+        }
+        if (!thingObj) {
           //if the thing wasn't already created we need to create one
-          thingObj = await this.props.createThing({name: this.state.thing})
+          thingObj = await this.props.createThing({ name: this.state.thing })
+        }
+
+        //iterate through the opinions and check if the state's thing and feeling id's match any of the opinions before the following line executies
+        //if it does match, set the opinion object to the one it matches
+        //not working because the awaits aren't holding up the logic
+        const opinion = await this.props.addNewOpinion({
+          statement: this.createStatement(this.state.feeling, this.state.thing),
+          feelingId: feelObj.id,
+          thingId: thingObj.id,
+        })
+        await this.props.postCart({
+          opinionId: opinion.id,
+          userId: this.props.userId,
+          amount: 0.0,
+        })
       }
-
-      //iterate through the opinions and check if the state's thing and feeling id's match any of the opinions before the following line executies
-      //if it does match, set the opinion object to the one it matches
-      //not working because the awaits aren't holding up the logic
-      const opinion = await this.props.addNewOpinion({statement: `i ${this.state.feeling} on ${this.state.thing} or something`, feelingId: feelObj.id, thingId: thingObj.id})
-      const cartObj = await this.props.postCart({opinionId: opinion.id, userId: this.props.userId, amount: 0.0})
-
+    } catch (error) {
+      console.log(error)
     }
-} catch(error){
-    console.log(error)
-}
   }
 
   render() {
@@ -98,9 +157,11 @@ class OpinionSelector extends Component {
           </div>
           <div>
             <StatementMaker
-            thing={this.state.thing}
-            feeling={this.state.feeling}
-            category={this.state.category} />
+              thing={this.state.thing}
+              feeling={this.state.feeling}
+              category={this.state.category}
+              statement={this.createStatement(this.state.feeling, this.state.thing)}
+            />
           </div>
         </form>
       </div>
@@ -108,7 +169,7 @@ class OpinionSelector extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   let feelingSuggestion = []
   let thingSuggestion = []
   if (state.feelings.length) {
@@ -135,7 +196,7 @@ const mapStateToProps = (state) => {
     category: state.category,
     feelingSuggestion: feelingSuggestion,
     thingSuggestion: thingSuggestion,
-    userId: state.user.id
+    userId: state.user.id,
   }
 }
 
@@ -147,18 +208,18 @@ const mapDispatchToProps = dispatch => {
     getThings: () => {
       dispatch(getThings())
     },
-    createFeeling: (obj) => {
-        return dispatch(createFeeling(obj))
+    createFeeling: obj => {
+      return dispatch(createFeeling(obj))
     },
-    createThing: (obj) => {
-        return dispatch(createThing(obj))
+    createThing: obj => {
+      return dispatch(createThing(obj))
     },
-    addNewOpinion: (obj) => {
-        return dispatch(addNewOpinion(obj))
+    addNewOpinion: obj => {
+      return dispatch(addNewOpinion(obj))
     },
-    postCart: (obj) => {
-        dispatch(postCart(obj))
-    }
+    postCart: obj => {
+      dispatch(postCart(obj))
+    },
   }
 }
 

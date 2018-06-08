@@ -38,11 +38,11 @@ export const getOpinion = (id) => dispatch =>
     .catch(err => console.log(err))
 
 export const addNewOpinion = (opinion) => async dispatch => {
-  const opinion = await axios
+  const opinionObj = await axios
     .post('/api/opinions', opinion)
     .then(res => dispatch(addOpinion(res.data)))
     .catch(err => console.log(err))
-  return opinion
+  return opinionObj
 }
 
 export default function(state = initState, action) {
