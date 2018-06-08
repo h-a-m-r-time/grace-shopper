@@ -14,4 +14,3 @@ const Feeling = db.define('feeling', {
 })
 
 module.exports = Feeling;
-

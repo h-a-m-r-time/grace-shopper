@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { getOpinions } from '../store/opinion'
+import { getOpinions } from '../store'
 import Opinion from './opinion'
 
 class OpinionList extends Component {

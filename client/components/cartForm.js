@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {fetchCart, deleteOpinion} from '../store/currentCart'
+import {fetchCart, removeItem} from '../store/cart'
 import {me} from '../store/user'
 import Button from '@material-ui/core/Button'
 import Table from '@material-ui/core/Table'
@@ -76,7 +76,7 @@ class CartForm extends Component {
         </TableHead>
         <TableBody>
             {
-              this.state.currentCart.map(item => (
+              this.state.cart.map(item => (
                 <TableRow>
                       <TableCell>{item.name}</TableCell>
                       <TableCell><Input placeholder="What's It Worth?" /></TableCell>
@@ -102,7 +102,7 @@ class CartForm extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  currentCart: state.currentCart,
+  cart: state.cart,
   user: state.user
 });
 
@@ -110,78 +110,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getUserCart: (user) => dispatch(fetchCart(user)),
     getUser: () => dispatch(me()),
-    deleteItem: (opinionId) => dispatch(deleteOpinion(opinionId))
+    deleteItem: (opinionId) => dispatch(removeItem(opinionId))
   }
 }
 
-
-
 export default connect(mapStateToProps, mapDispatchToProps)(CartForm)
-
-
-
-{/* <TableRow>
-<TableCell>Opinion From Database</TableCell>
-<TableCell><Input placeholder="What's It Worth?" /></TableCell>
-<TableCell><Button variant="contained" color="secondary" type="submit"><small>Delete</small></Button></TableCell>
-</TableRow>
-<TableRow>
-<TableCell>I love rice!</TableCell>
-<TableCell><Input placeholder="What's It Worth?" /></TableCell>
-<TableCell><Button variant="contained" color="secondary" type="submit"><small>Delete</small></Button></TableCell>
-</TableRow>
-<TableRow>
-<TableCell>I hate pugs</TableCell>
-<TableCell><Input placeholder="What's It Worth?" /></TableCell>
-<TableCell><Button variant="contained" color="secondary" type="submit"><small>Delete</small></Button></TableCell>
-</TableRow> */}
-
-// {
-//   this.props.defaultCart.map(opinion => (
-//   <div>
-//     <div>
-//       {opinion}
-//     </div>
-//     <form onSubmit={this.handleSubmit} name={name}>
-//       <div>
-//         <label htmlFor="opinion"><small>Opinion</small></label>
-//         <input name="opinion" type="text" />
-//       </div>
-//       <div>
-//         <label htmlFor="price"><small>Price</small></label>
-//         <input name="price" type="price" />
-//       </div>
-//       <div>
-
-//         <button type="submit"><small>Checkout</small></button>
-//       </div>
-//       {error && error.response && <div> {error.response.data} </div>}
-//     </form>
-//   </div>
-//   ))
-// }
-
-{/* <div>
-<table>
-  <tr>
-    <th>Opinion</th>
-    <th>Price</th>
-  </tr>
-</table>
-  <form onSubmit={this.handleSubmit} name={name}>
-    <div>
-      <label htmlFor="opinion"><small>Opinion</small></label>
-
-      <input name="opinion" type="text" placeholder="" />
-    </div>
-    <div>
-      <label htmlFor="price"><small>Price</small></label>
-      <input name="price" type="price" placeholder="currentPrice" />
-    </div>
-    <div>
-
-      <Button variant="contained" color="primary" type="submit"><small>Checkout</small></Button>
-    </div>
-    {error && error.response && <div> {error.response.data} </div>}
-  </form>
-</div> */}
