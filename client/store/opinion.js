@@ -37,12 +37,13 @@ export const getOpinion = (id) => dispatch =>
     .then(res => dispatch(gotOpinion(res.data)))
     .catch(err => console.log(err))
 
-export const addNewOpinion = (opinion) => async dispatch => {
-  const opinionObj = await axios
-    .post('/api/opinions', opinion)
-    .then(res => dispatch(addOpinion(res.data)))
-    .catch(err => console.log(err))
-  return opinionObj
+export const addNewOpinion = (opinionObj) => {
+  return async dispatch => {
+      const response = await axios.post('/api/opinions', opinionObj)
+      const opinion = response.data
+      dispatch(addOpinion(opinion))
+      return opinion
+  }
 }
 
 export default function(state = initState, action) {
