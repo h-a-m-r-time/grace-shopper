@@ -72,7 +72,7 @@ class OpinionSelector extends Component {
         //if it does match, set the opinion object to the one it matches
         //not working because the awaits aren't holding up the logic
         const opinion = await this.props.addNewOpinion({
-          statement: StatementMaker.createStatement(this.state.feeling, this.state.thing),
+          statement: StatementMaker.createStatement(this.state.feeling, this.state.thing, this.state.category),
           feelingId: feelObj.id,
           thingId: thingObj.id,
         })
