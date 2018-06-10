@@ -17,12 +17,12 @@ install:
 before_script:
   - psql -c 'create database "opinions-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
 
-# before_deploy:
-#   - npm run build-client # make the bundle
-#   - rm -rf node_modules # omit from the tarball, since we skip cleanup
-# deploy:
-#   skip_cleanup: true # prevents travis from deleting the build
-#   provider: heroku
-#   app: YOUR-HEROKU-APP-NAME-HERE # see README
-#   api_key:
-#     secure: YOUR-***ENCRYPTED***-API-KEY-HERE # see README
+-before_deploy:	+# before_deploy:
+-  - npm run build-client # make the bundle	+#   - npm run build-client # make the bundle
+-  - rm -rf node_modules # omit from the tarball, since we skip cleanup	+#   - rm -rf node_modules # omit from the tarball, since we skip cleanup
+-deploy:	+# deploy:
+-  skip_cleanup: true # prevents travis from deleting the build	+#   skip_cleanup: true # prevents travis from deleting the build
+-  provider: heroku	+#   provider: heroku
+-  app: opinionated-oasis-4 # see README	+#   app: YOUR-HEROKU-APP-NAME-HERE # see README
+-  api_key:	+#   api_key:
+-    secure: x5xIH9++4pa/P4qDX2PfUJXEolmXIP2xXLhM1FfXJO3mTcHawi+L9me2KW8xPMCKAsJniO/T1Iq0Nr5TH8SGCDjK8EM96Hp/0J/z3wRYVNp5Go7IvMlUXcCnRNViSpeeecpX7iMMTJ7J4Fj2I//v38EWMFF0ceCnCeOTXYC+2g+LouiyVTpsFSaPajEZrL+edgMG4Zh4JGDia+vjadMrqA8WK2sbVPIen49HgUMeqY7C1iUDjQTkphGbMYgKC0ROavU6D+7zfVNC46kP1In92LsDDuJOittfA5X5g0/jqAZhQzrQx1fon6xD2r6p+yd64k6fnwp2y2hf3qDIJwtmtCvzn+pJ2ZjNz9nVZRPK1SG47vQgHfWuaHPRuS8KJ13vzTdk3BWzg1LWqS8iEOCu6C3z/CWnzC8HoXjFZix5X3qjNJgYkbKraZhKz/o+mHCXiMsNRFmV81dMPtmWIsSYmiNathZieKINSZraZLTX9SVLVBg3WBAwm9fkxHTOfIfAFVwpFKjFwHtIii6Iyar9UFnaY3dXgUuVZyp57t2WNjPEgTkawO+aPAnFe5CmLinefGpRlQwhFWjsil7a0XldL5QXTab31nKwDKM2eP7Urji99QVfdCe2Y7sBGx5UUsu/OpttaiUrD2piPzW7T7IlCiQ6wsUKPt+G87ZzSNDcxjY= # see README
