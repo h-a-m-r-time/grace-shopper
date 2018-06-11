@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const {Transaction} = require('../db/models')
+const stripe = require('stripe')(process.env.STRIPE_SECRET)
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -33,11 +34,15 @@ router.post('/', async (req, res, next) => {
     }
 })
 
-router.put('/:id', async (req, res, next) => {
+router.put('/', async (req, res, next) => {
   try {
       const request = { ...req.body, purchased: true}
-      const transaction = await Transaction.update(request, { where: {id: req.body.id} })
-      res.json(transaction)
+      const transactions = await Promise.all(transactions.map(transaction => {
+          return Transaction.update({...transaction.body, purchased: true}, { where: {id: transaction.id} })
+      }))
+      const token = req.body.stripeToken
+      const charge = stripe.charges.create(req.body.stripeObject)
+      res.json(transactions)
   } catch (err){
       next(err)
   }
