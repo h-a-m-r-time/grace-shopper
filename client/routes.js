@@ -9,6 +9,7 @@ import {
   Confirmation,
   CartForm,
   Payment,
+  ListGenerator,
 } from './components'
 import OpinionList from './components/opinion-list'
 import { me } from './store'
@@ -35,6 +36,7 @@ class Routes extends Component {
             <Route path="/home" component={UserHome} />
             <Route path="/confirmation" component={Confirmation} />
             <Route path="/cart" component={CartForm} />
+            <Route path="/list" component={ListGenerator} />
             <Route component={UserHome} />
           </Switch>
         )}
