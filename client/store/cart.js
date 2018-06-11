@@ -22,9 +22,13 @@ export const deleteItem = (opinionId) => {
 export const fetchCart = (userId) => {
   return async dispatch => {
     //we won't be making this route after all, we are going to filter the cart by the id here
-    const response = await axios.get(`/api/cart/:${userId}`)
+    const response = await axios.get(`/api/cart/`)
     const cart = response.data
-    const action = getCart(cart)
+    console.log(cart)
+    const filterCart = cart.filter(trans => {
+        return trans.userId === userId
+    })
+    const action = getCart(filterCart)
     dispatch(action)
   }
 }
