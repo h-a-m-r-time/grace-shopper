@@ -1,12 +1,19 @@
 export default class StatementMaker {
 
-  static presTenseVerb(thing) {
-    if (thing) {
-      if (thing[thing.length - 1] === 's') {
-        return 'are'
-      } else {
-        return 'is'
-      }
+  static createStatement(feeling, thing, category) {
+    if (category === 'verb') {
+      return this.verbStatement(feeling, thing)
+    } else {
+      return this.descriptionStatement(feeling, thing)
+    }
+  }
+
+
+  static defaultFeeling(category) {
+    if (category === 'verb') {
+      return 'singular verb'
+    } else {
+      return 'description'
     }
   }
 
@@ -22,6 +29,16 @@ export default class StatementMaker {
     }
   }
 
+  static presTenseVerb(thing) {
+    if (thing) {
+      if (thing[thing.length - 1] === 's') {
+        return 'are'
+      } else {
+        return 'is'
+      }
+    }
+  }
+
   static verbStatement(feeling, thing) {
     if (!feeling && !thing) {
       return 'believe/feel/think something about something'
@@ -34,11 +51,5 @@ export default class StatementMaker {
     }
   }
 
-  static createStatement(feeling, thing, category) {
-    if (category === 'verb') {
-      return this.verbStatement(feeling, thing)
-    } else {
-      return this.descriptionStatement(feeling, thing)
-    }
-  }
+
 }
