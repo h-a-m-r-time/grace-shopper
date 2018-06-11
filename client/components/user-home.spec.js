@@ -23,18 +23,18 @@ describe('UserHome', () => {
   })
 })
 
-describe('Opinion', () => {
-  let opinionComp
+// describe('Opinion', () => {
+//   let opinionComp
 
-  const opinion = {
-    statement: 'life is meaningless'
-  }
+//   const opinion = {
+//     statement: 'life is meaningless'
+//   }
 
-  beforeEach(() => {
-    opinionComp = shallow(<Opinion opinion={opinion} />)
-  })
+//   beforeEach(() => {
+//     opinionComp = shallow(<Opinion opinion={opinion} />)
+//   })
 
-  it('renders the opinion statement in an h2', () => {
-    expect(opinionComp.find('h2').text()).to.be.equal('life is meaningless')
-  })
-})
+//   it('renders the opinion statement in an h2', () => {
+//     expect(opinionComp.find('h2').text()).to.be.equal('life is meaningless')
+//   })
+// })
