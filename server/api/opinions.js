@@ -8,11 +8,15 @@ router.get('/', async (req, res, next) => {
             include: [{all: true}]
         })
         const purchased = opinions.map(op => {
-            if(opinions.transactions.legnth > 0){
-                opinions.transactions.filter(trns => {
+            console.log("IN HERE THOUGH!!!!!!!!!!!!!!!!!!!!!", op.transactions)
+            if(op.transactions && op.transactions.length > 0){
+                console.log("IN HERE")
+                op.transactions = op.transactions.filter(trns => {
+                    console.log(trns.purchased)
                     return trns.purchased
                 })
             }
+            return op
         })
         res.json(purchased)
     } catch (error) {
