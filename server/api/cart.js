@@ -4,7 +4,7 @@ module.exports = router
 
 router.get('/', async (req, res, next) => {
     try {
-        const transactions = await Transaction.findAll({where: {purchased: false}})
+        const transactions = await Transaction.findAll({where: {purchased: false}, include: [{all: true}]})
         res.json(transactions)
     } catch (error) {
         next(error)

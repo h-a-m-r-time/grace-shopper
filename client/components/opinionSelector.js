@@ -11,6 +11,7 @@ import {
 import Button from '@material-ui/core/Button'
 import IntegrationAutosuggest from './OpinionSelectorAutoSuggest'
 import CategoryRadioButtons from './opinionSelectorCategory'
+import { withRouter } from 'react-router-dom'
 import Card from './card'
 import StatementMaker from '../utilities/statement-maker'
 
@@ -113,6 +114,7 @@ class OpinionSelector extends Component {
           userId: this.props.userId,
           amount: 0.0,
         })
+        this.props.history.push("/cart")
       }
     } catch (error) {
       console.log(error)
@@ -203,7 +205,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(OpinionSelector)
+)(OpinionSelector))
