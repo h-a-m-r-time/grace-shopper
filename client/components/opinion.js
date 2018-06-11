@@ -1,10 +1,22 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-export default function Opinion (props) {
+export default class Opinion extends Component {
 
-  return (
-    <div>
-      <h2>{props.opinion.statement}</h2>
-    </div>
-  )
+
+  renderOpinion() {
+    if (this.props.opinion.category === 'verb') {
+      return ('I', this.props.opinion.statement)
+    } else {
+      return (this.props.opinion.statement)
+    }
+  }
+
+  render(){
+    return (
+      <div>
+        <h2>{this.renderOpinion()}</h2>
+      </div>
+    )
+  }
+
 }

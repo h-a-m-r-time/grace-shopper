@@ -6,6 +6,7 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
+import Statement from '../utilities/statement-maker'
 
 const styles = {
   card: {
@@ -27,14 +28,13 @@ const styles = {
 
 function SimpleCard(props) {
   const { classes } = props
-  const bull = <span className={classes.bullet}>•</span>
 
   return (
     <div>
       <Card className={classes.card}>
         <CardContent>
           <Typography className={classes.title} color="textSecondary">
-            I, {`Billy Bob Thornton`},
+            I, the Logged-In User,
           </Typography>
           <Typography variant="headline" component="h2">
             OFFICIALLY
@@ -43,7 +43,9 @@ function SimpleCard(props) {
             (and definitively)
           </Typography>
           <Typography component="p">
-            {props.statement}<br />
+          {Statement.descriptionAddOn(props.category)}
+          <br />
+          {Statement.alteredStatement(props.statement)}
           </Typography>
         </CardContent>
         <CardActions>

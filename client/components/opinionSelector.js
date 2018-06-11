@@ -30,6 +30,38 @@ class OpinionSelector extends Component {
     this.props.getThings()
   }
 
+  correctSuggestions(suggestions) {
+    return suggestions
+    .filter(suggestion => suggestion.category === this.state.category)
+  }
+
+  formRenderOrder() {
+     const feelingComp = (<IntegrationAutosuggest
+      value={this.state.feeling}
+      onChangeFunc={this.onChange}
+      placeHolder={StatementMaker.defaultFeeling(this.state.category)}
+      optionName="feeling"
+      suggestionsProps={this.correctSuggestions(this.props.feelingSuggestions)}
+      key={1}
+    />)
+
+    const thingComp = (<IntegrationAutosuggest
+      value={this.state.thing}
+      onChangeFunc={this.onChange}
+      placeHolder="opinion subject"
+      optionName="thing"
+      suggestionsProps={this.correctSuggestions(this.props.thingSuggestions)}
+      key={2}
+    />)
+
+    if (this.state.category === 'verb'){
+      return [<div className="description-i" key={0}>I    </div>, feelingComp, thingComp]
+    } else {
+      return [thingComp, feelingComp]
+    }
+
+  }
+
   onChange = (name, value) => {
     this.setState({ [name]: value })
     //toogles the  category state if feeling exists
@@ -91,20 +123,7 @@ class OpinionSelector extends Component {
     return (
       <div>
         <form onSubmit={this.onSubmit}>
-          <IntegrationAutosuggest
-            value={this.state.feeling}
-            onChangeFunc={this.onChange}
-            placeHolder={StatementMaker.defaultFeeling(this.state.category)}
-            optionName="feeling"
-            suggestionsProps={this.props.feelingSuggestion}
-          />
-          <IntegrationAutosuggest
-            value={this.state.thing}
-            onChangeFunc={this.onChange}
-            placeHolder="opinion subject"
-            optionName="thing"
-            suggestionsProps={this.props.thingSuggestion}
-          />
+          {this.formRenderOrder()}
           <CategoryRadioButtons
             onChangeFunc={this.onChange}
             value={this.state.category}
@@ -116,9 +135,11 @@ class OpinionSelector extends Component {
           </div>
           <div>
             <Card
+              category={this.state.category}
               statement={StatementMaker.createStatement(
                 this.state.feeling,
-                this.state.thing
+                this.state.thing,
+                this.state.category
               )}
             />
           </div>
@@ -129,11 +150,12 @@ class OpinionSelector extends Component {
 }
 
 const mapStateToProps = state => {
-  let feelingSuggestion = []
-  let thingSuggestion = []
+  let feelingSuggestions = []
+  let thingSuggestions = []
   if (state.feelings.length) {
-    feelingSuggestion = state.feelings.map(feeling => {
+    feelingSuggestions = state.feelings.map(feeling => {
       return {
+        category: feeling.category,
         value: feeling.name,
         label: feeling.name,
       }
@@ -141,7 +163,7 @@ const mapStateToProps = state => {
   }
 
   if (state.things.length) {
-    thingSuggestion = state.things.map(thing => {
+    thingSuggestions = state.things.map(thing => {
       return {
         value: thing.name,
         label: thing.name,
@@ -152,9 +174,8 @@ const mapStateToProps = state => {
   return {
     feelings: state.feelings,
     things: state.things,
-    category: state.category,
-    feelingSuggestion: feelingSuggestion,
-    thingSuggestion: thingSuggestion,
+    feelingSuggestions: feelingSuggestions,
+    thingSuggestions: thingSuggestions,
     userId: state.user.id,
   }
 }
