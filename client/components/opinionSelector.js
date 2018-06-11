@@ -95,7 +95,6 @@ class OpinionSelector extends Component {
             name: this.state.feeling,
             // category: this.state.category,
           })
-          // console.log('CAT!!', this.state.category)
         }
         if (!thingObj) {
           //if the thing wasn't already created we need to create one

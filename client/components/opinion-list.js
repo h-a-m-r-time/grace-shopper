@@ -7,6 +7,7 @@ import { SimpleCard } from './index'
 class OpinionList extends Component {
   renderOpinions() {
     if (this.props.opinions.length) {
+
       return this.props.opinions.map(opinion => {
         return (
           <SimpleCard
@@ -30,9 +31,13 @@ class OpinionList extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = state => {
+  // const newOpinions = state.opinionReducer.opinions
+  // .filter(opinion => opinion.)
+  // console.log('STATE IS', state)
+  return {
   opinions: state.opinionReducer.opinions,
-})
+}}
 
 const mapDispatchToProps = dispatch => ({
   getOpinions: () => {
