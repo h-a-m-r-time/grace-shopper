@@ -5,10 +5,16 @@ module.exports = router
 router.get('/', async (req, res, next) => {
     try {
         const opinions = await Opinion.findAll({
-            where: {purchased: true},
             include: [{all: true}]
         })
-        res.json(opinions)
+        const purchased = opinions.map(op => {
+            if(opinions.transactions.legnth > 0){
+                opinions.transactions.filter(trns => {
+                    return trns.purchased
+                })
+            }
+        })
+        res.json(purchased)
     } catch (error) {
         next(error)
     }
