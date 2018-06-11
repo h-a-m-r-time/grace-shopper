@@ -27,11 +27,11 @@ const feelings = [
     category: 'verb'
   },
   {
-    name: 'suspicious',
+    name: 'are suspicious',
     category: 'description'
   },
   {
-    name: 'really sucks',
+    name: 'are ugly',
     category: 'description'
   },
   {
@@ -43,14 +43,17 @@ const feelings = [
 const opinions = [
   {
     statement: 'I love cake.',
+    category: 'verb',
     feelingId: 1,
     thingId: 1,
   }, {
-    statement: 'I am suspicious of bears.',
+    statement: 'bears are suspious.',
+    category: 'description',
     feelingId: 2,
     thingId: 2,
   }, {
-    statement: 'Pugs really suck.',
+    statement: 'pugs are ugly.',
+    category: 'description',
     feelingId: 3,
     thingId: 3,
   }
