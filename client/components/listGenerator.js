@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
+import { OpinionList } from './index'
+import opinionList from './opinion-list'
 
 const styles = theme => ({
   button: {
@@ -20,9 +22,6 @@ class ListGenerator extends React.Component {
     }
   }
   changeDisplay = evt => {
-    console.log('event', evt.currentTarget.name)
-    console.log('state', this.state.displayOrder)
-    console.log(evt.currentTarget.name)
     if (evt.currentTarget.name !== this.state.displayOrder) {
       this.setState({ displayOrder: evt.currentTarget.name })
     }
@@ -78,6 +77,7 @@ class ListGenerator extends React.Component {
         >
           Top Paid Opinions
         </Button>
+        <OpinionList displayOrder={this.state.displayOrder} />
       </div>
     )
   }
