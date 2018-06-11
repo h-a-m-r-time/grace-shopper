@@ -34,6 +34,7 @@ class CartForm extends Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
   componentDidMount() {
@@ -44,20 +45,23 @@ class CartForm extends Component {
   }
 
   handleChange(event) {
-    // console.log("What we're typing: ", event.target.value)
-    // this.setState({ [event.target.name]: event.target.value });
-    console.log(event.target.value)
+    event.preventDefault()
+    let elementPrice = document.getElementsByClassName('opinionPrice')
+
+    let elementsArray = Array.prototype.slice.call(elementPrice)
+
+    let price = elementsArray.filter(item => item.valueAsNumber)
+    .reduce((acc, curr) => {
+        return acc + curr.valueAsNumber
+    }, 0)
+
+    this.setState({
+      amount: price
+    })
   }
 
   handleSubmit(event) {
     event.preventDefault()
-    //information to be submitted to checkout
-
-    // event.preventDefault()
-    // const cart = {
-    //   opinion: event.target.opinion.value,
-    //   price: event.target.price.value,
-    // }
   }
 
   handleDelete = itemId => {
@@ -65,7 +69,6 @@ class CartForm extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <form onSubmit={this.handleSubmit}>
         <Paper>
@@ -76,6 +79,8 @@ class CartForm extends Component {
                 <CustomTableCell>Price</CustomTableCell>
                 <CustomTableCell />
                 <CustomTableCell />
+                <CustomTableCell />
+                <CustomTableCell />
               </TableRow>
             </TableHead>
             <TableBody>
@@ -83,11 +88,11 @@ class CartForm extends Component {
                 this.props.cart &&
                 this.props.cart[0] &&
                 this.props.cart[0].id &&
-                this.props.cart.map(item => (
+                this.props.cart.map((item) => (
                   <TableRow key={item.id}>
                     <TableCell>{item.opinion.statement}</TableCell>
                     <TableCell>
-                      <Input placeholder="What's It Worth?" />
+                      <input className="opinionPrice" step="0.01" placeholder="What's It Worth?" type="number" name="amount" onChange={this.handleChange} />
                     </TableCell>
                     <TableCell>
                       <Button
@@ -108,6 +113,7 @@ class CartForm extends Component {
                 <TableCell />
                 <TableCell />
                 <TableCell>Total</TableCell>
+                <TableCell>$ {this.state.amount}</TableCell>
                 <TableCell>
                   <Payment
                     amount={this.state.amount}
