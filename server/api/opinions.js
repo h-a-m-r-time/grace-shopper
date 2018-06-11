@@ -4,7 +4,10 @@ module.exports = router
 
 router.get('/', async (req, res, next) => {
     try {
-        const opinions = await Opinion.findAll()
+        const opinions = await Opinion.findAll({
+            where: {purchased: true},
+            include: [{all: true}]
+        })
         res.json(opinions)
     } catch (error) {
         next(error)
