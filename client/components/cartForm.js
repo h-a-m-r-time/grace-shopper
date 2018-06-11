@@ -62,11 +62,6 @@ class CartForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    //information to be submitted to checkout
-
-    // this.setState({
-    //   [event.target.name]: "You purchased" + this.props.cart.length + "items."
-    // })
   }
 
   handleDelete = itemId => {
@@ -74,8 +69,6 @@ class CartForm extends Component {
   }
 
   render() {
-    // console.log(this.props.cart)
-    // console.log(this.state)
     return (
       <form onSubmit={this.handleSubmit}>
         <Paper>
