@@ -34,6 +34,7 @@ class CartForm extends Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
   componentDidMount() {
