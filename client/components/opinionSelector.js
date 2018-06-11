@@ -94,7 +94,7 @@ class OpinionSelector extends Component {
           <IntegrationAutosuggest
             value={this.state.feeling}
             onChangeFunc={this.onChange}
-            placeHolder="singular verb"
+            placeHolder={StatementMaker.defaultFeeling(this.state.category)}
             optionName="feeling"
             suggestionsProps={this.props.feelingSuggestion}
           />
