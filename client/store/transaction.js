@@ -14,10 +14,15 @@ const initState = []
 /**
  * ACTION CREATORS
  */
-const gotTransactions = transactions => ({
-  type: GET_TRANSACTIONS,
-  transactions,
-})
+ const gotTransactions = transactions => ({
+   type: GET_TRANSACTIONS,
+   transactions,
+ })
+
+ const puttedTransactions = transactions => ({
+   type: PUT_TRANSACTIONS,
+   transactions,
+ })
 
 /**
  * THUNK CREATORS
@@ -30,9 +35,9 @@ export const getTransactions = () => dispatch =>
 
 export const putTransactions = (transactionObj) => async dispatch => {
     try{
-        const transactions = await axios.put('/api/transactions', {transactions: transactionObj.transactions, stripeToken: transactionObj.stripe, stripeObject: transactionObj.stripeObject})
-        const opinion = response.data
-        dispatch(puttedTransactions(opinion))
+        const response = await axios.put('/api/transactions', {transactions: transactionObj.transactions, stripeToken: transactionObj.stripe, stripeObject: transactionObj.stripeObject})
+        const transactions = response.data
+        dispatch(puttedTransactions(transactions))
     } catch(err){
         console.log(err)
     }
@@ -43,6 +48,8 @@ export const putTransactions = (transactionObj) => async dispatch => {
 export default function(state = initState, action) {
   switch (action.type) {
     case GET_TRANSACTIONS:
+      return [...state, ...action.transactions]
+    case PUT_TRANSACTIONS:
       return [...state, ...action.transactions]
     default:
       return state
