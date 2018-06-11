@@ -21,6 +21,11 @@ form div {
   display: inline-block;
 }
 
-.content{
+.content {
     margin-top: 100px;
+}
+
+.description-i {
+  position: absolute;
+  top: 165px;
 }
