@@ -16,7 +16,6 @@ export default class StatementMaker {
     }
   }
 
-
   static defaultFeeling(category) {
     if (category === 'verb') {
       return 'opinion verb'
@@ -50,8 +49,6 @@ export default class StatementMaker {
       }
     }
   }
-
-
 
   static verbStatement(feeling, thing) {
     if (!feeling && !thing) {

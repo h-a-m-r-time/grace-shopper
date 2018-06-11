@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import { getOpinions } from '../store'
-import Card from './card'
+import { SimpleCard } from './index'
 
 class OpinionList extends Component {
   renderOpinions() {
     if (this.props.opinions.length) {
       return this.props.opinions.map(opinion => {
         return (
-          <Card
+          <SimpleCard
             category={opinion.category}
             statement={opinion.statement}
             key={opinion.id}
