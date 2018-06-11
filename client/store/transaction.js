@@ -43,7 +43,6 @@ export const putTransactions = (transactionObj) => async dispatch => {
 export default function(state = initState, action) {
   switch (action.type) {
     case GET_TRANSACTIONS:
-        console.log("IN HERE", action.transactions, this)
       return [...state, ...action.transactions]
     default:
       return state
