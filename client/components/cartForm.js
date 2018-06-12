@@ -97,7 +97,7 @@ class CartForm extends Component {
                         variant="contained"
                         color="secondary"
                         type="submit"
-                        onClick={this.handleDelete}
+                        onClick={() => this.handleDelete(item.id)}
                       >
                         <small>Delete</small>
                       </Button>
