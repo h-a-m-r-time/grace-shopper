@@ -9,15 +9,18 @@ class OpinionList extends Component {
     if (this.props.opinions.length) {
       let filteredOpinions = []
       switch (this.props.displayOrder) {
+        case 'allOpinions':
+        filteredOpinions = this.props.opinions
+        break
         case 'newOpinions':
           filteredOpinions = this.props.newOpinions
           break
         case 'myOpinions':
           filteredOpinions = this.props.myOpinions
           break
-        case 'topOpinions':
-          filteredOpinions = this.props.topOpinions
-          break
+        // case 'topOpinions':
+        //   filteredOpinions = this.props.topOpinions
+        //   break
         default:
           break
       }
@@ -77,25 +80,33 @@ state.opinionReducer.opinions
   }
 })
 
-  // let topPaidOpinions = []
-  // state.opinionReducer.opinions
-  // .map(opinion => {
-  //   if (!topPaidOpinions.length && opinion){
-  //     topOpinions.push(opinion)
-  //   } else {
-  //     for (let i = 0; i < topOpinions.length; i++) {
-  //       if (opinion.transactions.length > topOpinions[i].transactions.length){
-  //         topPaidOpinions = [...topPaidOpinions.slice(0, i), opinion, ...topPaidOpinions.slice(i, 4)]
-  //       }
-  //     }
-  //   }
-  // })
+// let topPaidOpinions = []
+// state.opinionReducer.opinions
+// .map(opinion => {
+//   if (!topPaidOpinions.length){
+//     let topPrice = 0
+//     for (let i = 0; i < state.opinionReducer.opinions.transactions.length; i++) {
+//       if (state.opinionReducer.opinions.transactions[i].amount > topPrice){
+//         topPrice = state.opinionReducer.opinions.transactions[i].amount
+//       }
+//     }
+
+//     topOpinions.push(opinion)
+//   } else {
+//     for (let i = 0; i < topOpinions.length; i++) {
+//       if (opinion.transactions.length > topOpinions[i].transactions.length){
+//         topOpinions = [...topOpinions.slice(0, i), opinion, ...topOpinions.slice(i, 4)]
+//       }
+//     }
+//   }
+// })
 
   return {
     opinions: state.opinionReducer.opinions,
     myOpinions: myOpinions,
     topOpinions: topOpinions,
     newOpinions: newOpinions,
+    // topPaidOpinions: topPaidOpinions
   }
 }
 
