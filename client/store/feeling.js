@@ -19,7 +19,7 @@ const gotFeelings = feelings => ({
   feelings,
 })
 
-const addFeeling = feeling => {
+export const addFeeling = feeling => {
   return {type: ADD_FEELING,
   feeling}
 }
@@ -27,12 +27,12 @@ const addFeeling = feeling => {
 /**
  * THUNK CREATORS
  */
-export const getFeelings = () => dispatch => {
+export const getFeelings = () => dispatch =>
   axios
     .get('/api/feelings')
     .then(res => dispatch(gotFeelings(res.data)))
     .catch(err => console.log(err))
-}
+
 
 export function createFeeling(feelingObj) {
     return async dispatch => {

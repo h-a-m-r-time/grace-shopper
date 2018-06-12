@@ -38,9 +38,7 @@ class CartForm extends Component {
   }
 
   componentDidMount() {
-    console.log('MOINT')
     this.props.getUser()
-    console.log(this.props.user.id)
     this.props.getUserCart(this.props.user.id)
   }
 
@@ -118,6 +116,7 @@ class CartForm extends Component {
                   <Payment
                     amount={this.state.amount}
                     description={this.state.description}
+                    transactions={this.props.cart}
                   />
                 </TableCell>
               </TableRow>
