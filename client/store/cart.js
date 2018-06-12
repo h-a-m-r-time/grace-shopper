@@ -36,7 +36,7 @@ export const postCart = (opinionObj, history) => {
     return async dispatch => {
         const response = await axios.post('/api/cart', opinionObj)
         const cartItem = response.data
-        dispatch(postedCart(cartItem))
+        await dispatch(postedCart(cartItem))
         if (history){
           history.push('/cart')}
     }
