@@ -70,7 +70,7 @@ state.opinionReducer.opinions
     topOpinions.push(opinion)
   } else {
     for (let i = 0; i < topOpinions.length; i++) {
-      if (opinion.transactions.length > topOpinions[i].transactions.length){
+      if (opinion.transactions && opinion.transactions.length > topOpinions[i].transactions.length){
         topOpinions = [...topOpinions.slice(0, i), opinion, ...topOpinions.slice(i, 4)]
       }
     }
