@@ -7,8 +7,19 @@ import { SimpleCard } from './index'
 class OpinionList extends Component {
   renderOpinions() {
     if (this.props.opinions.length) {
+      let filteredOpinions = []
+      switch (this.props.displayOrder) {
+        case 'newOpinions':
+          filteredOpinions = this.props.newOpinions
+          break
+        case 'myOpinions':
+          filteredOpinions = this.props.myOpinions
+          break
+        default:
+          break;
+      }
 
-      return this.props.opinions.map(opinion => {
+      return filteredOpinions.map(opinion => {
         return (
           <SimpleCard
             category={opinion.category}
@@ -32,12 +43,60 @@ class OpinionList extends Component {
 }
 
 const mapStateToProps = state => {
-  // const newOpinions = state.opinionReducer.opinions
-  // .filter(opinion => opinion.)
-  // console.log('STATE IS', state)
+
+const newOpinions = state.opinionReducer.opinions.filter(
+  opinion => opinion.id > state.opinionReducer.opinions.length - 5
+)
+
+const myOpinions = state.opinionReducer.opinions
+.filter(opinion => {
+  if (opinion.transactions){
+    for (let i = 0; i < opinion.transactions.length; i++) {
+      if (opinion.transactions[i].userId === state.user.id){
+        return true
+      }
+    }
+  }
+  return false
+})
+
+// let topOpinions = []
+// state.opinionReducer.opinions
+// .map(opinion => {
+//   if (!topOpinions.length){
+//     topOpinions.push(opinion)
+//   } else {
+//     for (let i = 0; i < topOpinions.length; i++) {
+//       if (opinion.transactions.length > topOpinions[i].transactions.length){
+//         topOpinions = [...topOpinions.slice(0, i), opinion, ...topOpinions.slice(i, 4)]
+//       }
+//     }
+//   }
+// })
+
+  // console.log(state, myOpinions)
+
+  // let topPaidOpinions = []
+  // state.opinionReducer.opinions
+  // .map(opinion => {
+  //   if (!topPaidOpinions.length && opinion){
+  //     topOpinions.push(opinion)
+  //   } else {
+  //     for (let i = 0; i < topOpinions.length; i++) {
+  //       if (opinion.transactions.length > topOpinions[i].transactions.length){
+  //         topPaidOpinions = [...topPaidOpinions.slice(0, i), opinion, ...topPaidOpinions.slice(i, 4)]
+  //       }
+  //     }
+  //   }
+  // })
+
   return {
-  opinions: state.opinionReducer.opinions,
-}}
+    opinions: state.opinionReducer.opinions,
+    myOpinions: myOpinions,
+    // topOpinions: topOpinions,
+    newOpinions: newOpinions,
+  }
+}
 
 const mapDispatchToProps = dispatch => ({
   getOpinions: () => {
