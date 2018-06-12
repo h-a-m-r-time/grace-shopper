@@ -60,6 +60,7 @@ const myOpinions = state.opinionReducer.opinions
   return false
 })
 
+
 // let topOpinions = []
 // state.opinionReducer.opinions
 // .map(opinion => {
