@@ -31,28 +31,37 @@ class CartForm extends Component {
     this.state = {
       amount: 0,
       description: '',
+        cart: []
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
   }
 
-  componentDidMount() {
+
+  async componentDidMount () {
     this.props.getUser()
-    this.props.getUserCart(this.props.user.id)
+    await this.props.getUserCart(this.props.user.id)
+    this.setState({cart: this.props.cart})
   }
 
-  handleChange(event) {
-    event.preventDefault()
-    let elementPrice = document.getElementsByClassName('opinionPrice')
-
-    let elementsArray = Array.prototype.slice.call(elementPrice)
-
-    let price = elementsArray.filter(item => item.valueAsNumber)
-    .reduce((acc, curr) => {
-        return acc + curr.valueAsNumber
-    }, 0)
-
+  async handleChange(item, ev) {
+    // console.log("What we're typing: ", event.target.value)
+    // this.setState({ [event.target.name]: event.target.value });
+    //console.log(event.target.value, amount)
+    let priceChangeCart = [...this.state.cart]
+    let price = 0;
+    for (let i = 0; i < priceChangeCart.length; i++) {
+        if(priceChangeCart[i].id === item.id){
+            priceChangeCart[i].amount = ev.target.value;
+            await this.setState({
+                ...this.state,
+                cart: priceChangeCart
+            })
+        }
+        price += +priceChangeCart[i].amount
+    }
+    console.log(price)
     this.setState({
       amount: price
     })
@@ -90,7 +99,7 @@ class CartForm extends Component {
                   <TableRow key={item.id}>
                     <TableCell>{item.opinion.statement}</TableCell>
                     <TableCell>
-                      <input className="opinionPrice" step="0.01" placeholder="What's It Worth?" type="number" name="amount" onChange={this.handleChange} />
+                    <TableCell><Input placeholder="What's It Worth?" value={item.amount} onChange={ev => {this.handleChange(item, ev)}} /></TableCell>
                     </TableCell>
                     <TableCell>
                       <Button
@@ -116,7 +125,7 @@ class CartForm extends Component {
                   <Payment
                     amount={this.state.amount}
                     description={this.state.description}
-                    transactions={this.props.cart}
+                    transactions={this.state.cart}
                   />
                 </TableCell>
               </TableRow>
