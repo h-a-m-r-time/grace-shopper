@@ -18,9 +18,6 @@ class OpinionList extends Component {
         case 'myOpinions':
           filteredOpinions = this.props.myOpinions
           break
-        // case 'topOpinions':
-        //   filteredOpinions = this.props.topOpinions
-        //   break
         default:
           break
       }
@@ -80,33 +77,11 @@ state.opinionReducer.opinions
   }
 })
 
-// let topPaidOpinions = []
-// state.opinionReducer.opinions
-// .map(opinion => {
-//   if (!topPaidOpinions.length){
-//     let topPrice = 0
-//     for (let i = 0; i < state.opinionReducer.opinions.transactions.length; i++) {
-//       if (state.opinionReducer.opinions.transactions[i].amount > topPrice){
-//         topPrice = state.opinionReducer.opinions.transactions[i].amount
-//       }
-//     }
-
-//     topOpinions.push(opinion)
-//   } else {
-//     for (let i = 0; i < topOpinions.length; i++) {
-//       if (opinion.transactions.length > topOpinions[i].transactions.length){
-//         topOpinions = [...topOpinions.slice(0, i), opinion, ...topOpinions.slice(i, 4)]
-//       }
-//     }
-//   }
-// })
-
   return {
     opinions: state.opinionReducer.opinions,
     myOpinions: myOpinions,
     topOpinions: topOpinions,
     newOpinions: newOpinions,
-    // topPaidOpinions: topPaidOpinions
   }
 }
 
