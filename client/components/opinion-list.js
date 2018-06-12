@@ -7,7 +7,19 @@ import { SimpleCard } from './index'
 class OpinionList extends Component {
   renderOpinions() {
     if (this.props.opinions.length) {
-      return this.props.opinions.map(opinion => {
+      let filteredOpinions = []
+      switch (this.props.displayOrder) {
+        case 'newOpinions':
+          filteredOpinions = this.props.newOpinions
+          break
+        case 'myOpinions':
+          filteredOpinions = this.props.myOpinions
+          break
+        default:
+          break;
+      }
+
+      return filteredOpinions.map(opinion => {
         return (
           <SimpleCard
             category={opinion.category}
@@ -31,30 +43,38 @@ class OpinionList extends Component {
 }
 
 const mapStateToProps = state => {
-  const newOpinions = state.opinionReducer.opinions.filter(
-    opinion => opinion.id > state.opinionReducer.opinions.length - 5
-  )
 
-const myOpinions = state.opinionReducer.opinions.filter(opinion =>
-  opinion.transactions.map(transaction => {
-    if (transaction.userId === state.user.id) {
-      return true
-    }
-  }))
+const newOpinions = state.opinionReducer.opinions.filter(
+  opinion => opinion.id > state.opinionReducer.opinions.length - 5
+)
 
-  let topOpinions = []
-  state.opinionReducer.opinions
-  .map(opinion => {
-    if (!topOpinions.length){
-      topOpinions.push(opinion)
-    } else {
-      for (let i = 0; i < topOpinions.length; i++) {
-        if (opinion.transactions.length > topOpinions[i].transactions.length){
-          topOpinions = [...topOpinions.slice(0, i), opinion, ...topOpinions.slice(i, 4)]
-        }
+const myOpinions = state.opinionReducer.opinions
+.filter(opinion => {
+  if (opinion.transactions){
+    for (let i = 0; i < opinion.transactions.length; i++) {
+      if (opinion.transactions[i].userId === state.user.id){
+        return true
       }
     }
-  })
+  }
+  return false
+})
+
+// let topOpinions = []
+// state.opinionReducer.opinions
+// .map(opinion => {
+//   if (!topOpinions.length){
+//     topOpinions.push(opinion)
+//   } else {
+//     for (let i = 0; i < topOpinions.length; i++) {
+//       if (opinion.transactions.length > topOpinions[i].transactions.length){
+//         topOpinions = [...topOpinions.slice(0, i), opinion, ...topOpinions.slice(i, 4)]
+//       }
+//     }
+//   }
+// })
+
+  // console.log(state, myOpinions)
 
   // let topPaidOpinions = []
   // state.opinionReducer.opinions
@@ -73,7 +93,7 @@ const myOpinions = state.opinionReducer.opinions.filter(opinion =>
   return {
     opinions: state.opinionReducer.opinions,
     myOpinions: myOpinions,
-    topOpinions: topOpinions,
+    // topOpinions: topOpinions,
     newOpinions: newOpinions,
   }
 }
