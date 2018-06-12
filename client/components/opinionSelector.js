@@ -60,7 +60,7 @@ class OpinionSelector extends Component {
     />)
 
     if (this.state.category === 'verb'){
-      return [<div className="description-i" key={0}>I    </div>, feelingComp, thingComp]
+      return [<div className="description-i" key={0}>I</div>, feelingComp, thingComp]
     } else {
       return [thingComp, feelingComp]
     }
