@@ -11,15 +11,17 @@ import store from '../store'
 class Payment extends Component {
   onToken = token => {
     console.log('data from payment form', token)
-    store.dispatch(putTransactions({
+    store.dispatch(
+      putTransactions({
         transactions: this.props.transactions,
         stripeObject: {
-            amount: this.props.amount * 100,
-            currency: 'usd',
-            description: 'Example charge',
-            source: token,
-        }
-    }))
+          description: 'Example charge',
+          source: token.id,
+          currency: 'usd',
+          amount: this.props.amount * 100,
+        },
+      })
+    )
   }
   render() {
     let paymentAmount = 100
