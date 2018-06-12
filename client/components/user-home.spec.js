@@ -6,7 +6,7 @@ import enzyme, {shallow} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import {UserHome} from './user-home'
 
-import Opinion from './opinion'
+// import Opinion from './opinion'
 
 const adapter = new Adapter()
 enzyme.configure({adapter})
@@ -22,3 +22,19 @@ describe('UserHome', () => {
     expect(userHome.find('h3').text()).to.be.equal('Welcome, cody@email.com')
   })
 })
+
+// describe('Opinion', () => {
+//   let opinionComp
+
+//   const opinion = {
+//     statement: 'life is meaningless'
+//   }
+
+//   beforeEach(() => {
+//     opinionComp = shallow(<Opinion opinion={opinion} />)
+//   })
+
+//   it('renders the opinion statement in an h2', () => {
+//     expect(opinionComp.find('h2').text()).to.be.equal('life is meaningless')
+//   })
+// })
