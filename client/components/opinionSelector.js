@@ -93,7 +93,7 @@ class OpinionSelector extends Component {
           //if the feeling wasn't already created we need to create one
           feelObj = await this.props.createFeeling({
             name: this.state.feeling,
-            // category: this.state.category,
+            category: this.state.category,
           })
         }
         if (!thingObj) {
