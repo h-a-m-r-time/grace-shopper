@@ -10,8 +10,7 @@ import StatementMaker from '../utilities/statement-maker'
 import {
   getFeelings,
   getThings,
-  createFeeling,
-  createThing,
+  getOpinions,
   addNewOpinion,
   postCart,
 } from '../store'
@@ -82,23 +81,23 @@ class OpinionSelector extends Component {
     }
     this.props.opinions.map(op => {
         //check that we have matching feelings and thing on a created opinion, and set the opinion
-        if(op.feeling.name === this.state.feeling && op.thing.name === this.state.thing){
+        if (op.feeling && op.feeling.name === this.state.feeling && op.thing && op.thing.name === this.state.thing){
             this.setState({currentOpinion: op})
             //unset it whenever there is one and one of the elements changed
-        } else if(this.state.currentOpinion && this.state.currentOpinion.id){
+        } else if (this.state.currentOpinion && this.state.currentOpinion.id){
             this.setState({currentOpinion: {}})
         }
     })
   }
 
-  onSubmit = async evt => {
+  onSubmit = evt => {
     evt.preventDefault()
     ///need to push data to store and maybe redirect to cart? tbd
     //need both feeling and thing to be filled out before
     try {
       if (this.state.feeling && this.state.thing) {
         //if selectedOpinionid exists, the user has submitted a created idea so
-        if(this.state.currentOpinion && this.state.currentOpinion.id){
+        if (this.state.currentOpinion && this.state.currentOpinion.id){
             //may want to await this so we don't navigate to the cart until it's ready with new items?
             this.props.postCart({
               opinionId: this.state.currentOpinion.id,
@@ -107,7 +106,7 @@ class OpinionSelector extends Component {
             })
             //right now it won't show the newest add in cart
             //we either have to navigate from teh router or return a promise or have a onreceiveprops in the cart
-            this.props.history.push("/cart")
+            this.props.history.push('cart')
         } else {
             //setup the bare object, check if the feelings and things were in the prop arrays
             //this eventually will not have to check if the feelings and things were in scope
@@ -127,7 +126,7 @@ class OpinionSelector extends Component {
             thingObj ? opinionObj.thingId = thingObj.id : opinionObj.thing = this.state.thing
             this.props.addNewOpinion(opinionObj)
             //not sure if navigation can or should be in a thunk
-            this.props.history.push("/cart")
+            this.props.history.push('/cart')
         }
       }
     } catch (error) {
@@ -212,7 +211,7 @@ const mapDispatchToProps = dispatch => {
     },
     //might be overkill, might already have them ready in store
     getOpinions: () => {
-      dispatch(getOpinoins)
+      dispatch(getOpinions())
     },
     addNewOpinion: obj => {
       return dispatch(addNewOpinion(obj))
