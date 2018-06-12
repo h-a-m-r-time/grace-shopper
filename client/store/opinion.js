@@ -54,7 +54,7 @@ export const addNewOpinion = (opinionObj, history) => {
       }
       const response = await axios.post('/api/opinions', opinionObj)
       const opinion = response.data
-      dispatch(addOpinion(opinion))
+      await dispatch(addOpinion(opinion))
       if (history){
         history.push('/cart')}
       //not sure how to get state from store into a thunk to grab userId
