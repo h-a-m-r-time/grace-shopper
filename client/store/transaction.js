@@ -1,4 +1,5 @@
 import axios from 'axios'
+import history from '../history'
 
 /**
  * ACTION TYPES
@@ -38,6 +39,7 @@ export const putTransactions = transactionObj => async dispatch => {
     const response = await axios.put('/api/transactions', transactionObj)
     const transactions = response.data
     dispatch(puttedTransactions(transactions))
+    history.push('/confirmation')
   } catch (err) {
     console.log(err)
   }
