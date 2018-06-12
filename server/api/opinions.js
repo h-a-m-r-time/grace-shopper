@@ -1,24 +1,13 @@
 const router = require('express').Router()
-const {Opinion} = require('../db/models')
+const {Opinion, Transaction} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
     try {
         const opinions = await Opinion.findAll({
-            include: [{all: true}]
+            include: [{model: Transaction, where: {purchased: true}}]
         })
-        const purchased = opinions.map(op => {
-            //console.log("IN HERE THOUGH!!!!!!!!!!!!!!!!!!!!!", op.transactions)
-            if(op.transactions && op.transactions.length > 0){
-                //console.log("IN HERE")
-                op.transactions = op.transactions.filter(trns => {
-                    //console.log(trns.purchased)
-                    return trns.purchased
-                })
-            }
-            return op
-        })
-        res.json(purchased)
+        res.json(opinions)
     } catch (error) {
         next(error)
     }
