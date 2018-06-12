@@ -54,7 +54,7 @@ class OpinionSelector extends Component {
       onChangeFunc={this.onChange}
       placeHolder="opinion subject"
       optionName="thing"
-      suggestionsProps={this.correctSuggestions(this.props.thingSuggestions)}
+      suggestionsProps={this.props.thingSuggestions}
       key={2}
     />)
 
