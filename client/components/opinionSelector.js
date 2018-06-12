@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import Button from '@material-ui/core/Button'
+import { withRouter } from 'react-router-dom'
+import IntegrationAutosuggest from './OpinionSelectorAutoSuggest'
+import CategoryRadioButtons from './opinionSelectorCategory'
+import Card from './card'
+import StatementMaker from '../utilities/statement-maker'
 //lets talk about prettier configurating becaues if they're single words i think one line is nicer
 import {
   getFeelings,
@@ -9,12 +15,6 @@ import {
   addNewOpinion,
   postCart,
 } from '../store'
-import Button from '@material-ui/core/Button'
-import IntegrationAutosuggest from './OpinionSelectorAutoSuggest'
-import CategoryRadioButtons from './opinionSelectorCategory'
-import { withRouter } from 'react-router-dom'
-import Card from './card'
-import StatementMaker from '../utilities/statement-maker'
 
 class OpinionSelector extends Component {
   constructor(props) {
