@@ -19,7 +19,7 @@ const gotThings = things => ({
   things,
 })
 
-const addThing = thing => ({
+export const addThing = thing => ({
   type: ADD_THING,
   thing
 })
