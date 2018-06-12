@@ -97,7 +97,7 @@ class CartForm extends Component {
                 this.props.cart[0].id &&
                 this.props.cart.map((item) => (
                   <TableRow key={item.id}>
-                    <TableCell>{item.opinion.statement}</TableCell>
+                    <TableCell>{item.opinion ? item.opinion.statement: "Dat New New"}</TableCell>
                     <TableCell>
                     <TableCell><Input placeholder="What's It Worth?" value={item.amount} onChange={ev => {this.handleChange(item, ev)}} /></TableCell>
                     </TableCell>
