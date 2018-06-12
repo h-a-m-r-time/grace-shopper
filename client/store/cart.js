@@ -57,7 +57,7 @@ const cart = ( state = defaultCart, action) => {
       return action.cart
     }
     case POST_CART: {
-        return [...state, action.cartItem]
+        return [...state, action.cart]
     }
     case DELETE_ITEM: {
       return [...state.filter(opinion => {
