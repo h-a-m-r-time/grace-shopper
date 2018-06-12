@@ -9,14 +9,14 @@ class OpinionList extends Component {
     if (this.props.opinions.length) {
       let filteredOpinions = []
       switch (this.props.displayOrder) {
+        case 'allOpinions':
+        filteredOpinions = this.props.opinions
+        break
         case 'newOpinions':
           filteredOpinions = this.props.newOpinions
           break
         case 'myOpinions':
           filteredOpinions = this.props.myOpinions
-          break
-        case 'topOpinions':
-          filteredOpinions = this.props.topOpinions
           break
         default:
           break
@@ -76,20 +76,6 @@ state.opinionReducer.opinions
     }
   }
 })
-
-  // let topPaidOpinions = []
-  // state.opinionReducer.opinions
-  // .map(opinion => {
-  //   if (!topPaidOpinions.length && opinion){
-  //     topOpinions.push(opinion)
-  //   } else {
-  //     for (let i = 0; i < topOpinions.length; i++) {
-  //       if (opinion.transactions.length > topOpinions[i].transactions.length){
-  //         topPaidOpinions = [...topPaidOpinions.slice(0, i), opinion, ...topPaidOpinions.slice(i, 4)]
-  //       }
-  //     }
-  //   }
-  // })
 
   return {
     opinions: state.opinionReducer.opinions,
