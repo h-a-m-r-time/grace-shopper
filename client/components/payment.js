@@ -3,8 +3,7 @@ import StripeCheckout from 'react-stripe-checkout'
 <<<<<<< Updated upstream
 =======
 import { putTransactions } from '../store'
-import store from '../store'
->>>>>>> Stashed changes
+>>>>>>> master
 // to make this live, replace external data-key
 
 // need the following props:
@@ -15,8 +14,6 @@ class Payment extends Component {
   onToken = token => {
     console.log('data from payment form', token)
 <<<<<<< Updated upstream
-=======
-    store.dispatch(putTransactions({
         transactions: this.props.transactions,
         stripeObject: {
             amount: this.props.amount * 100,

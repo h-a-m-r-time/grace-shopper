@@ -2,13 +2,20 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import { getOpinions } from '../store'
-import Opinion from './opinion'
+import { SimpleCard } from './index'
 
 class OpinionList extends Component {
   renderOpinions() {
     if (this.props.opinions.length) {
+
       return this.props.opinions.map(opinion => {
-        return <Opinion opinion={opinion} key={opinion.id} />
+        return (
+          <SimpleCard
+            category={opinion.category}
+            statement={opinion.statement}
+            key={opinion.id}
+          />
+        )
       })
     } else {
       return 'There are no opinions to show!'
@@ -20,15 +27,17 @@ class OpinionList extends Component {
   }
 
   render() {
-    return (
-      <div>{this.renderOpinions()}</div>
-    )
+    return <div>{this.renderOpinions()}</div>
   }
 }
 
-const mapStateToProps = state => ({
-  opinions: state.opinionReducer.opinions
-})
+const mapStateToProps = state => {
+  // const newOpinions = state.opinionReducer.opinions
+  // .filter(opinion => opinion.)
+  // console.log('STATE IS', state)
+  return {
+  opinions: state.opinionReducer.opinions,
+}}
 
 const mapDispatchToProps = dispatch => ({
   getOpinions: () => {
