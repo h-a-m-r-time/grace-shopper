@@ -19,7 +19,7 @@ const gotFeelings = feelings => ({
   feelings,
 })
 
-const addFeeling = feeling => {
+export const addFeeling = feeling => {
   return {type: ADD_FEELING,
   feeling}
 }

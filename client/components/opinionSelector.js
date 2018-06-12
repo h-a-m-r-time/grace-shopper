@@ -104,6 +104,8 @@ class OpinionSelector extends Component {
               userId: this.props.userId,
               amount: 0.0,
             })
+            //right now it won't show the newest add in cart
+            //we either have to navigate from teh router or return a promise or have a onreceiveprops in the cart
             this.props.history.push("/cart")
         } else {
             //setup the bare object, check if the feelings and things were in the prop arrays
@@ -112,6 +114,7 @@ class OpinionSelector extends Component {
             let opinionObj = {
                 statement: StatementMaker.createStatement(this.state.feeling, this.state.thing, this.state.category),
                 category: this.state.category,
+                userId: this.props.userId
             }
             let feelObj = this.props.feelings.find(feeling => {
               return feeling.name === this.state.feeling
@@ -119,11 +122,11 @@ class OpinionSelector extends Component {
             let thingObj = this.props.things.find(thing => {
               return thing.name === this.state.thing
             })
-            feelObj.id ? opinionObj.feelingId = feelObj.id : opinionObj.feeling = this.state.feeling
-            thingObj.id ? opinionObj.thingId = thingObj.id : opinionObj.thing = this.state.thing
+            feelObj ? opinionObj.feelingId = feelObj.id : opinionObj.feeling = this.state.feeling
+            thingObj ? opinionObj.thingId = thingObj.id : opinionObj.thing = this.state.thing
             this.props.addNewOpinion(opinionObj)
             //not sure if navigation can or should be in a thunk
-            //this.props.history.push("/cart")
+            this.props.history.push("/cart")
         }
       }
     } catch (error) {
