@@ -40,7 +40,7 @@ export const getOpinion = (id) => dispatch =>
 
 //power thunk, creates things, feelings, and opinions
 //might not even need post things and feelings thunks
-export const addNewOpinion = (opinionObj) => {
+export const addNewOpinion = (opinionObj, history) => {
   return async dispatch => {
       if(!opinionObj.feelingId) {
           const feeling = await axios.post('/api/feelings', {name: opinionObj.feeling, category: opinionObj.category})
@@ -55,6 +55,8 @@ export const addNewOpinion = (opinionObj) => {
       const response = await axios.post('/api/opinions', opinionObj)
       const opinion = response.data
       dispatch(addOpinion(opinion))
+      if (history){
+        history.push('/cart')}
       //not sure how to get state from store into a thunk to grab userId
       await axios.post('/api/cart', {opinionId: opinion.id, amount: 0.0, userId: opinionObj.userId})
       return opinion
