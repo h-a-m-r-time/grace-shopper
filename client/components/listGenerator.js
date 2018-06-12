@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import { OpinionList } from './index'
-import opinionList from './opinion-list'
 
 const styles = theme => ({
   button: {
@@ -18,7 +17,7 @@ class ListGenerator extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      displayOrder: 'myOpinions',
+      displayOrder: 'allOpinions',
     }
   }
   changeDisplay = evt => {
@@ -31,6 +30,19 @@ class ListGenerator extends React.Component {
     return (
       <div>
         <Button
+          id="list-allOpinions"
+          variant="contained"
+          color={
+            this.state.displayOrder === 'allOpinions' ? 'primary' : 'default'
+          }
+          className={classes.button}
+          name="allOpinions"
+          onClick={this.changeDisplay}
+        >
+          All Opinions
+        </Button>
+        <Button
+          id="list-myOpinions"
           variant="contained"
           color={
             this.state.displayOrder === 'myOpinions' ? 'primary' : 'default'
@@ -43,6 +55,7 @@ class ListGenerator extends React.Component {
         </Button>
 
         <Button
+          id="list-topOpinions"
           variant="contained"
           color={
             this.state.displayOrder === 'topOpinions' ? 'primary' : 'default'
@@ -54,6 +67,7 @@ class ListGenerator extends React.Component {
           Top Opinions
         </Button>
         <Button
+          id="list-newOpinions"
           variant="contained"
           color={
             this.state.displayOrder === 'newOpinions' ? 'primary' : 'default'
@@ -65,6 +79,7 @@ class ListGenerator extends React.Component {
           New Opinions
         </Button>
         <Button
+          id="list-topPaidOpinions"
           variant="contained"
           color={
             this.state.displayOrder === 'topPaidOpinions'
