@@ -22,19 +22,3 @@ describe('UserHome', () => {
     expect(userHome.find('h3').text()).to.be.equal('Welcome, cody@email.com')
   })
 })
-
-// describe('Opinion', () => {
-//   let opinionComp
-
-//   const opinion = {
-//     statement: 'life is meaningless'
-//   }
-
-//   beforeEach(() => {
-//     opinionComp = shallow(<Opinion opinion={opinion} />)
-//   })
-
-//   it('renders the opinion statement in an h2', () => {
-//     expect(opinionComp.find('h2').text()).to.be.equal('life is meaningless')
-//   })
-// })
