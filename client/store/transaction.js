@@ -14,15 +14,15 @@ const initState = []
 /**
  * ACTION CREATORS
  */
- const gotTransactions = transactions => ({
-   type: GET_TRANSACTIONS,
-   transactions,
- })
+const gotTransactions = transactions => ({
+  type: GET_TRANSACTIONS,
+  transactions,
+})
 
- const puttedTransactions = transactions => ({
-   type: PUT_TRANSACTIONS,
-   transactions,
- })
+const puttedTransactions = transactions => ({
+  type: PUT_TRANSACTIONS,
+  transactions,
+})
 
 /**
  * THUNK CREATORS
@@ -33,14 +33,14 @@ export const getTransactions = () => dispatch =>
     .then(res => dispatch(gotTransactions(res.data)))
     .catch(err => console.log(err))
 
-export const putTransactions = (transactionObj) => async dispatch => {
-    try{
-        const response = await axios.put('/api/transactions', transactionObj)
-        const transactions = response.data
-        dispatch(puttedTransactions(transactions))
-    } catch(err){
-        console.log(err)
-    }
+export const putTransactions = transactionObj => async dispatch => {
+  try {
+    const response = await axios.put('/api/transactions', transactionObj)
+    const transactions = response.data
+    dispatch(puttedTransactions(transactions))
+  } catch (err) {
+    console.log(err)
+  }
 }
 /**
  * REDUCER
