@@ -15,8 +15,11 @@ class OpinionList extends Component {
         case 'myOpinions':
           filteredOpinions = this.props.myOpinions
           break
+        case 'topOpinions':
+          filteredOpinions = this.props.topOpinions
+          break
         default:
-          break;
+          break
       }
 
       return filteredOpinions.map(opinion => {
@@ -60,21 +63,19 @@ const myOpinions = state.opinionReducer.opinions
   return false
 })
 
-// let topOpinions = []
-// state.opinionReducer.opinions
-// .map(opinion => {
-//   if (!topOpinions.length){
-//     topOpinions.push(opinion)
-//   } else {
-//     for (let i = 0; i < topOpinions.length; i++) {
-//       if (opinion.transactions.length > topOpinions[i].transactions.length){
-//         topOpinions = [...topOpinions.slice(0, i), opinion, ...topOpinions.slice(i, 4)]
-//       }
-//     }
-//   }
-// })
-
-  // console.log(state, myOpinions)
+let topOpinions = []
+state.opinionReducer.opinions
+.map(opinion => {
+  if (!topOpinions.length){
+    topOpinions.push(opinion)
+  } else {
+    for (let i = 0; i < topOpinions.length; i++) {
+      if (opinion.transactions.length > topOpinions[i].transactions.length){
+        topOpinions = [...topOpinions.slice(0, i), opinion, ...topOpinions.slice(i, 4)]
+      }
+    }
+  }
+})
 
   // let topPaidOpinions = []
   // state.opinionReducer.opinions
@@ -93,7 +94,7 @@ const myOpinions = state.opinionReducer.opinions
   return {
     opinions: state.opinionReducer.opinions,
     myOpinions: myOpinions,
-    // topOpinions: topOpinions,
+    topOpinions: topOpinions,
     newOpinions: newOpinions,
   }
 }
