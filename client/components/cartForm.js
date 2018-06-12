@@ -67,7 +67,6 @@ class CartForm extends Component {
   }
 
   render() {
-    console.log(this.props.cart)
     return (
       <form onSubmit={this.handleSubmit}>
         <Paper>
