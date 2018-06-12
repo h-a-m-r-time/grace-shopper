@@ -112,7 +112,7 @@ class OpinionSelector extends Component {
             })
             //right now it won't show the newest add in cart
             //we either have to navigate from teh router or return a promise or have a onreceiveprops in the cart
-            this.props.history.push('cart')
+            // this.props.history.push('cart')
         } else {
             //setup the bare object, check if the feelings and things were in the prop arrays
             //this eventually will not have to check if the feelings and things were in scope
@@ -132,7 +132,7 @@ class OpinionSelector extends Component {
             thingObj ? opinionObj.thingId = thingObj.id : opinionObj.thing = this.state.thing
             this.props.addNewOpinion(opinionObj)
             //not sure if navigation can or should be in a thunk
-            this.props.history.push('/cart')
+            // this.props.history.push('/cart')
         }
       }
     } catch (error) {
@@ -207,7 +207,7 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch, ownprops) => {
   return {
     getFeelings: () => {
       dispatch(getFeelings())
@@ -220,10 +220,10 @@ const mapDispatchToProps = dispatch => {
       dispatch(getOpinions())
     },
     addNewOpinion: obj => {
-      return dispatch(addNewOpinion(obj))
+      return dispatch(addNewOpinion(obj, ownprops.history))
     },
     postCart: obj => {
-      dispatch(postCart(obj))
+      dispatch(postCart(obj, ownprops.history))
     },
   }
 }

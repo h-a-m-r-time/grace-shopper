@@ -58,7 +58,7 @@ class Confirmation extends Component {
 
 const mapStateToProps = state => ({
   transactions: state.transaction,
-  userId: 1 //mocking it until we have ability to add transaction for any user, can't login as seeded user
+  userId: state.user.id
 })
 
 const mapDispatchToProps = dispatch => ({

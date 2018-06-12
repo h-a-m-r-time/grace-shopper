@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import StripeCheckout from 'react-stripe-checkout'
 import { putTransactions } from '../store'
+import store from '../store'
 // to make this live, replace external data-key
 
 // need the following props:
@@ -10,7 +11,7 @@ import { putTransactions } from '../store'
 class Payment extends Component {
   onToken = token => {
     console.log('data from payment form', token)
-    putTransactions({
+    store.dispatch(putTransactions({
         transactions: this.props.transactions,
         stripeObject: {
             amount: this.props.amount * 100,
@@ -18,7 +19,7 @@ class Payment extends Component {
             description: 'Example charge',
             source: token,
         }
-    })
+    }))
   }
   render() {
     let paymentAmount = 100
