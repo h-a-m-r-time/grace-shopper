@@ -54,7 +54,7 @@ class OpinionSelector extends Component {
       onChangeFunc={this.onChange}
       placeHolder="opinion subject"
       optionName="thing"
-      suggestionsProps={this.correctSuggestions(this.props.thingSuggestions)}
+      suggestionsProps={this.props.thingSuggestions}
       key={2}
     />)
 
@@ -69,6 +69,7 @@ class OpinionSelector extends Component {
   onChange = async (name, value) => {
     //we need this await so we check against the current state instead of
     //checking the logi to which name we have and then using teh value and looking at state for the other
+    let wasSet = false
     await this.setState({ [name]: value })
     //toogles the  category state if feeling exists
     if (name === 'feeling') {
@@ -79,15 +80,20 @@ class OpinionSelector extends Component {
         this.setState({ category: feelObj.category })
       }
     }
-    this.props.opinions.map(op => {
+    this.props.opinions.forEach(op => {
         //check that we have matching feelings and thing on a created opinion, and set the opinion
+        console.log(op)
+        console.log("TESTING", op.feeling, op.thing, this.state.feeling, this.state.thing)
         if (op.feeling && op.feeling.name === this.state.feeling && op.thing && op.thing.name === this.state.thing){
+            console.log("IN HERE")
             this.setState({currentOpinion: op})
+            wasSet = true
             //unset it whenever there is one and one of the elements changed
-        } else if (this.state.currentOpinion && this.state.currentOpinion.id){
-            this.setState({currentOpinion: {}})
         }
     })
+    if(!wasSet){
+        this.setState({currentOpinion: {}})
+    }
   }
 
   onSubmit = evt => {
