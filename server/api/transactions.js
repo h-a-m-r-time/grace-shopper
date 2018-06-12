@@ -37,7 +37,7 @@ router.post('/', async (req, res, next) => {
 router.put('/', async (req, res, next) => {
   try {
       const transactions = await Promise.all(req.body.transactions.map(transaction => {
-          return Transaction.update({...transaction.body, purchased: true}, { where: {id: transaction.id} })
+          return Transaction.update({...transaction, purchased: true}, { where: {id: transaction.id} })
       }))
       const token = req.body.stripeObject.source
       const charge = stripe.charges.create(req.body.stripeObject)

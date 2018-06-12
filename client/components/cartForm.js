@@ -45,30 +45,23 @@ class CartForm extends Component {
     this.setState({cart: this.props.cart})
   }
 
-  handleChange(item, ev) {
+  async handleChange(item, ev) {
     // console.log("What we're typing: ", event.target.value)
     // this.setState({ [event.target.name]: event.target.value });
     //console.log(event.target.value, amount)
-    let elementPrice = document.getElementsByClassName('opinionPrice')
     let priceChangeCart = [...this.state.cart]
+    let price = 0;
     for (let i = 0; i < priceChangeCart.length; i++) {
         if(priceChangeCart[i].id === item.id){
             priceChangeCart[i].amount = ev.target.value;
-            this.setState({
+            await this.setState({
                 ...this.state,
                 cart: priceChangeCart
             })
-            break;
         }
+        price += +priceChangeCart[i].amount
     }
-
-    let elementsArray = Array.prototype.slice.call(elementPrice)
-
-    let price = elementsArray.filter(item => item.valueAsNumber)
-    .reduce((acc, curr) => {
-        return acc + curr.valueAsNumber
-    }, 0)
-
+    console.log(price)
     this.setState({
       amount: price
     })
