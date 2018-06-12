@@ -35,7 +35,7 @@ export const getTransactions = () => dispatch =>
 
 export const putTransactions = (transactionObj) => async dispatch => {
     try{
-        const response = await axios.put('/api/transactions', {transactions: transactionObj.transactions, stripeToken: transactionObj.stripe, stripeObject: transactionObj.stripeObject})
+        const response = await axios.put('/api/transactions', transactionObj)
         const transactions = response.data
         dispatch(puttedTransactions(transactions))
     } catch(err){

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+//lets talk about prettier configurating becaues if they're single words i think one line is nicer
 import {
   getFeelings,
   getThings,
@@ -212,12 +213,6 @@ const mapDispatchToProps = dispatch => {
     //might be overkill, might already have them ready in store
     getOpinions: () => {
       dispatch(getOpinoins)
-    },
-    createFeeling: obj => {
-      return dispatch(createFeeling(obj))
-    },
-    createThing: obj => {
-      return dispatch(createThing(obj))
     },
     addNewOpinion: obj => {
       return dispatch(addNewOpinion(obj))

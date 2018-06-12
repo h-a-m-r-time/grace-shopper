@@ -8,11 +8,11 @@ router.get('/', async (req, res, next) => {
             include: [{all: true}]
         })
         const purchased = opinions.map(op => {
-            console.log("IN HERE THOUGH!!!!!!!!!!!!!!!!!!!!!", op.transactions)
+            //console.log("IN HERE THOUGH!!!!!!!!!!!!!!!!!!!!!", op.transactions)
             if(op.transactions && op.transactions.length > 0){
-                console.log("IN HERE")
+                //console.log("IN HERE")
                 op.transactions = op.transactions.filter(trns => {
-                    console.log(trns.purchased)
+                    //console.log(trns.purchased)
                     return trns.purchased
                 })
             }
