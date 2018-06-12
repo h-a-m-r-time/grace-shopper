@@ -12,10 +12,10 @@ const getCart = cart => ({type: GET_CART, cart})
 
 const postedCart = cart => ({type: POST_CART, cart})
 
-export const deleteItem = (opinionId) => {
+const deleteItem = (itemId) => {
   return {
     type: DELETE_ITEM,
-    opinionId
+    itemId
   }
 }
 
@@ -24,7 +24,6 @@ export const fetchCart = (userId) => {
     //we won't be making this route after all, we are going to filter the cart by the id here
     const response = await axios.get(`/api/cart/`)
     const cart = response.data
-    console.log(cart)
     const filterCart = cart.filter(trans => {
         return trans.userId === userId
     })
@@ -41,9 +40,9 @@ export const postCart = (opinionObj) => {
     }
 }
 
-export const removeItem = (opinionId) => {
+export const removeItem = (id) => {
   return async dispatch => {
-    const response = await axios.delete(`/api/cart/:${opinionId}`)
+    const response = await axios.delete(`/api/cart/${id}`)
     const opinionData = response.data
     const action = deleteItem(opinionData)
     dispatch(action)
@@ -59,8 +58,8 @@ const cart = ( state = defaultCart, action) => {
         return [...state, action.cartItem]
     }
     case DELETE_ITEM: {
-      return [...state, state.cart.filter(opinion => {
-        return opinion.id !== action.opinionId
+      return [...state.filter(opinion => {
+        return opinion.id !== Number(action.itemId)
       })]
     }
     default: {
