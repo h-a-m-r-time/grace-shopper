@@ -18,7 +18,7 @@ class ListGenerator extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      displayOrder: 'myOpinion',
+      displayOrder: 'myOpinions',
     }
   }
   changeDisplay = evt => {
