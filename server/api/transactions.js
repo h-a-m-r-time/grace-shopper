@@ -38,17 +38,21 @@ router.post('/', async (req, res, next) => {
 
 router.put('/', async (req, res, next) => {
   try {
-    const transactions = await Promise.all(
-      req.body.transactions.map(transaction => {
-        return Transaction.update(
+    let transArray = []
+    await Promise.all(
+      req.body.transactions.map(async transaction => {
+        const updatedValue = await Transaction.update(
           { ...transaction, purchased: true },
-          { where: { id: transaction.id } }
+          {
+            where: { id: transaction.id },
+            returning: true,
+          }
         )
+        transArray.push(updatedValue[1])
       })
     )
-    const token = req.body.stripeObject.source
-    const charge = await stripe.charges.create(req.body.stripeObject)
-    res.json(transactions.data)
+    await stripe.charges.create(req.body.stripeObject)
+    res.json(transArray)
   } catch (err) {
     next(err)
   }
