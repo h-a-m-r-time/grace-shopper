@@ -212,10 +212,6 @@ const mapDispatchToProps = (dispatch, ownprops) => {
     getThings: () => {
       dispatch(getThings())
     },
-    //might be overkill, might already have them ready in store
-    getOpinions: () => {
-      dispatch(getOpinions())
-    },
     addNewOpinion: obj => {
       dispatch(addNewOpinion(obj, ownprops.history))
     },
