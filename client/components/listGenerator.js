@@ -78,20 +78,6 @@ class ListGenerator extends React.Component {
         >
           New Opinions
         </Button>
-        <Button
-          id="list-topPaidOpinions"
-          variant="contained"
-          color={
-            this.state.displayOrder === 'topPaidOpinions'
-              ? 'primary'
-              : 'default'
-          }
-          className={classes.button}
-          name="topPaidOpinions"
-          onClick={this.changeDisplay}
-        >
-          Top Paid Opinions
-        </Button>
         <OpinionList displayOrder={this.state.displayOrder} />
       </div>
     )
