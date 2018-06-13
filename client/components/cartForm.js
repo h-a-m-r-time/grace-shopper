@@ -40,11 +40,10 @@ class CartForm extends Component {
 
   async componentDidMount () {
     this.props.getUser()
-    await this.props.getUserCart(this.props.user.id)
-    this.setState({cart: this.props.cart})
+    this.props.getUserCart(this.props.user.id)
   }
 
-  componentWillReceiveProps(newProps){
+  UNSAFE_componentWillReceiveProps(newProps){
       this.setState({
           cart: newProps.cart
       })
