@@ -6,7 +6,6 @@ import { OpinionSelector, ListGenerator } from './'
  * COMPONENT
  */
 export const UserHome = props => {
-  const { email } = props
 
   return (
     <div>
