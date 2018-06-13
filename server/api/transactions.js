@@ -39,7 +39,7 @@ router.post('/', async (req, res, next) => {
 router.put('/', async (req, res, next) => {
   try {
     let transArray = []
-    const transactions = await Promise.all(
+    await Promise.all(
       req.body.transactions.map(async transaction => {
         const updatedValue = await Transaction.update(
           { ...transaction, purchased: true },
@@ -51,7 +51,7 @@ router.put('/', async (req, res, next) => {
         transArray.push(updatedValue[1])
       })
     )
-    const charge = await stripe.charges.create(req.body.stripeObject)
+    await stripe.charges.create(req.body.stripeObject)
     res.json(transArray)
   } catch (err) {
     next(err)

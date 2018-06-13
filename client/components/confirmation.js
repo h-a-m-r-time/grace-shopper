@@ -20,7 +20,7 @@ class Confirmation extends Component {
   renderTransactions() {
     if (this.props.transactions && this.props.transactions.length) {
       return this.props.transactions.map(transaction => {
-          if(transaction.userId === this.props.userId){
+          if (transaction.userId === this.props.userId){
               return <TransactionReceipt key={transaction.id} transaction={transaction} />
           }
       })

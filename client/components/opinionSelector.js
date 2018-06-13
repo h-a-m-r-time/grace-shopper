@@ -88,7 +88,7 @@ class OpinionSelector extends Component {
             //unset it whenever there is one and one of the elements changed
         }
     })
-    if(!wasSet){
+    if (!wasSet) {
         this.setState({currentOpinion: {}})
     }
   }

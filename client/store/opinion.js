@@ -42,12 +42,12 @@ export const getOpinion = (id) => dispatch =>
 //might not even need post things and feelings thunks
 export const addNewOpinion = (opinionObj, history) => {
   return async dispatch => {
-      if(!opinionObj.feelingId) {
+      if (!opinionObj.feelingId) {
           const feeling = await axios.post('/api/feelings', {name: opinionObj.feeling, category: opinionObj.category})
           opinionObj.feelingId = feeling.data.id
           dispatch(addFeeling(feeling.data))
       }
-      if(!opinionObj.thingId) {
+      if (!opinionObj.thingId) {
           const thing = await axios.post('/api/things', {name: opinionObj.thing})
           opinionObj.thingId = thing.data.id
           dispatch(addThing(thing.data))
