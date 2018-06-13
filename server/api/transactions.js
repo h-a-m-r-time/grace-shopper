@@ -42,7 +42,7 @@ router.put('/', async (req, res, next) => {
     const transactions = await Promise.all(
       req.body.transactions.map(async transaction => {
         const updatedValue = await Transaction.update(
-          { ...req.body.transactions, purchased: true },
+          { ...transaction, purchased: true },
           {
             where: { id: transaction.id },
             returning: true,
