@@ -44,7 +44,7 @@ class OpinionList extends Component {
   }
 
   render() {
-    return <div>{this.renderOpinions()}</div>
+    return <div className="cardWrapper" >{this.renderOpinions()}</div>
   }
 }
 

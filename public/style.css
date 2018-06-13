@@ -27,5 +27,18 @@ form div {
 
 .description-i {
   position: absolute;
-  top: 165px;
+  top: 125px;
+}
+
+/*not great overwrites*/
+.CategoryRadioButtons-root-125{
+    display: inline !important;
+}
+
+.cardWrapper{
+    display: flex;
+    flex-wrap: wrap;
+}
+.cardWrapper > div {
+    margin: 5px;
 }
