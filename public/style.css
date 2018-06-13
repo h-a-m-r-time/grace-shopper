@@ -29,3 +29,16 @@ form div {
   position: absolute;
   top: 165px;
 }
+
+/*not great overwrites*/
+.CategoryRadioButtons-root-125{
+    display: inline !important;
+}
+
+.cardWrapper{
+    display: flex;
+    flex-wrap: wrap;
+}
+.cardWrapper > div {
+    margin: 5px;
+}
