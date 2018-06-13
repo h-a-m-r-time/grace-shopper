@@ -82,10 +82,7 @@ class OpinionSelector extends Component {
     }
     this.props.opinions.forEach(op => {
         //check that we have matching feelings and thing on a created opinion, and set the opinion
-        console.log(op)
-        console.log("TESTING", op.feeling, op.thing, this.state.feeling, this.state.thing)
         if (op.feeling && op.feeling.name === this.state.feeling && op.thing && op.thing.name === this.state.thing){
-            console.log("IN HERE")
             this.setState({currentOpinion: op})
             wasSet = true
             //unset it whenever there is one and one of the elements changed
@@ -220,7 +217,7 @@ const mapDispatchToProps = (dispatch, ownprops) => {
       dispatch(getOpinions())
     },
     addNewOpinion: obj => {
-      return dispatch(addNewOpinion(obj, ownprops.history))
+      dispatch(addNewOpinion(obj, ownprops.history))
     },
     postCart: obj => {
       dispatch(postCart(obj, ownprops.history))

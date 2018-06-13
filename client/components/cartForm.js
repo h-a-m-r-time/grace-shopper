@@ -45,6 +45,12 @@ class CartForm extends Component {
     this.setState({cart: this.props.cart})
   }
 
+  componentWillReceiveProps(newProps){
+      this.setState({
+          cart: newProps.cart
+      })
+  }
+
   async handleChange(item, ev) {
     // console.log("What we're typing: ", event.target.value)
     // this.setState({ [event.target.name]: event.target.value });

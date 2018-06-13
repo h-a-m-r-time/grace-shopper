@@ -55,10 +55,9 @@ export const addNewOpinion = (opinionObj, history) => {
       const response = await axios.post('/api/opinions', opinionObj)
       const opinion = response.data
       await dispatch(addOpinion(opinion))
+      await axios.post('/api/cart', {opinionId: opinion.id, amount: 0.0, userId: opinionObj.userId})
       if (history){
         history.push('/cart')}
-      //not sure how to get state from store into a thunk to grab userId
-      await axios.post('/api/cart', {opinionId: opinion.id, amount: 0.0, userId: opinionObj.userId})
       return opinion
   }
 }
@@ -74,6 +73,7 @@ export default function(state = initState, action) {
         ...state, opinion: action.opinion
       }
     case ADD_OPINION:
+        console.log(action.opinion)
       return {
         ...state, opinions: [...state.opinions, action.opinion]
       }
