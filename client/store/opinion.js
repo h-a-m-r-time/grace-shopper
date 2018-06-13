@@ -73,7 +73,6 @@ export default function(state = initState, action) {
         ...state, opinion: action.opinion
       }
     case ADD_OPINION:
-        console.log(action.opinion)
       return {
         ...state, opinions: [...state.opinions, action.opinion]
       }
