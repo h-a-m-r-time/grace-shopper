@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import StripeCheckout from 'react-stripe-checkout'
-import { putTransactions } from '../store'
-import store from '../store'
+import store, { putTransactions } from '../store'
 // to make this live, replace external data-key
 
 // need the following props:
@@ -10,7 +9,6 @@ import store from '../store'
 
 class Payment extends Component {
   onToken = token => {
-    console.log('data from payment form', token)
     store.dispatch(
       putTransactions({
         transactions: this.props.transactions,

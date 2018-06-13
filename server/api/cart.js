@@ -30,7 +30,7 @@ router.get('/:id', async (req, res, next) => {
 })
 
 router.post('/', async (req, res, next) => {
-    try{
+    try {
         const request = {...req.body, purchased: false}
         const transaction = await Transaction.create(request, {include: [{all: true}]})
         res.json(transaction)

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 import { fetchCart, removeItem } from '../store/cart'
 import { me } from '../store/user'
 import Button from '@material-ui/core/Button'
@@ -39,10 +38,15 @@ class CartForm extends Component {
   }
 
 
-  async componentDidMount () {
+  componentDidMount () {
     this.props.getUser()
-    await this.props.getUserCart(this.props.user.id)
-    this.setState({cart: this.props.cart})
+    this.props.getUserCart(this.props.user.id)
+  }
+
+  UNSAFE_componentWillReceiveProps(newProps){
+      this.setState({
+          cart: newProps.cart
+      })
   }
 
   async handleChange(item, ev) {
@@ -52,7 +56,7 @@ class CartForm extends Component {
     let priceChangeCart = [...this.state.cart]
     let price = 0;
     for (let i = 0; i < priceChangeCart.length; i++) {
-        if(priceChangeCart[i].id === item.id){
+        if (priceChangeCart[i].id === item.id){
             priceChangeCart[i].amount = ev.target.value;
             await this.setState({
                 ...this.state,
@@ -97,9 +101,9 @@ class CartForm extends Component {
                 this.props.cart[0].id &&
                 this.props.cart.map((item) => (
                   <TableRow key={item.id}>
-                    <TableCell>{item.opinion ? item.opinion.statement: "Dat New New"}</TableCell>
+                    <TableCell>{item.opinion ? item.opinion.statement : 'Dat New New'}</TableCell>
                     <TableCell>
-                    <TableCell><Input placeholder="What's It Worth?" value={item.amount} onChange={ev => {this.handleChange(item, ev)}} /></TableCell>
+                    <TableCell><Input placeholder="What Is It Worth?" value={item.amount} onChange={ev => {this.handleChange(item, ev)}} /></TableCell>
                     </TableCell>
                     <TableCell>
                       <Button
