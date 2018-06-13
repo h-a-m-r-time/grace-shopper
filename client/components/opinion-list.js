@@ -18,6 +18,9 @@ class OpinionList extends Component {
         case 'myOpinions':
           filteredOpinions = this.props.myOpinions
           break
+        case 'topOpinions':
+          filteredOpinions = this.props.topOpinions
+          break
         default:
           break
       }
