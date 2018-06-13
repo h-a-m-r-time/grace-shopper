@@ -38,7 +38,7 @@ class CartForm extends Component {
   }
 
 
-  async componentDidMount () {
+  componentDidMount () {
     this.props.getUser()
     this.props.getUserCart(this.props.user.id)
   }
