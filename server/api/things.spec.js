@@ -13,10 +13,11 @@ describe('Thing routes', () => {
     const firstThing = 'apples'
     const secondThing = 'oranges'
     let apples
+    let things
 
     beforeEach(() => {
 
-      const things = [{
+      things = [{
         name: firstThing,
         description: 'one a day keeps the doctor away'
       }, {
@@ -52,6 +53,21 @@ describe('Thing routes', () => {
           expect(res.body).to.be.an('object')
           expect(res.body.name).to.be.equal( firstThing )
         })
+    })
+
+    it('POST /api/things', () => {
+        return request(app)
+            .post('/api/things')
+            .send({
+              name: 'testThing',
+              description: 'one a day keeps the doctor away'
+            })
+            .expect(201)
+            .then(res => {
+                expect(res.body).to.be.an('object')
+                expect(res.body.name).to.be.equal('testThing')
+                expect(res.body.description).to.be.equal('one a day keeps the doctor away')
+            })
     })
   })
 })
