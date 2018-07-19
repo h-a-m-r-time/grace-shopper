@@ -5,15 +5,15 @@ const app = require('../')
 const Feeling = db.model('feeling')
 
 describe('Feeling routes', () => {
+
     beforeEach(() => {
         return db.sync({force: true})
     })
 
-    describe('api/feelings/', () => {
+    describe('GET /api/feelings', () => {
         const firstFeeling = 'hate'
         const secondFeeling = 'love'
         let love
-
         beforeEach(() => {
             const feelings = [{
                 name: firstFeeling,
@@ -22,14 +22,12 @@ describe('Feeling routes', () => {
                 name: secondFeeling,
                 category: 'verb'
             }]
-
             return Feeling.bulkCreate(feelings, {returning: true})
                 .then(createdFeelings => {
                     love = createdFeelings[1].id
                 })
         })
-
-        it('GET /api/feelings', () => {
+        it('browses feelings and returns a json array', () => {
             return request(app)
                 .get('/api/feelings')
                 .expect(200)
@@ -39,8 +37,7 @@ describe('Feeling routes', () => {
                     expect(res.body[1].category).to.be.equal('verb')
                 })
         })
-
-        it('serves up a specific feeling on GET /feelings/{id}', () => {
+        it('reads a feeling when browsed with an appropriate parameter and returns a json object', () => {
             return request(app)
                 .get(`/api/feelings/${love}`)
                 .expect(200)
@@ -49,8 +46,10 @@ describe('Feeling routes', () => {
                     expect(res.body.name).to.be.equal(secondFeeling)
                 })
         })
+    })
 
-        it('POST /api/feelings', () => {
+    describe('POST api/feelings/', () => {
+        it('adds a feeling and responds with JSON', () => {
             return request(app)
                 .post('/api/feelings')
                 .send({
@@ -64,5 +63,6 @@ describe('Feeling routes', () => {
                     expect(res.body.category).to.be.equal('verb')
                 })
         })
+
     })
 })

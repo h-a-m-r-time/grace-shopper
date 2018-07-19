@@ -9,14 +9,13 @@ describe('Thing routes', () => {
     return db.sync({force: true})
   })
 
-  describe('api/things/', () => {
+  describe('GET /api/things', () => {
     const firstThing = 'apples'
     const secondThing = 'oranges'
     let apples
     let things
 
     beforeEach(() => {
-
       things = [{
         name: firstThing,
         description: 'one a day keeps the doctor away'
@@ -24,15 +23,13 @@ describe('Thing routes', () => {
         name: secondThing,
         description: 'at least it\'s not a banana'
       }]
-
-
       return Thing.bulkCreate(things, {returning: true})
         .then(createdThings => {
           apples = createdThings[0].id
         })
     })
 
-    it('GET /api/things', () => {
+    it('browses things and returns a json array', () => {
       return request(app)
         .get('/api/things')
         .set('Accept', 'application/json')
@@ -45,7 +42,7 @@ describe('Thing routes', () => {
         })
     })
 
-    it('serves up a specific feeling on GET /things/{id}', () => {
+    it('reads a thing when browsed with an appropriate parameter and returns a json object', () => {
       return request(app)
         .get(`/api/things/${apples}`)
         .expect(200)
@@ -54,8 +51,10 @@ describe('Thing routes', () => {
           expect(res.body.name).to.be.equal( firstThing )
         })
     })
+  })
 
-    it('POST /api/things', () => {
+  describe('POST /api/things', () => {
+    it('creates a thing and responds with JSON', () => {
         return request(app)
             .post('/api/things')
             .send({
