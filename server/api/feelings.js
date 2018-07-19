@@ -23,26 +23,8 @@ router.get('/:id', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
     try {
         const feeling = await Feeling.create(req.body)
-        res.json(feeling)
+        res.status(201).json(feeling)
     } catch (err) {
         next(err)
     }
-})
-
-router.put('/:id', async (req, res, next) => {
-  try {
-      const feeling = await Feeling.update(req.body, { where: {id: req.body.id} })
-      res.json(feeling)
-  } catch (err){
-      next(err)
-  }
-})
-
-router.delete('/:id', async (req, res, next) => {
-  try {
-      await Feeling.destroy({where: {id: +req.params.id}})
-      res.json(req.params.id)
-  } catch (err){
-      next(err)
-  }
 })

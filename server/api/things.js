@@ -23,26 +23,8 @@ router.get('/:id', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
     try {
         const thing = await Thing.create(req.body)
-        res.json(thing)
+        res.status(201).json(thing)
     } catch (err) {
         next(err)
     }
-})
-
-router.put('/:id', async (req, res, next) => {
-  try {
-      const thing = await Thing.update(req.body, { where: {id: req.body.id} })
-      res.json(thing)
-  } catch (err){
-      next(err)
-  }
-})
-
-router.delete('/:id', async (req, res, next) => {
-  try {
-      await Thing.destroy({where: {id: +req.params.id}})
-      res.json(req.params.id)
-  } catch (err){
-      next(err)
-  }
 })

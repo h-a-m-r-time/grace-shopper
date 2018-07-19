@@ -30,21 +30,3 @@ router.post('/', async (req, res, next) => {
         next(err)
     }
 })
-
-router.put('/:id', async (req, res, next) => {
-  try {
-      const opinion = await Opinion.update(req.body, { where: {id: req.body.id} })
-      res.json(opinion)
-  } catch (err){
-      next(err)
-  }
-})
-
-router.delete('/:id', async (req, res, next) => {
-  try {
-      await Opinion.destroy({where: {id: +req.params.id}})
-      res.json(req.params.id)
-  } catch (err){
-      next(err)
-  }
-})
