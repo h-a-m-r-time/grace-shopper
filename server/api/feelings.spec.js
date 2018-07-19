@@ -49,5 +49,20 @@ describe('Feeling routes', () => {
                     expect(res.body.name).to.be.equal(secondFeeling)
                 })
         })
+
+        it('POST /api/feelings', () => {
+            return request(app)
+                .post('/api/feelings')
+                .send({
+                  name: 'testFeeling',
+                  category: 'verb'
+                })
+                .expect(201)
+                .then(res => {
+                    expect(res.body).to.be.an('object')
+                    expect(res.body.name).to.be.equal('testFeeling')
+                    expect(res.body.category).to.be.equal('verb')
+                })
+        })
     })
 })
