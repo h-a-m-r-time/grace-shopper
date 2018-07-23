@@ -108,7 +108,6 @@ describe('Cart routes', () => {
                 .delete(`/api/cart/${id}`)
                 .expect(200)
                 .then(res => {
-                    console.log(res.body)
                     expect(res.body).to.be.equal(`${id}`)
                 })
         })
