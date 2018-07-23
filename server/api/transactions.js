@@ -26,16 +26,6 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
-  try {
-    const request = { ...req.body, purchased: true }
-    const transaction = await Transaction.create(request)
-    res.json(transaction)
-  } catch (err) {
-    next(err)
-  }
-})
-
 router.put('/', async (req, res, next) => {
   try {
     let transArray = []
@@ -53,15 +43,6 @@ router.put('/', async (req, res, next) => {
     )
     await stripe.charges.create(req.body.stripeObject)
     res.json(transArray)
-  } catch (err) {
-    next(err)
-  }
-})
-
-router.delete('/:id', async (req, res, next) => {
-  try {
-    await Transaction.destroy({ where: { id: +req.params.id } })
-    res.json(req.params.id)
   } catch (err) {
     next(err)
   }

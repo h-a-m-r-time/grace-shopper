@@ -39,15 +39,6 @@ router.post('/', async (req, res, next) => {
     }
 })
 
-router.put('/:id', async (req, res, next) => {
-  try {
-      const transaction = await Transaction.update(req.body, { where: {id: req.body.id} })
-      res.json(transaction)
-  } catch (err){
-      next(err)
-  }
-})
-
 router.delete('/:id', async (req, res, next) => {
   try {
       await Transaction.destroy({where: {id: +req.params.id}})
