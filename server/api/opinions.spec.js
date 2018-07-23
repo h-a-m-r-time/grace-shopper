@@ -1,5 +1,3 @@
-//TODO add things and feelings models to start building test
-
 const {expect} = require('chai')
 const request = require('supertest')
 const db = require('../db')

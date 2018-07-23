@@ -33,7 +33,7 @@ router.post('/', async (req, res, next) => {
     try {
         const request = {...req.body, purchased: false}
         const transaction = await Transaction.create(request, {include: [{all: true}]})
-        res.json(transaction)
+        res.status(201).json(transaction)
     } catch (err) {
         next(err)
     }
@@ -42,7 +42,7 @@ router.post('/', async (req, res, next) => {
 router.delete('/:id', async (req, res, next) => {
   try {
       await Transaction.destroy({where: {id: +req.params.id}})
-      res.json(req.params.id)
+      res.status(200).json(req.params.id)
   } catch (err){
       next(err)
   }
