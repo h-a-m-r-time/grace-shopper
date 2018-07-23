@@ -25,7 +25,7 @@ router.get('/:id', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
     try {
         const opinion = await Opinion.create(req.body)
-        res.json(opinion)
+        res.status(201).json(opinion)
     } catch (err) {
         next(err)
     }
