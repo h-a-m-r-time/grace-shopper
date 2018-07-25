@@ -41,7 +41,7 @@ router.put('/', async (req, res, next) => {
         transArray.push(updatedValue[1])
       })
     )
-    await stripe.charges.create(req.body.stripeObject)
+    req.body.stripeObject && (await stripe.charges.create(req.body.stripeObject))
     res.json(transArray)
   } catch (err) {
     next(err)
