@@ -5,7 +5,7 @@ export default function Opinion (props) {
   const transaction = props.transaction
   return (
       <TableRow>
-          <TableCell> {transaction.opinion.statement} </TableCell>
+          <td> {transaction.opinion.statement} </td>
           <TableCell> {transaction.amount} </TableCell>
           <TableCell>{new Date(transaction.updatedAt).toLocaleDateString()}</TableCell>
       </TableRow>
