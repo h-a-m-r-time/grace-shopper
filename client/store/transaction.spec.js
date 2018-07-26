@@ -1,7 +1,7 @@
 //CHANGE THIS TO A CART SPEC
 
 import { expect } from 'chai'
-import {fetchCart, postCart, removeItem} from './cart'
+import {getTransactions, putTransactions} from './transaction'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import thunkMiddleware from 'redux-thunk'
@@ -26,27 +26,26 @@ describe('Cart Thunk Creators', () => {
     store.clearActions()
   })
 
-  describe('fetchCart', () => {
-      it('eventually dispatches the GET_CART action', () => {
-          const fakeCart = [{amount: '0', purchased: false, opinionId: 1}]
-          mockAxios.onGet('/api/cart/').replyOnce(200, fakeCart)
-          return store.dispatch(fetchCart()).then(() => {
+  describe('getTransactions', () => {
+      it('eventually dispatches the GET_TRANSACTIONS action', () => {
+          const fakeTransaction = [{amount: '20', purchased: true, opinionId: 1}]
+          mockAxios.onGet('/api/transactions').replyOnce(200, fakeTransaction)
+          return store.dispatch(getTransactions()).then(() => {
               const actions = store.getActions()
-              expect(actions[0].type).to.be.equal('GET_CART')
-              expect(actions[0].cart).to.be.deep.equal(fakeCart)
+              expect(actions[0].type).to.be.equal('GET_TRANSACTIONS')
+              expect(actions[0].transactions).to.be.deep.equal(fakeTransaction)
           })
       })
   })
 
-  describe('postCart', () => {
-    it('eventually dispatches the POST_CART action', () => {
-      const fakeCart = [{amount: '0', purchased: false, opinionId: 1}]
-      mockAxios.onPost('/api/cart').replyOnce(204, fakeCart)
-      return store.dispatch(postCart(fakeCart)).then(() => {
+  describe('putTransactions', () => {
+    it('eventually dispatches the PUT_TRANSACTIONS action', () => {
+      const fakeTransaction = [{amount: '30', purchased: true, opinionId: 1}]
+      mockAxios.onPut('/api/transactions').replyOnce(204, fakeTransaction)
+      return store.dispatch(putTransactions(fakeTransaction)).then(() => {
         const actions = store.getActions()
-        expect(actions[0].type).to.be.equal('POST_CART')
-        console.log("ACTIONS!!!!", actions[0])
-        expect(actions[0].cart).to.be.deep.equal(fakeCart)
+        expect(actions[0].type).to.be.equal('PUT_TRANSACTIONS')
+        expect(actions[0].transactions).to.be.deep.equal(fakeTransaction)
       })
     })
   })
