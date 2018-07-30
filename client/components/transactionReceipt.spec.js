@@ -13,6 +13,7 @@ enzyme.configure({ adapter })
 describe('Transaction Receipt React Component', () => {
   let receiptComp
   let transactionObj
+  let uiShallow
   beforeEach(() => {
     console.log("CONTEXTTTT!!!!", context)
     transactionObj = {opinion: {statement: 'test'}, amount: '0', updatedAt: '2018-07-23 14:59:39.525-04'}
@@ -24,7 +25,7 @@ describe('Transaction Receipt React Component', () => {
       console.log("I DONT KNOW!!!!!!!!")
       console.log(receiptComp.find('.tester'))
     expect(receiptComp.find('td').text()).to.be.equal(' test ')
-    const wrapper = uiShallow(<TransactionRecepit transaction={transactionObj} />)
-    expect(wrapper.find('td').text()).to.be.equal('test')
+    const wrapper = uiShallow(<TransactionReceipt transaction={transactionObj} />)
+    expect(wrapper.find('td').text()).to.be.equal(' test ')
   })
 })
