@@ -1,13 +1,19 @@
 import React from 'react'
-import { TableCell, TableRow } from '@material-ui/core'
+import { TableRow } from '@material-ui/core'
 
-export default function Opinion (props) {
+/**
+ * Renders a table row that contains opinion information
+ * @function TransactionReceipt
+ * @param {object} props - React props.
+ * @returns {JSX.Element} - Rendered component
+ */
+export default function TransactionReceipt (props) {
   const transaction = props.transaction
   return (
       <TableRow>
-          <td> {transaction.opinion.statement} </td>
-          <TableCell> {transaction.amount} </TableCell>
-          <TableCell>{new Date(transaction.updatedAt).toLocaleDateString()}</TableCell>
+          <td className="statement"> {transaction.opinion.statement} </td>
+          <td className="amount"> {transaction.amount} </td>
+          <td className="date">{new Date(transaction.updatedAt).toLocaleDateString()}</td>
       </TableRow>
   )
 }
