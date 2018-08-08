@@ -16,7 +16,16 @@ const styles = theme => ({
   },
 })
 
+/**
+ * Class for all confirmed purchased opinions
+ * @extends Component
+ */
 class Confirmation extends Component {
+
+  /**
+   * Logic to either render out transactions as Table rows or a single row with an empty message
+   * @return   {JSX.Element} Element cotaining body of transactions table
+   */
   renderTransactions() {
     if (this.props.transactions && this.props.transactions.length) {
       return this.props.transactions.map(transaction => {
@@ -29,10 +38,18 @@ class Confirmation extends Component {
     }
   }
 
+  /**
+   * makes a call to populate transactions into store when component mounts
+   * @function componentDidMount
+   */
   componentDidMount() {
     this.props.getTransactions()
   }
 
+  /**
+   * renders confirmation view
+   * @return {JSX.Element}
+   */
   render() {
     const { classes } = this.props
     return (
@@ -56,11 +73,21 @@ class Confirmation extends Component {
   }
 }
 
+/**
+ * Provides necessary state from store to component's props
+ * @param    {object} state object from redux store
+ * @return   {object} props for component
+ */
 const mapStateToProps = state => ({
   transactions: state.transaction,
   userId: state.user.id
 })
 
+/**
+ * Provides functions that utilize dispatch to component's props
+ * @param    {function} dispatch dispatches actions to redux store
+ * @return   {object} provides functions that utilize dispatch as component's props
+ */
 const mapDispatchToProps = dispatch => ({
   getTransactions: () => {
     return dispatch(getTransactions())
