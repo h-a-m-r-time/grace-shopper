@@ -17,7 +17,6 @@ const defaultProps = {transaction: {
 
 /**
  * sets up the shallow object for testing
- * @function  setup
  * @global   {Function} shallow from enzyme
  * @return   {ShallowWrapper} - component to test
  */

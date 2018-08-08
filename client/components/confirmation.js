@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { Table, TableBody, TableCell, TableHead, TableRow, Paper, withStyles } from '@material-ui/core'
 import { TransactionReceipt } from './'
 import { getTransactions } from '../store'
-
 const styles = theme => ({
   root: {
     width: '100%',
@@ -20,21 +19,27 @@ const styles = theme => ({
  * Class for all confirmed purchased opinions
  * @extends Component
  */
-class Confirmation extends Component {
+export class Confirmation extends Component {
 
   /**
    * Logic to either render out transactions as Table rows or a single row with an empty message
    * @return   {JSX.Element} Element cotaining body of transactions table
    */
   renderTransactions() {
-    if (this.props.transactions && this.props.transactions.length) {
-      return this.props.transactions.map(transaction => {
-          if (transaction.userId === this.props.userId){
-              return <TransactionReceipt key={transaction.id} transaction={transaction} />
-          }
+      const transactions = (this.props.transactions && this.props.transactions.length) ? (
+        this.props.transactions.filter(transaction => {
+            if (transaction.userId === this.props.userId){
+                return true
+            }
+        })
+    ) : null;
+    if (transactions && transactions.length > 0) {
+      console.log("IN HERE", transactions)
+      return transactions.map((transaction) => {
+          return <TransactionReceipt key={transaction.id} transaction={transaction} />
       })
     } else {
-      return <TableRow><TableCell>'We can not find your transactions, the pyramid is collapsing'</TableCell></TableRow>
+      return <TableRow><td className="jst_empty">'We can not find your transactions, the pyramid is collapsing'</td></TableRow>
     }
   }
 
@@ -75,8 +80,8 @@ class Confirmation extends Component {
 
 /**
  * Provides necessary state from store to component's props
- * @param    {object} state object from redux store
- * @return   {object} props for component
+ * @param {object} state object from redux store
+ * @return {object} props for component
  */
 const mapStateToProps = state => ({
   transactions: state.transaction,
@@ -85,8 +90,8 @@ const mapStateToProps = state => ({
 
 /**
  * Provides functions that utilize dispatch to component's props
- * @param    {function} dispatch dispatches actions to redux store
- * @return   {object} provides functions that utilize dispatch as component's props
+ * @param {function} dispatch dispatches actions to redux store
+ * @return {object} provides functions that utilize dispatch as component's props
  */
 const mapDispatchToProps = dispatch => ({
   getTransactions: () => {
