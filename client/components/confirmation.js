@@ -34,7 +34,6 @@ export class Confirmation extends Component {
         })
     ) : null;
     if (transactions && transactions.length > 0) {
-      console.log("IN HERE", transactions)
       return transactions.map((transaction) => {
           return <TransactionReceipt key={transaction.id} transaction={transaction} />
       })
