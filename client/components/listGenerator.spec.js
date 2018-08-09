@@ -2,23 +2,27 @@
 
 import { expect } from 'chai'
 import React from 'react'
-import enzyme, { shallow } from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
+import { shallow } from 'enzyme'
 import ListGenerator from './listGenerator'
 
-// import Opinion from './opinion'
+const defaultProps = {
 
-const adapter = new Adapter()
-enzyme.configure({ adapter })
+}
+
+/**
+ * sets up the shallow object for testing
+ * @global   {Function} shallow from enzyme
+ * @return   {ShallowWrapper} - component to test
+ */
+const setup = (props={}) => {
+    const setupProps = { ...defaultProps, ...props }
+    return shallow(<ListGenerator { ...setupProps } />)
+}
 
 describe('ListGenerator React Component', () => {
-  let listComp
-
-  beforeEach(() => {
-    listComp = shallow(<ListGenerator />).dive({ context })
-  })
 
   it('renders default state = myOpinions', () => {
+    const listComp = setup().dive({ context })
     expect(listComp.state('displayOrder')).to.be.deep.equal('allOpinions')
   })
 })
