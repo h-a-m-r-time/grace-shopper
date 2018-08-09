@@ -7,7 +7,7 @@ import { auth } from '../store'
 /**
  * COMPONENT
  */
-const AuthForm = props => {
+export const AuthForm = props => {
   const { name, displayName, handleSubmit, error } = props
 
   return (
@@ -20,7 +20,7 @@ const AuthForm = props => {
           <TextField id="password" name="password" label="Password" />
         </div>
         <div>
-          <Button variant="contained" color="primary" type="submit">
+          <Button variant="contained" className="jst_submit" color="primary" type="submit">
             {displayName}
           </Button>
         </div>
