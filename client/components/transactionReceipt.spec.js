@@ -2,12 +2,8 @@
 
 import { expect } from 'chai'
 import React from 'react'
-import enzyme, { shallow } from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
+import { shallow } from 'enzyme'
 import TransactionReceipt from './transactionReceipt'
-
-const adapter = new Adapter()
-enzyme.configure({ adapter })
 
 const defaultProps = {transaction: {
     opinion: {statement: 'test'},
@@ -17,7 +13,6 @@ const defaultProps = {transaction: {
 
 /**
  * sets up the shallow object for testing
- * @function  setup
  * @global   {Function} shallow from enzyme
  * @return   {ShallowWrapper} - component to test
  */
