@@ -13,7 +13,7 @@ const styles = theme => ({
   },
 })
 
-class ListGenerator extends React.Component {
+export class ListGenerator extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
