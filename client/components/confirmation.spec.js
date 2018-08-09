@@ -1,4 +1,5 @@
 import { expect } from 'chai'
+import { spy } from 'sinon'
 import React from 'react'
 import { shallow } from 'enzyme'
 import { Confirmation } from './confirmation'
@@ -18,9 +19,10 @@ const defaultProps = {
         root: 'root',
         table: 'table',
     },
-    getTransactions: function(){() => {
-        getTransactions += 1;
-    }}
+    /**
+     * stub for necessary function in props
+     */
+    getTransactions: function(){}
 }
 
 /**
@@ -47,8 +49,10 @@ describe('Confiramtion React Component', () => {
         expect(wrapper.find('.jst_empty').length).to.equal(1)
     })
     it('gets transactions when it mounts', () => {
-        const wrapper = setup()
-
+        const props = {getTransactions: function(){}}
+        const sneaky = spy(props, "getTransactions")
+        const wrapper = setup(props)
+        expect(sneaky.callCount).to.equal(1)
     })
     it('displays transactions from props', () => {
         const wrapper = setup({transactions: [{
