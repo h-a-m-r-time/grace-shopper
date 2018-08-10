@@ -26,7 +26,7 @@ const styles = {
   },
 }
 
-function SimpleCard(props) {
+export function SimpleCard(props) {
   const { classes } = props
 
   return (
