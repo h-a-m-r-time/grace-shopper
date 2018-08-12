@@ -26,7 +26,13 @@ const styles = {
   },
 }
 
-function SimpleCard(props) {
+/**
+ * Class component used to display opinions on main page
+ * @function SimpleCard
+ * @param       {object} props React props
+ * @return {JSX.Element} React object to render component
+ */
+export function SimpleCard(props) {
   const { classes } = props
 
   return (
