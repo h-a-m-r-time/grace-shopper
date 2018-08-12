@@ -3,6 +3,7 @@ import { spy } from 'sinon'
 import React from 'react'
 import { shallow } from 'enzyme'
 import { SimpleCard } from './card'
+import Statement from '../utilities/statement-maker'
 
 const defaultProps = {
     classes: {
@@ -28,5 +29,19 @@ describe('SimpleCard React Component', () => {
     it('renders succesfully', () => {
         const wrapper = setup()
         expect(wrapper.length).to.equal(1)
+        console.log("STATEMEN", wrapper.debug(), wrapper.Statement)
+    })
+    it('displays statement', () => {
+        const wrapper = setup()
+        expect(wrapper.contains(defaultProps.statement)).to.equal(true)
+    })
+    it('calls utility functions appropriately', () => {
+        const addOnWatch = spy(Statement, "descriptionAddOn")
+        const alterWatch = spy(Statement, "alteredStatement")
+        const wrapper = setup()
+        expect(addOnWatch.callCount).to.equal(1)
+        expect(alterWatch.callCount).to.equal(1)
+        expect(addOnWatch.args[0][0]).to.equal(defaultProps.category)
+        expect(alterWatch.args[0][0]).to.equal(defaultProps.statement)
     })
 })
