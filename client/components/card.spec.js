@@ -29,7 +29,6 @@ describe('SimpleCard React Component', () => {
     it('renders succesfully', () => {
         const wrapper = setup()
         expect(wrapper.length).to.equal(1)
-        console.log("STATEMEN", wrapper.debug(), wrapper.Statement)
     })
     it('displays statement', () => {
         const wrapper = setup()
