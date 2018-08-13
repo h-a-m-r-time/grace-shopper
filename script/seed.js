@@ -141,16 +141,11 @@ async function seed() {
     createdUsers,
   ])
 
-  // Wowzers! We can even `await` on the right-hand side of the assignment operator
-  // and store the result that the promise resolves to in a variable! This is nice!
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${transactions.length} transactions`)
   console.log(`seeded successfully`)
 }
 
-// Execute the `seed` function, IF we ran this module directly (`node seed`).
-// `Async` functions always return a promise, so we can use `catch` to handle
-// any errors that might occur inside of `seed`.
 if (module === require.main) {
   seed()
     .catch(err => {
@@ -158,18 +153,11 @@ if (module === require.main) {
       process.exitCode = 1
     })
     .finally(() => {
-      // `finally` is like then + catch. It runs no matter what.
       console.log('closing db connection')
       db.close()
       console.log('db connection closed')
     })
-  /*
-   * note: everything outside of the async function is totally synchronous
-   * The console.log below will occur before any of the logs that occur inside
-   * of the async function
-   */
   console.log('seeding...')
 }
 
-// we export the seed function for testing purposes (see `./seed.spec.js`)
 module.exports = seed
