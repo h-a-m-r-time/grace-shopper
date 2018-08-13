@@ -104,8 +104,6 @@ const users = [
 async function seed() {
   await db.sync({ force: true })
   console.log('db synced!')
-  // Whoa! Because we `await` the promise that db.sync returns, the next line will not be
-  // executed until that promise resolves!
 
   const createdFeelings = await Feeling.bulkCreate(feelings, {
     returning: true,
