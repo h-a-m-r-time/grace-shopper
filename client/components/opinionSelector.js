@@ -156,16 +156,6 @@ class OpinionSelector extends Component {
               Add Opinion to Cart
             </Button>
           </div>
-          {/* <div>
-            <Card
-              category={this.state.category}
-              statement={StatementMaker.createStatement(
-                this.state.feeling,
-                this.state.thing,
-                this.state.category
-              )}
-            />
-          </div> */}
         </form>
         <div>
             <Card
