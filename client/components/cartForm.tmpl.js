@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Table, TableBody, TableCell, TableHead, TableRow, TableFooter, Paper, Input} from '@material-ui/core'
+import { Table, TableBody, TableCell, TableHead, TableRow, TableFooter, Paper} from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import Payment from './payment'
 import CartItem from './cartItem.tmpl'
