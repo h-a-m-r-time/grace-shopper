@@ -19,4 +19,14 @@ describe('cart template', () => {
         const wrapper = setup()
         expect(wrapper.length).to.equal(1)
     })
+    it('renders a cartItem for each item', () => {
+        const props = {cart: [{id: 1}, {id: 2}, {id: 3}]}
+        const wrapper = setup(props)
+        expect(wrapper.find('CartItem').length).to.equal(3)
+    })
+    it('display amount', () => {
+        const props = {amount: 534534}
+        const wrapper = setup(props)
+        expect(wrapper.html()).to.contain(props.amount)
+    })
 })
