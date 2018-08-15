@@ -15,17 +15,6 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/:id', async (req, res, next) => {
-  try {
-    const transaction = await Transaction.findById(req.params.id, {
-      where: { purchased: true },
-    })
-    res.json(transaction)
-  } catch (error) {
-    next(error)
-  }
-})
-
 router.put('/', async (req, res, next) => {
   try {
     let transArray = []

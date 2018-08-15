@@ -10,7 +10,7 @@ import StatementMaker from '../utilities/statement-maker'
 import {
   getFeelings,
   getThings,
-  getOpinions,
+  // getOpinions,
   addNewOpinion,
   postCart,
 } from '../store'
@@ -71,7 +71,7 @@ class OpinionSelector extends Component {
     //checking the logi to which name we have and then using teh value and looking at state for the other
     let wasSet = false
     await this.setState({ [name]: value })
-    //toogles the  category state if feeling exists
+    //toggles the  category state if feeling exists
     if (name === 'feeling') {
       const feelObj = this.props.feelings.filter(feeling => {
         return feeling.name === value
@@ -156,7 +156,8 @@ class OpinionSelector extends Component {
               Add Opinion to Cart
             </Button>
           </div>
-          <div>
+        </form>
+        <div>
             <Card
               category={this.state.category}
               statement={StatementMaker.createStatement(
@@ -165,8 +166,7 @@ class OpinionSelector extends Component {
                 this.state.category
               )}
             />
-          </div>
-        </form>
+        </div>
       </div>
     )
   }
