@@ -1,15 +1,8 @@
 import React from 'react'
-import Button from '@material-ui/core/Button'
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
-import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
-import TableFooter from '@material-ui/core/TableFooter'
-import Paper from '@material-ui/core/Paper'
-import Input from '@material-ui/core/Input'
+import { Button, Table, TableBody, TableCell, TableHead, TableRow, TableFooter, Paper, Input} from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import Payment from './payment'
+import CartItem from './cartItem.tmpl'
 
 const CustomTableCell = withStyles(theme => ({
   head: {
@@ -21,7 +14,12 @@ const CustomTableCell = withStyles(theme => ({
   },
 }))(TableCell)
 
-export default function TransactionReceipt (props) {
+/**
+ * Renders the cart form
+ * @param {object} props - React props.
+ * @returns {JSX.Element} - Rendered component
+ */
+export default function CartForm (props) {
     return (
         <form onSubmit={props.handleSubmit}>
           <Paper>
@@ -42,22 +40,7 @@ export default function TransactionReceipt (props) {
                   props.cart[0] &&
                   props.cart[0].id &&
                   props.cart.map((item) => (
-                    <TableRow key={item.id}>
-                      <TableCell>{item.opinion ? item.opinion.statement : 'Dat New New'}</TableCell>
-                      <TableCell>
-                      <TableCell><Input placeholder="What Is It Worth?" value={item.amount} onChange={ev => {props.handleChange(item, ev)}} /></TableCell>
-                      </TableCell>
-                      <TableCell>
-                        <Button
-                          variant="contained"
-                          color="secondary"
-                          type="submit"
-                          onClick={() => props.handleDelete(item.id)}
-                        >
-                          <small>Delete</small>
-                        </Button>
-                      </TableCell>
-                    </TableRow>
+                      <CartItem key={item.id} item={item} handleChange={props.handleChange} handleDelete={props.handleDelete} />
                   ))}
               </TableBody>
               <TableFooter>
