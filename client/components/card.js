@@ -10,7 +10,7 @@ import Statement from '../utilities/statement-maker'
 
 const styles = {
   card: {
-    minWidth: 275,
+    width: 275,
   },
   bullet: {
     display: 'inline-block',
