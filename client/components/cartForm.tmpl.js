@@ -14,6 +14,11 @@ const CustomTableCell = withStyles(theme => ({
   },
 }))(TableCell)
 
+/**
+ * Renders the cart form
+ * @param {object} props - React props.
+ * @returns {JSX.Element} - Rendered component
+ */
 export default function CartForm (props) {
     return (
         <form onSubmit={props.handleSubmit}>

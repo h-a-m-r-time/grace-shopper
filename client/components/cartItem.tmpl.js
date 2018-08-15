@@ -1,6 +1,11 @@
 import React from 'react'
 import { Button, TableCell, TableRow, Input } from '@material-ui/core/'
 
+/**
+ * Renders an item in the cart component
+ * @param {object} props - React props.
+ * @returns {JSX.Element} - Rendered component
+ */
 export default function CartItem (props) {
     const item = props.item
     return (
