@@ -9,7 +9,7 @@ import FormTmpl from './cartForm.tmpl'
  * Class for users cart
  * @extends Component
  */
-class CartForm extends Component {
+export class CartForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -56,7 +56,6 @@ class CartForm extends Component {
   }
 
   handleDelete = itemId => {
-      console.log("RNNING")
     this.props.deleteItem(itemId)
   }
 
