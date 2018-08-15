@@ -29,4 +29,11 @@ describe('cart template', () => {
         const wrapper = setup(props)
         expect(wrapper.html()).to.contain(props.amount)
     })
+    it('calls a submit function from props when submit', () => {
+        const props = {handleSubmit: () => {}}
+        const sneaky = spy(props, 'handleSubmit')
+        const wrapper = setup(props)
+        wrapper.simulate('submit')
+        expect(sneaky.callCount).to.equal(1)
+    })
 })
