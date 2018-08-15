@@ -22,4 +22,19 @@ describe('cart item', () => {
         const wrapper = setup()
         expect(wrapper.length).to.equal(1)
     })
+    it('renders a delete button', () => {
+        const wrapper = setup()
+        const deleteButton = wrapper.find('.jst_delete')
+        expect(deleteButton.length).to.equal(1)
+    })
+    it('calls a delete handler on delete button click', () => {
+        const props = {
+            handleDelete: () => {}
+        }
+        const sneaky = spy(props, 'handleDelete')
+        const wrapper = setup(props)
+        const deleteButton = wrapper.find('.jst_delete')
+        deleteButton.simulate('click', '1')
+        expect(sneaky.callCount).to.equal(1)
+    })
 })

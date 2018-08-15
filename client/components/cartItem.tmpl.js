@@ -16,6 +16,7 @@ export default function CartItem (props) {
                 </TableCell>
                 <TableCell>
                     <Button
+                        className="jst_delete"
                         variant="contained"
                         color="secondary"
                         type="submit"
