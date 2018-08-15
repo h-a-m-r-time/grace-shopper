@@ -19,7 +19,6 @@ class CartForm extends Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
-    this.handleDelete = this.handleDelete.bind(this)
   }
 
 
@@ -57,6 +56,7 @@ class CartForm extends Component {
   }
 
   handleDelete = itemId => {
+      console.log("RNNING")
     this.props.deleteItem(itemId)
   }
 
@@ -65,7 +65,7 @@ class CartForm extends Component {
           ...this.props,
           handleSubmit: this.handleSubmit,
           handleChange: this.handleChange,
-          handleDelet: this.handleDelete,
+          handleDelete: this.handleDelete,
           amount: this.state.amount,
           description: this.state.description,
           transactions: this.state.cart
