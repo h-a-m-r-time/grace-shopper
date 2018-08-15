@@ -37,4 +37,19 @@ describe('cart item', () => {
         deleteButton.simulate('click', '1')
         expect(sneaky.callCount).to.equal(1)
     })
+    it('renders an amount input', () => {
+        const wrapper = setup()
+        const amount = wrapper.find('.jst_input')
+        expect(amount.length).to.equal(1)
+    })
+    it('calls a change handler on amount change', () => {
+        const props = {
+            handleChange: () => {}
+        }
+        const sneaky = spy(props, 'handleChange')
+        const wrapper = setup(props)
+        const amount = wrapper.find('.jst_input')
+        amount.simulate('change')
+        expect(sneaky.callCount).to.equal(1)
+    })
 })

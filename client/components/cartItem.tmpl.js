@@ -12,7 +12,7 @@ export default function CartItem (props) {
             <TableRow>
                 <TableCell>{item.opinion ? item.opinion.statement : 'Dat New New'}</TableCell>
                 <TableCell>
-                <TableCell><Input placeholder="What Is It Worth?" value={item.amount} onChange={ev => {props.handleChange(item, ev)}} /></TableCell>
+                <TableCell><Input className="jst_input" placeholder="What Is It Worth?" value={item.amount} onChange={ev => {props.handleChange(item, ev)}} /></TableCell>
                 </TableCell>
                 <TableCell>
                     <Button
