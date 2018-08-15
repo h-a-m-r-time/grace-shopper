@@ -111,9 +111,6 @@ state.opinionReducer.opinions
 }
 
 const mapDispatchToProps = dispatch => ({
-  getTopTransaction: () => {
-    return dispatch(getTopTransaction())
-  },
   getOpinions: () => {
     return dispatch(getOpinions())
   },
