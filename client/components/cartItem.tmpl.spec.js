@@ -22,6 +22,17 @@ describe('cart item', () => {
         const wrapper = setup()
         expect(wrapper.length).to.equal(1)
     })
+    it('displays item statement', () => {
+        const props = {
+            item: {
+                opinion: {
+                    statement: "This is a test"
+                }
+            }
+        }
+        const wrapper = setup(props)
+        expect(wrapper.html()).to.contain(props.item.opinion.statement)
+    })
     it('renders a delete button', () => {
         const wrapper = setup()
         const deleteButton = wrapper.find('.jst_delete')
