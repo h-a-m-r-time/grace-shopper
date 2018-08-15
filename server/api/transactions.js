@@ -15,16 +15,32 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id/max', async (req, res, next) => {
   try {
-    const transaction = await Transaction.findById(req.params.id, {
-      where: { purchased: true },
+    const topAmount = await Transaction.max('amount', {
+      where: {
+        opinionId: req.params.id
+      }
     })
-    res.json(transaction)
+    const topTransaction = await Transaction.findAll({
+      where: {amount: topAmount}
+    })
+    res.json(topTransaction)
   } catch (error) {
     next(error)
   }
 })
+
+// router.get('/:id', async (req, res, next) => {
+//   try {
+//     const transaction = await Transaction.findById(req.params.id, {
+//       where: { purchased: true },
+//     })
+//     res.json(transaction)
+//   } catch (error) {
+//     next(error)
+//   }
+// })
 
 router.put('/', async (req, res, next) => {
   try {

@@ -6,6 +6,7 @@ import history from '../history'
  */
 const GET_TRANSACTIONS = 'GET_TRANSACTIONS'
 const PUT_TRANSACTIONS = 'PUT_TRANSACTIONS'
+const GET_TOP_TRANSACTION = 'GET_TOP_TRANSACTION'
 
 /**
  * INITIAL STATE
@@ -15,6 +16,11 @@ const initState = []
 /**
  * ACTION CREATORS
  */
+const gotTopTransaction = transaction => ({
+  type: GET_TOP_TRANSACTION,
+  transaction
+})
+
 const gotTransactions = transactions => ({
   type: GET_TRANSACTIONS,
   transactions,
@@ -28,6 +34,12 @@ const puttedTransactions = transactions => ({
 /**
  * THUNK CREATORS
  */
+export const getTopTransaction = () => dispatch =>
+  axios
+    .get('api/transactions/:id/max')
+    .then(res => dispatch(gotTopTransaction(res.data)))
+    .catch(err => console.log(err))
+
 export const getTransactions = () => dispatch =>
   axios
     .get('/api/transactions')
@@ -49,6 +61,8 @@ export const putTransactions = transactionObj => async dispatch => {
  */
 export default function(state = initState, action) {
   switch (action.type) {
+    case GET_TOP_TRANSACTION:
+      return [...state, ...action.transaction]
     case GET_TRANSACTIONS:
       return [...state, ...action.transactions]
     case PUT_TRANSACTIONS:

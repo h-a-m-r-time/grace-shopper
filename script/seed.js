@@ -65,12 +65,15 @@ const things = [
 const transactions = [
   {
     amount: 7.77,
+    purchased: true
   },
   {
     amount: 6.66,
+    purchased: true
   },
   {
     amount: 0.0,
+    purchased: true
   },
   {
     amount: 8.77,
