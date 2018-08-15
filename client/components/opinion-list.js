@@ -66,19 +66,41 @@ const myOpinions = state.opinionReducer.opinions
   return false
 })
 
+let topTransactions = []
 let topOpinions = []
+// for each opinion, find the top transaction
 state.opinionReducer.opinions
-.map(opinion => {
-  if (!topOpinions.length){
-    topOpinions.push(opinion)
-  } else {
-    for (let i = 0; i < topOpinions.length; i++) {
-      if (opinion.transactions && opinion.transactions.length > topOpinions[i].transactions.length){
-        topOpinions = [...topOpinions.slice(0, i), opinion, ...topOpinions.slice(i, 4)]
+.forEach(opinion => {
+  if (opinion.transactions){
+    let topTransaction = opinion.transactions.reduce((acc, curr) => {
+      return curr.amount > acc.amount ? curr : acc
+    })
+
+    // if there are less than 5 top transactions, push opinion and transaction
+    if (topTransactions.length < 5){
+      topTransactions.push(topTransaction)
+      topOpinions.push(opinion)
+    } else {
+      // otherwise find the lowest transaction/index
+      let lowTransaction
+      let index
+      for (let i = 0; i < topTransactions.length; i++){
+        if (!lowTransaction ||
+          topTransactions[i].amount < lowTransaction){
+          lowTransaction = topTransactions[i]
+          index = i
+        }
+      }
+      // and see if that transaction amount is less than the topTransaction for THIS opinion
+      // if so, replace the opinion/transaction at index
+      if (lowTransaction.amount < topTransaction.amount){
+        topTransactions[index] = topTransaction
+        topOpinions[index] = opinion
       }
     }
   }
 })
+
 
   return {
     opinions: state.opinionReducer.opinions,
