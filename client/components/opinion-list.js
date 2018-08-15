@@ -3,9 +3,6 @@ import { connect } from 'react-redux'
 
 import { getOpinions, getTopTransaction } from '../store'
 import { SimpleCard } from './index'
-// import transaction from '../store/transaction';
-// import transaction from '../store/transaction';
-// import { access } from 'fs';
 
 class OpinionList extends Component {
   renderOpinions() {
@@ -69,10 +66,8 @@ const myOpinions = state.opinionReducer.opinions
   return false
 })
 
-// we want to populate topOpinions with
 let topTransactions = []
 let topOpinions = []
-
 // for each opinion, find the top transaction
 state.opinionReducer.opinions
 .forEach(opinion => {
@@ -104,8 +99,6 @@ state.opinionReducer.opinions
       }
     }
   }
-  // topTransactions.push(topTransaction)
-  // console.log(topTransaction)
 })
 
 
