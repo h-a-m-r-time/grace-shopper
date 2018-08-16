@@ -18,7 +18,7 @@ export class CartForm extends Component {
         cart: []
     }
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleChange = this.handleChange.bind(this)
+    //this.handleChange = this.handleChange.bind(this)
   }
 
 
@@ -33,7 +33,7 @@ export class CartForm extends Component {
       })
   }
 
-  async handleChange(item, ev) {
+  handleChange = async (item, ev) => {
     let priceChangeCart = [...this.state.cart]
     let price = 0;
     for (let i = 0; i < priceChangeCart.length; i++) {
