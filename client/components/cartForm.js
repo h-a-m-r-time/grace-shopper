@@ -18,36 +18,26 @@ export class CartForm extends Component {
         cart: []
     }
     this.handleSubmit = this.handleSubmit.bind(this)
-    //this.handleChange = this.handleChange.bind(this)
   }
-
 
   componentDidMount () {
     this.props.getUser()
     this.props.getUserCart(this.props.user.id)
   }
 
-  UNSAFE_componentWillReceiveProps(newProps){
-      this.setState({
-          cart: newProps.cart
-      })
-  }
-
-  handleChange = async (item, ev) => {
-    let priceChangeCart = [...this.state.cart]
+  handleChange = (item, ev) => {
+    let priceChangeCart = [...this.props.cart]
     let price = 0;
-    for (let i = 0; i < priceChangeCart.length; i++) {
+    for (let i = 0; i < priceChangeCart.length; i++){
         if (priceChangeCart[i].id === item.id){
             priceChangeCart[i].amount = ev.target.value;
-            await this.setState({
-                ...this.state,
-                cart: priceChangeCart
-            })
         }
         price += +priceChangeCart[i].amount
     }
     this.setState({
-      amount: price
+        ...this.state,
+        cart: priceChangeCart,
+        amount: price
     })
   }
 

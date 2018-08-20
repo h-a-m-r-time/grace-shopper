@@ -58,8 +58,9 @@ describe('Cart Form component', () => {
         }
         const wrapper = setup(props)
         const instance = wrapper.instance()
-        instance.UNSAFE_componentWillReceiveProps(props)
-        await instance.handleChange({id: 5}, {target: {value: "50"}})
+        instance.handleChange({id: 5}, {target: {value: "50"}})
         expect(wrapper.state('amount')).to.equal(50)
+        instance.handleChange({id: 14}, {target: {value: "5"}})
+        expect(wrapper.state('amount')).to.equal(55)
     })
 })
