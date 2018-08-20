@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchCart, removeItem } from '../store/cart'
-import { me } from '../store/user'
-import Payment from './payment'
-import FormTmpl from './cartForm.tmpl'
+import { me, fetchCart, removeItem } from '../store/'
+import { CartFormTmpl as FormTmpl } from './'
 
 /**
  * Class for users cart

@@ -1,8 +1,7 @@
 import React from 'react'
 import { Table, TableBody, TableCell, TableHead, TableRow, TableFooter, Paper} from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
-import Payment from './payment'
-import CartItem from './cartItem.tmpl'
+import { Payment, CartItem } from './'
 
 const CustomTableCell = withStyles(theme => ({
   head: {

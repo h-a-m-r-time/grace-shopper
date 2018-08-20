@@ -38,7 +38,6 @@ describe('Cart Form component', () => {
         const wrapper = setup(props)
         expect(userWatch.callCount).to.equal(1)
         expect(cartWatch.callCount).to.equal(1)
-        console.log(wrapper.dive())
     })
     it('invokes the deleteItem prop when handleDelete is triggered appropriately', () => {
         const props = {
