@@ -19,7 +19,7 @@ export const Navbar = ({ handleClick, isLoggedIn }) => (
           <Button>
             <Link to="/home">Home</Link>
           </Button>
-          <Button href="#" onClick={handleClick}>
+          <Button href="#" className="jst_logout" onClick={handleClick}>
             Logout
           </Button>
           <Button>
