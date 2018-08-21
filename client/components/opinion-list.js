@@ -49,65 +49,59 @@ class OpinionList extends Component {
 }
 
 const mapStateToProps = state => {
-
-const newOpinions = state.opinionReducer.opinions.filter(
-  opinion => opinion.id > state.opinionReducer.opinions.length - 5
-)
-
-const myOpinions = state.opinionReducer.opinions
-.filter(opinion => {
-  if (opinion.transactions){
-    for (let i = 0; i < opinion.transactions.length; i++) {
-      if (opinion.transactions[i].userId === state.user.id){
-        return true
-      }
-    }
-  }
-  return false
-})
-
-let topTransactions = []
-let topOpinions = []
-// for each opinion, find the top transaction
-state.opinionReducer.opinions
-.forEach(opinion => {
-  if (opinion.transactions){
-    let topTransaction = opinion.transactions.reduce((acc, curr) => {
-      return curr.amount > acc.amount ? curr : acc
-    })
-
-    // if there are less than 5 top transactions, push opinion and transaction
-    if (topTransactions.length < 5){
-      topTransactions.push(topTransaction)
-      topOpinions.push(opinion)
-    } else {
-      // otherwise find the lowest transaction/index
-      let lowTransaction
-      let index
-      for (let i = 0; i < topTransactions.length; i++){
-        if (!lowTransaction ||
-          topTransactions[i].amount < lowTransaction){
-          lowTransaction = topTransactions[i]
-          index = i
+    const newOpinions = state.opinionReducer.opinions.filter(
+        opinion => opinion.id > state.opinionReducer.opinions.length - 5
+    )
+    const myOpinions = state.opinionReducer.opinions.filter(opinion => {
+        if (opinion.transactions){
+            for (let i = 0; i < opinion.transactions.length; i++) {
+                if (opinion.transactions[i].userId === state.user.id){
+                    return true
+                }
+            }
         }
-      }
-      // and see if that transaction amount is less than the topTransaction for THIS opinion
-      // if so, replace the opinion/transaction at index
-      if (lowTransaction.amount < topTransaction.amount){
-        topTransactions[index] = topTransaction
-        topOpinions[index] = opinion
-      }
+            return false
+        })
+
+    let topTransactions = []
+    let topOpinions = []
+    // for each opinion, find the top transaction
+    state.opinionReducer.opinions.forEach(opinion => {
+        if (opinion.transactions){
+            let topTransaction = opinion.transactions.reduce((acc, curr) => {
+                return curr.amount > acc.amount ? curr : acc
+            })
+
+            // if there are less than 5 top transactions, push opinion and transaction
+            if (topTransactions.length < 5){
+                topTransactions.push(topTransaction)
+                topOpinions.push(opinion)
+            } else {
+                // otherwise find the lowest transaction/index
+                let lowTransaction
+                let index
+                for (let i = 0; i < topTransactions.length; i++){
+                  if (!lowTransaction ||
+                    topTransactions[i].amount < lowTransaction){
+                    lowTransaction = topTransactions[i]
+                    index = i
+                  }
+                }
+                // and see if that transaction amount is less than the topTransaction for THIS opinion
+                // if so, replace the opinion/transaction at index
+                if (lowTransaction.amount < topTransaction.amount){
+                  topTransactions[index] = topTransaction
+                  topOpinions[index] = opinion
+                }
+            }
+        }
+    })
+    return {
+        opinions: state.opinionReducer.opinions,
+        myOpinions: myOpinions,
+        topOpinions: topOpinions,
+        newOpinions: newOpinions,
     }
-  }
-})
-
-
-  return {
-    opinions: state.opinionReducer.opinions,
-    myOpinions: myOpinions,
-    topOpinions: topOpinions,
-    newOpinions: newOpinions,
-  }
 }
 
 const mapDispatchToProps = dispatch => ({
