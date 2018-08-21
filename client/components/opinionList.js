@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 import { getOpinions } from '../store'
 import { SimpleCard } from './index'
 
-class OpinionList extends Component {
+export class OpinionList extends Component {
   renderOpinions() {
-    if (this.props.opinions.length) {
+    if (this.props.opinions && this.props.opinions.length) {
       let filteredOpinions = []
       switch (this.props.displayOrder) {
         case 'allOpinions':

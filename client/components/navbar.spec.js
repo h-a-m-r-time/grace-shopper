@@ -1,5 +1,4 @@
 import { expect } from 'chai'
-import { spy } from 'sinon'
 import React from 'react'
 import { MemoryRouter } from 'react-router'
 import { shallow } from 'enzyme'
