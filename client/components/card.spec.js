@@ -20,7 +20,7 @@ const defaultProps = {
  * @global   {Function} shallow from enzyme
  * @return   {ShallowWrapper} - component to test
  */
-const setup = (props={}) => {
+const setup = (props = {}) => {
     const setupProps = { ...defaultProps, ...props }
     return shallow(<SimpleCard { ...setupProps } />)
 }
@@ -35,9 +35,9 @@ describe('SimpleCard React Component', () => {
         expect(wrapper.contains(defaultProps.statement)).to.equal(true)
     })
     it('calls utility functions appropriately', () => {
-        const addOnWatch = spy(Statement, "descriptionAddOn")
-        const alterWatch = spy(Statement, "alteredStatement")
-        const wrapper = setup()
+        const addOnWatch = spy(Statement, 'descriptionAddOn')
+        const alterWatch = spy(Statement, 'alteredStatement')
+        setup()
         expect(addOnWatch.callCount).to.equal(1)
         expect(alterWatch.callCount).to.equal(1)
         expect(addOnWatch.args[0][0]).to.equal(defaultProps.category)

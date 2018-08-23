@@ -16,13 +16,13 @@ describe('Cart routes', () => {
             const cart = [{
                 amount: 0,
                 purchased: false,
-                transactions_opinionId_fkey: 1,
-                transactions_userId_fkey: 1
+                transactionsOpinionIdFkey: 1,
+                transactionsUserIdFkey: 1
             }, {
                 amount: 0,
                 purchased: false,
-                transactions_opinionId_fkey: 2,
-                transactions_userId_fkey: 1
+                transactionsOpinionIdFkey: 2,
+                transactionsUserIdFkey: 1
             }]
             return Transaction.bulkCreate(cart, {returning: true})
                 .then(createdCart => {
@@ -71,8 +71,8 @@ describe('Cart routes', () => {
                 .send({
                     amount: 0,
                     purchased: false,
-                    transactions_opinionId_fkey: 1,
-                    transactions_userId_fkey: 1
+                    transactionsOpinionIdFkey: 1,
+                    transactionsUserIdFkey: 1
                 })
                 .expect(201)
                 .then(res => {
@@ -90,13 +90,13 @@ describe('Cart routes', () => {
             const cart = [{
                 amount: 0,
                 purchased: false,
-                transactions_opinionId_fkey: 1,
-                transactions_userId_fkey: 1
+                transactionsOpinionIdFkey: 1,
+                transactionsUserIdFkey: 1
             }, {
                 amount: 0,
                 purchased: false,
-                transactions_opinionId_fkey: 2,
-                transactions_userId_fkey: 1
+                transactionsOpinionIdFkey: 2,
+                transactionsUserIdFkey: 1
             }]
             return Transaction.bulkCreate(cart, {returning: true})
                 .then(createdCart => {

@@ -17,7 +17,7 @@ const defaultProps = {
  * @global   {Function} shallow from enzyme
  * @return   {ShallowWrapper} - component to test
  */
-const setup = (props={}) => {
+const setup = (props = {}) => {
     const setupProps = { ...defaultProps, ...props }
     return shallow(<ListGenerator { ...setupProps } />)
 }

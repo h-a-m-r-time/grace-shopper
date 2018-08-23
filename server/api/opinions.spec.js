@@ -16,13 +16,13 @@ describe('Opinion routes', () => {
             const opinions = [{
                 statement: 'I fake fake',
                 category: 'verb',
-                opinions_feelingId_fkey: 1,
-                opinions_thingId_fkey: 1
+                opinionsFeelingIdFkey: 1,
+                opinionsThingIdFkey: 1
             }, {
                 statement: 'I test test',
                 category: 'verb',
-                opinions_feelingId_fkey: 2,
-                opinions_thingId_fkey: 2
+                opinionsFeelingIdFkey: 2,
+                opinionsThingIdFkey: 2
             }]
             return Opinion.bulkCreate(opinions, {returning: true})
                 .then(createdOpinions => {
@@ -56,8 +56,8 @@ describe('Opinion routes', () => {
                 .send({
                     statement: 'I fake test',
                     category: 'verb',
-                    opinions_feelingId_fkey: 1,
-                    opinions_thingId_fkey: 2
+                    opinionsFeelingIdFkey: 1,
+                    opinionsThingIdFkey: 2
                 })
                 .expect(201)
                 .then(res => {

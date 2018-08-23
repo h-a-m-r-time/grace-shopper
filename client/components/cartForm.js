@@ -33,7 +33,6 @@ export class CartForm extends Component {
         price += +priceChangeCart[i].amount
     }
     this.setState({
-        ...this.state,
         cart: priceChangeCart,
         amount: price
     })
@@ -58,7 +57,7 @@ export class CartForm extends Component {
           transactions: this.state.cart
       }
     return (
-      <FormTmpl {...propSetup}/>
+      <FormTmpl {...propSetup} />
     )
   }
 }

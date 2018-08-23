@@ -12,7 +12,7 @@ const defaultProps = {
  * @global   {Function} shallow from enzyme
  * @return   {ShallowWrapper} - component to test
  */
-const setup = (props={}) => {
+const setup = (props = {}) => {
     const setupProps = { ...defaultProps, ...props }
     return shallow(<CartItem { ...setupProps } />)
 }
@@ -26,7 +26,7 @@ describe('cart item', () => {
         const props = {
             item: {
                 opinion: {
-                    statement: "This is a test"
+                    statement: 'This is a test'
                 }
             }
         }

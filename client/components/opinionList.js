@@ -8,6 +8,7 @@ export class OpinionList extends Component {
   renderOpinions() {
     if (this.props.opinions && this.props.opinions.length) {
       let filteredOpinions = []
+      let topTransactions = []
       switch (this.props.displayOrder) {
         case 'allOpinions':
           filteredOpinions = this.props.opinions
@@ -30,8 +31,6 @@ export class OpinionList extends Component {
               })
           break
         case 'topOpinions':
-            let topTransactions = []
-            let topOpinions = []
             // for each opinion, find the top transaction
             this.props.opinions.forEach(opinion => {
                 if (opinion.transactions){
@@ -42,13 +41,13 @@ export class OpinionList extends Component {
                     // if there are less than 5 top transactions, push opinion and transaction
                     if (topTransactions.length < 5){
                         topTransactions.push(topTransaction)
-                        topOpinions.push(opinion)
+                        filteredOpinions.push(opinion)
                     } else {
                         // otherwise find the lowest transaction/index
                         let lowTransaction
                         let index
                         for (let i = 0; i < topTransactions.length; i++){
-                            if (!lowTransaction ||topTransactions[i].amount < lowTransaction){
+                            if (!lowTransaction || topTransactions[i].amount < lowTransaction){
                                 lowTransaction = topTransactions[i]
                                 index = i
                             }
@@ -57,12 +56,11 @@ export class OpinionList extends Component {
                         // if so, replace the opinion/transaction at index
                         if (lowTransaction.amount < topTransaction.amount){
                             topTransactions[index] = topTransaction
-                            topOpinions[index] = opinion
+                            filteredOpinions[index] = opinion
                         }
                     }
                 }
             })
-            filteredOpinions = topOpinions
           break
         default:
           break

@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import { spy } from 'sinon'
 import React from 'react'
-import { shallow, mount } from 'enzyme'
+import { shallow } from 'enzyme'
 import { CartForm } from './cartForm'
 
 const defaultProps = {
@@ -18,7 +18,7 @@ const defaultProps = {
  * @global   {Function} shallow from enzyme
  * @return   {ShallowWrapper} - component to test
  */
-const setup = (props={}) => {
+const setup = (props = {}) => {
     const setupProps = { ...defaultProps, ...props }
     return shallow(<CartForm { ...setupProps } />)
 }
@@ -35,7 +35,7 @@ describe('Cart Form component', () => {
         }
         const userWatch = spy(props, 'getUser')
         const cartWatch = spy(props, 'getUserCart')
-        const wrapper = setup(props)
+        setup(props)
         expect(userWatch.callCount).to.equal(1)
         expect(cartWatch.callCount).to.equal(1)
     })
@@ -51,15 +51,15 @@ describe('Cart Form component', () => {
         expect(sneaky.callCount).to.equal(1)
         expect(sneaky.args[0][0]).to.equal(arg)
     })
-    it('updates cart amount price', async () => {
+    it('updates cart amount price', () => {
         const props = {
-            cart: [{id: 5, amount: "0"}, {id: 14, amount: "0"}]
+            cart: [{id: 5, amount: '0'}, {id: 14, amount: '0'}]
         }
         const wrapper = setup(props)
         const instance = wrapper.instance()
-        instance.handleChange({id: 5}, {target: {value: "50"}})
+        instance.handleChange({id: 5}, {target: {value: '50'}})
         expect(wrapper.state('amount')).to.equal(50)
-        instance.handleChange({id: 14}, {target: {value: "5"}})
+        instance.handleChange({id: 14}, {target: {value: '5'}})
         expect(wrapper.state('amount')).to.equal(55)
     })
 })
