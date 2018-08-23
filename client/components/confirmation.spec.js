@@ -6,12 +6,12 @@ import { Confirmation } from './confirmation'
 
 const defaultProps = {
     transactions: [{
-        amount: "2.66",
-        createdAt: "2018-06-12T00:55:56.725Z",
+        amount: '2.66',
+        createdAt: '2018-06-12T00:55:56.725Z',
         id: 5,
         opinionId: 3,
         purchased: true,
-        updatedAt: "2018-06-12T00:55:56.751Z",
+        updatedAt: '2018-06-12T00:55:56.751Z',
         userId: 1
     }],
     userId: 1,
@@ -30,7 +30,7 @@ const defaultProps = {
  * @global   {Function} shallow from enzyme
  * @return   {ShallowWrapper} - component to test
  */
-const setup = (props={}) => {
+const setup = (props = {}) => {
     const setupProps = { ...defaultProps, ...props }
     return shallow(<Confirmation { ...setupProps } />)
 }
@@ -50,26 +50,26 @@ describe('Confiramtion React Component', () => {
     })
     it('gets transactions when it mounts', () => {
         const props = {getTransactions: function(){}}
-        const sneaky = spy(props, "getTransactions")
-        const wrapper = setup(props)
+        const sneaky = spy(props, 'getTransactions')
+        setup(props)
         expect(sneaky.callCount).to.equal(1)
     })
     it('displays transactions from props', () => {
         const wrapper = setup({transactions: [{
-            amount: "2.66",
-            createdAt: "2018-06-12T00:55:56.725Z",
+            amount: '2.66',
+            createdAt: '2018-06-12T00:55:56.725Z',
             id: 5,
             opinionId: 3,
             purchased: true,
-            updatedAt: "2018-06-12T00:55:56.751Z",
+            updatedAt: '2018-06-12T00:55:56.751Z',
             userId: 1
         }, {
-            amount: "2.66",
-            createdAt: "2018-06-12T00:55:56.725Z",
+            amount: '2.66',
+            createdAt: '2018-06-12T00:55:56.725Z',
             id: 6,
             opinionId: 4,
             purchased: true,
-            updatedAt: "2018-06-12T00:55:56.751Z",
+            updatedAt: '2018-06-12T00:55:56.751Z',
             userId: 1
         }]})
         expect(wrapper.find('TransactionReceipt').length).to.equal(2)

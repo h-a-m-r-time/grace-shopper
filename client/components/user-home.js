@@ -5,8 +5,7 @@ import { OpinionSelector, ListGenerator } from './'
 /**
  * COMPONENT
  */
-export const UserHome = props => {
-
+export const UserHome = () => {
   return (
     <div>
       <OpinionSelector />

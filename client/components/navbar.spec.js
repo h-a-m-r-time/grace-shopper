@@ -9,7 +9,7 @@ import { Navbar as Nav } from './navbar'
  * @global   {Function} shallow from enzyme
  * @return   {ShallowWrapper} - component to test
  */
-const setup = (props={}) => {
+const setup = (props = {}) => {
     const setupProps = { ...props }
     return shallow(<MemoryRouter><Nav { ...setupProps } /></MemoryRouter>)
 }

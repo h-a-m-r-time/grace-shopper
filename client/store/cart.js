@@ -44,7 +44,6 @@ export const postCart = (opinionObj, history) => {
 
 export const removeItem = (id) => {
   return async dispatch => {
-      console.log("IN THE REMOVE", id)
     const response = await axios.delete(`/api/cart/${id}`)
     const opinionData = response.data
     const action = deleteItem(opinionData)

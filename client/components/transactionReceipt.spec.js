@@ -5,10 +5,12 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import TransactionReceipt from './transactionReceipt'
 
-const defaultProps = {transaction: {
-    opinion: {statement: 'test'},
-    amount: '0',
-    updatedAt: '2018-07-23 14:59:39.525-04'}
+const defaultProps = {
+    transaction: {
+        opinion: {statement: 'test'},
+        amount: '0',
+        updatedAt: '2018-07-23 14:59:39.525-04',
+    }
 }
 
 /**

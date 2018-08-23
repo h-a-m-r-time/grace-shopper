@@ -13,7 +13,7 @@ const defaultProps = {
  * @global   {Function} shallow from enzyme
  * @return   {ShallowWrapper} - component to test
  */
-const setup = (props={}) => {
+const setup = ( props = {} ) => {
     const setupProps = { ...defaultProps, ...props }
     return shallow(<OpinionList { ...setupProps } />)
 }
@@ -24,8 +24,8 @@ describe('OpinionList', () => {
         expect(wrapper.length).to.equal(1)
     })
     it('calls appropriate methods on mount', () => {
-        const sneaky = spy(defaultProps, "getOpinions")
-        const wrapper = setup()
+        const sneaky = spy(defaultProps, 'getOpinions')
+        setup()
         expect(sneaky.callCount).to.equal(1)
     })
 })

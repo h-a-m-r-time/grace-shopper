@@ -9,7 +9,7 @@ import CartForm from './cartForm.tmpl'
  * @global   {Function} shallow from enzyme
  * @return   {ShallowWrapper} - component to test
  */
-const setup = (props={}) => {
+const setup = (props = {}) => {
     const setupProps = { ...props }
     return shallow(<CartForm { ...setupProps } />)
 }

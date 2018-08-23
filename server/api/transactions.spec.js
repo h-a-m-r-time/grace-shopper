@@ -16,13 +16,13 @@ describe('Transaction routes', () => {
             const transactions = [{
                 amount: 0,
                 purchased: true,
-                transactions_opinionId_fkey: 1,
-                transactions_userId_fkey: 1
+                transactionsOpinionIdFkey: 1,
+                transactionsUserIdFkey: 1
             }, {
                 amount: 0,
                 purchased: true,
-                transactions_opinionId_fkey: 2,
-                transactions_userId_fkey: 1
+                transactionsOpinionIdFkey: 2,
+                transactionsUserIdFkey: 1
             }]
             return Transaction.bulkCreate(transactions, {returning: true})
                 .then(createdCart => {
@@ -56,13 +56,13 @@ describe('Transaction routes', () => {
             const transactions = [{
                 amount: 0,
                 purchased: false,
-                transactions_opinionId_fkey: 1,
-                transactions_userId_fkey: 1
+                transactionsOpinionIdFkey: 1,
+                transactionsUserIdFkey: 1
             }, {
                 amount: 0,
                 purchased: false,
-                transactions_opinionId_fkey: 2,
-                transactions_userId_fkey: 1
+                transactionsOpinionIdFkey: 2,
+                transactionsUserIdFkey: 1
             }]
             return Transaction.bulkCreate(transactions, {returning: true})
                 .then(createdCart => {

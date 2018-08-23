@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import { spy } from 'sinon'
 import React from 'react'
-import { mount, shallow } from 'enzyme'
+import { shallow } from 'enzyme'
 import { AuthForm } from './auth-form'
 
 /**
@@ -9,7 +9,7 @@ import { AuthForm } from './auth-form'
  * @global   {Function} shallow from enzyme
  * @return   {ShallowWrapper} - component to test
  */
-const setup = (props={}) => {
+const setup = (props = {}) => {
     const setupProps = { ...props }
     return shallow(<AuthForm { ...setupProps } />)
 }
