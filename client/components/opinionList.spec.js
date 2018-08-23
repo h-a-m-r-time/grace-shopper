@@ -23,4 +23,9 @@ describe('OpinionList', () => {
         const wrapper = setup()
         expect(wrapper.length).to.equal(1)
     })
+    it('calls appropriate methods on mount', () => {
+        const sneaky = spy(defaultProps, "getOpinions")
+        const wrapper = setup()
+        expect(sneaky.callCount).to.equal(1)
+    })
 })
